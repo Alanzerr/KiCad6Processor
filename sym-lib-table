@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name "TJ-Cyber")(type "Legacy")(uri "${KIPRJMOD}/TJ-Cyber.lib")(options "")(descr ""))
+  (lib (name "TJ-Cyber-rescue")(type "Legacy")(uri "${KIPRJMOD}/TJ-Cyber-rescue.lib")(options "")(descr ""))
+)

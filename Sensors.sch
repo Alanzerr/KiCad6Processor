@@ -1,0 +1,2107 @@
+EESchema Schematic File Version 4
+LIBS:TJ-Cyber-cache
+EELAYER 29 0
+EELAYER END
+$Descr A3 16535 11693
+encoding utf-8
+Sheet 3 6
+Title "TJSCH001"
+Date ""
+Rev "Draft A2"
+Comp "Bitwise Ltd."
+Comment1 "Crescent House"
+Comment2 "Carnegie Campus"
+Comment3 "Dunfermline"
+Comment4 "KY11 8GR"
+$EndDescr
+$Comp
+L Device:C C?
+U 1 1 60579C30
+P 4350 8850
+AR Path="/60579C30" Ref="C?"  Part="1" 
+AR Path="/605286BD/60579C30" Ref="C1"  Part="1" 
+F 0 "C1" H 4528 8896 50  0000 L CNN
+F 1 "0.1uF" H 4528 8805 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 4350 8850 50  0001 C CNN
+F 3 "-" H 4350 8850 50  0001 C CNN
+F 4 "SMD Multilayer Ceramic Capacitor, 0.1 µF, 50 V, 0603 [1608 Metric], ± 10%, X7R, C Series" H 4350 8850 50  0001 C CNN "Desc"
+F 5 "Vishay" H 4350 8850 50  0001 C CNN "Manu"
+F 6 "VJ0805Y104KXACW1BC" H 4350 8850 50  0001 C CNN "Manu PN"
+F 7 "Farnell" H 4350 8850 50  0001 C CNN "Dist"
+F 8 "1907318" H 4350 8850 50  0001 C CNN "Dist PN"
+F 9 "+Inter,+Motor" H 4350 8850 50  0001 C CNN "Config"
+	1    4350 8850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3850 8600 4350 8600
+Connection ~ 3850 8600
+Wire Wire Line
+	4350 9100 3850 9100
+Wire Wire Line
+	3850 9100 3850 9200
+Connection ~ 3850 9100
+$Comp
+L power:GND #PWR?
+U 1 1 60579C3B
+P 3850 9200
+AR Path="/60579C3B" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60579C3B" Ref="#PWR0102"  Part="1" 
+F 0 "#PWR0102" H 3850 8950 50  0001 C CNN
+F 1 "GND" H 3855 9027 50  0000 C CNN
+F 2 "" H 3850 9200 50  0001 C CNN
+F 3 "" H 3850 9200 50  0001 C CNN
+	1    3850 9200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60579C44
+P 5600 8600
+AR Path="/60579C44" Ref="R?"  Part="1" 
+AR Path="/605286BD/60579C44" Ref="R3"  Part="1" 
+F 0 "R3" V 5805 8600 50  0000 C CNN
+F 1 "2K" V 5714 8600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 5600 8600 50  0001 C CNN
+F 3 "-" H 5600 8600 50  0001 C CNN
+F 4 "SMD Chip Resistor, 2 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 5600 8600 50  0001 C CNN "Desc"
+F 5 "Farnell" H 5600 8600 50  0001 C CNN "Dist"
+F 6 "2502694" H 5600 8600 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 5600 8600 50  0001 C CNN "Manu"
+F 8 "WR08X2001FTL" H 5600 8600 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 5600 8600 50  0001 C CNN "Config"
+	1    5600 8600
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60579C4D
+P 5850 8850
+AR Path="/60579C4D" Ref="R?"  Part="1" 
+AR Path="/605286BD/60579C4D" Ref="R4"  Part="1" 
+F 0 "R4" H 5918 8896 50  0000 L CNN
+F 1 "4.7K" H 5950 8800 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 5850 8850 50  0001 C CNN
+F 3 "-" H 5850 8850 50  0001 C CNN
+F 4 "SMD Chip Resistor, 4.7 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 5850 8850 50  0001 C CNN "Desc"
+F 5 "Farnell" H 5850 8850 50  0001 C CNN "Dist"
+F 6 "2502731" H 5850 8850 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 5850 8850 50  0001 C CNN "Manu"
+F 8 "WR08X4701FTL" H 5850 8850 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 5850 8850 50  0001 C CNN "Config"
+	1    5850 8850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60579C56
+P 6250 8850
+AR Path="/60579C56" Ref="C?"  Part="1" 
+AR Path="/605286BD/60579C56" Ref="C2"  Part="1" 
+F 0 "C2" H 6428 8896 50  0000 L CNN
+F 1 "0.1uF" H 6428 8805 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 6250 8850 50  0001 C CNN
+F 3 "-" H 6250 8850 50  0001 C CNN
+F 4 "SMD Multilayer Ceramic Capacitor, 0.1 µF, 50 V, 0603 [1608 Metric], ± 10%, X7R, C Series" H 6250 8850 50  0001 C CNN "Desc"
+F 5 "Farnell" H 6250 8850 50  0001 C CNN "Dist"
+F 6 "1907318" H 6250 8850 50  0001 C CNN "Dist PN"
+F 7 "Vishay" H 6250 8850 50  0001 C CNN "Manu"
+F 8 "VJ0805Y104KXACW1BC" H 6250 8850 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 6250 8850 50  0001 C CNN "Config"
+	1    6250 8850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5850 8600 6250 8600
+Connection ~ 5850 8600
+Wire Wire Line
+	5850 9100 5850 9200
+Connection ~ 5850 9100
+$Comp
+L power:GND #PWR?
+U 1 1 60579C60
+P 5850 9200
+AR Path="/60579C60" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60579C60" Ref="#PWR0104"  Part="1" 
+F 0 "#PWR0104" H 5850 8950 50  0001 C CNN
+F 1 "GND" H 5855 9027 50  0000 C CNN
+F 2 "" H 5850 9200 50  0001 C CNN
+F 3 "" H 5850 9200 50  0001 C CNN
+	1    5850 9200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60579C69
+P 7500 8600
+AR Path="/60579C69" Ref="R?"  Part="1" 
+AR Path="/605286BD/60579C69" Ref="R5"  Part="1" 
+F 0 "R5" V 7705 8600 50  0000 C CNN
+F 1 "2K" V 7614 8600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 7500 8600 50  0001 C CNN
+F 3 "-" H 7500 8600 50  0001 C CNN
+F 4 "SMD Chip Resistor, 2 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 7500 8600 50  0001 C CNN "Desc"
+F 5 "Farnell" H 7500 8600 50  0001 C CNN "Dist"
+F 6 "2502694" H 7500 8600 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 7500 8600 50  0001 C CNN "Manu"
+F 8 "WR08X2001FTL" H 7500 8600 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 7500 8600 50  0001 C CNN "Config"
+	1    7500 8600
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60579C72
+P 7750 8850
+AR Path="/60579C72" Ref="R?"  Part="1" 
+AR Path="/605286BD/60579C72" Ref="R6"  Part="1" 
+F 0 "R6" H 7818 8896 50  0000 L CNN
+F 1 "4.7K" H 7850 8800 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 7750 8850 50  0001 C CNN
+F 3 "-" H 7750 8850 50  0001 C CNN
+F 4 "SMD Chip Resistor, 4.7 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 7750 8850 50  0001 C CNN "Desc"
+F 5 "Farnell" H 7750 8850 50  0001 C CNN "Dist"
+F 6 "2502731" H 7750 8850 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 7750 8850 50  0001 C CNN "Manu"
+F 8 "WR08X4701FTL" H 7750 8850 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 7750 8850 50  0001 C CNN "Config"
+	1    7750 8850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60579C7B
+P 8250 8850
+AR Path="/60579C7B" Ref="C?"  Part="1" 
+AR Path="/605286BD/60579C7B" Ref="C3"  Part="1" 
+F 0 "C3" H 8428 8896 50  0000 L CNN
+F 1 "0.1uF" H 8428 8805 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 8250 8850 50  0001 C CNN
+F 3 "-" H 8250 8850 50  0001 C CNN
+F 4 "SMD Multilayer Ceramic Capacitor, 0.1 µF, 50 V, 0603 [1608 Metric], ± 10%, X7R, C Series" H 8250 8850 50  0001 C CNN "Desc"
+F 5 "Farnell" H 8250 8850 50  0001 C CNN "Dist"
+F 6 "1907318" H 8250 8850 50  0001 C CNN "Dist PN"
+F 7 "Vishay" H 8250 8850 50  0001 C CNN "Manu"
+F 8 "VJ0805Y104KXACW1BC" H 8250 8850 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 8250 8850 50  0001 C CNN "Config"
+	1    8250 8850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7750 8600 8250 8600
+Connection ~ 7750 8600
+Wire Wire Line
+	7750 9100 7750 9200
+Connection ~ 7750 9100
+$Comp
+L power:GND #PWR?
+U 1 1 60579C85
+P 7750 9200
+AR Path="/60579C85" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60579C85" Ref="#PWR0116"  Part="1" 
+F 0 "#PWR0116" H 7750 8950 50  0001 C CNN
+F 1 "GND" H 7755 9027 50  0000 C CNN
+F 2 "" H 7750 9200 50  0001 C CNN
+F 3 "" H 7750 9200 50  0001 C CNN
+	1    7750 9200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60579C8E
+P 9400 8600
+AR Path="/60579C8E" Ref="R?"  Part="1" 
+AR Path="/605286BD/60579C8E" Ref="R7"  Part="1" 
+F 0 "R7" V 9605 8600 50  0000 C CNN
+F 1 "2K" V 9514 8600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 9400 8600 50  0001 C CNN
+F 3 "-" H 9400 8600 50  0001 C CNN
+F 4 "SMD Chip Resistor, 2 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 9400 8600 50  0001 C CNN "Desc"
+F 5 "Farnell" H 9400 8600 50  0001 C CNN "Dist"
+F 6 "2502694" H 9400 8600 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 9400 8600 50  0001 C CNN "Manu"
+F 8 "WR08X2001FTL" H 9400 8600 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 9400 8600 50  0001 C CNN "Config"
+	1    9400 8600
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60579C97
+P 9650 8850
+AR Path="/60579C97" Ref="R?"  Part="1" 
+AR Path="/605286BD/60579C97" Ref="R8"  Part="1" 
+F 0 "R8" H 9718 8896 50  0000 L CNN
+F 1 "4.7K" H 9750 8800 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 9650 8850 50  0001 C CNN
+F 3 "-" H 9650 8850 50  0001 C CNN
+F 4 "SMD Chip Resistor, 4.7 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 9650 8850 50  0001 C CNN "Desc"
+F 5 "Farnell" H 9650 8850 50  0001 C CNN "Dist"
+F 6 "2502731" H 9650 8850 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 9650 8850 50  0001 C CNN "Manu"
+F 8 "WR08X4701FTL" H 9650 8850 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 9650 8850 50  0001 C CNN "Config"
+	1    9650 8850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60579CA0
+P 10150 8850
+AR Path="/60579CA0" Ref="C?"  Part="1" 
+AR Path="/605286BD/60579CA0" Ref="C4"  Part="1" 
+F 0 "C4" H 10328 8896 50  0000 L CNN
+F 1 "0.1uF" H 10328 8805 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 10150 8850 50  0001 C CNN
+F 3 "-" H 10150 8850 50  0001 C CNN
+F 4 "SMD Multilayer Ceramic Capacitor, 0.1 µF, 50 V, 0603 [1608 Metric], ± 10%, X7R, C Series" H 10150 8850 50  0001 C CNN "Desc"
+F 5 "Farnell" H 10150 8850 50  0001 C CNN "Dist"
+F 6 "1907318" H 10150 8850 50  0001 C CNN "Dist PN"
+F 7 "Vishay" H 10150 8850 50  0001 C CNN "Manu"
+F 8 "VJ0805Y104KXACW1BC" H 10150 8850 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 10150 8850 50  0001 C CNN "Config"
+	1    10150 8850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9650 8600 10150 8600
+Connection ~ 9650 8600
+Wire Wire Line
+	10150 9100 9650 9100
+Wire Wire Line
+	9650 9100 9650 9200
+Connection ~ 9650 9100
+$Comp
+L power:GND #PWR?
+U 1 1 60579CAB
+P 9650 9200
+AR Path="/60579CAB" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60579CAB" Ref="#PWR0117"  Part="1" 
+F 0 "#PWR0117" H 9650 8950 50  0001 C CNN
+F 1 "GND" H 9655 9027 50  0000 C CNN
+F 2 "" H 9650 9200 50  0001 C CNN
+F 3 "" H 9650 9200 50  0001 C CNN
+	1    9650 9200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60579CB4
+P 11300 8600
+AR Path="/60579CB4" Ref="R?"  Part="1" 
+AR Path="/605286BD/60579CB4" Ref="R9"  Part="1" 
+F 0 "R9" V 11505 8600 50  0000 C CNN
+F 1 "2K" V 11414 8600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 11300 8600 50  0001 C CNN
+F 3 "-" H 11300 8600 50  0001 C CNN
+F 4 "SMD Chip Resistor, 2 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 11300 8600 50  0001 C CNN "Desc"
+F 5 "Farnell" H 11300 8600 50  0001 C CNN "Dist"
+F 6 "2502694" H 11300 8600 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 11300 8600 50  0001 C CNN "Manu"
+F 8 "WR08X2001FTL" H 11300 8600 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 11300 8600 50  0001 C CNN "Config"
+	1    11300 8600
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60579CBD
+P 11550 8850
+AR Path="/60579CBD" Ref="R?"  Part="1" 
+AR Path="/605286BD/60579CBD" Ref="R10"  Part="1" 
+F 0 "R10" H 11618 8896 50  0000 L CNN
+F 1 "4.7K" H 11650 8800 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 11550 8850 50  0001 C CNN
+F 3 "-" H 11550 8850 50  0001 C CNN
+F 4 "SMD Chip Resistor, 4.7 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 11550 8850 50  0001 C CNN "Desc"
+F 5 "Farnell" H 11550 8850 50  0001 C CNN "Dist"
+F 6 "2502731" H 11550 8850 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 11550 8850 50  0001 C CNN "Manu"
+F 8 "WR08X4701FTL" H 11550 8850 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 11550 8850 50  0001 C CNN "Config"
+	1    11550 8850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60579CC6
+P 12050 8850
+AR Path="/60579CC6" Ref="C?"  Part="1" 
+AR Path="/605286BD/60579CC6" Ref="C5"  Part="1" 
+F 0 "C5" H 12228 8896 50  0000 L CNN
+F 1 "0.1uF" H 12228 8805 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 12050 8850 50  0001 C CNN
+F 3 "-" H 12050 8850 50  0001 C CNN
+F 4 "SMD Multilayer Ceramic Capacitor, 0.1 µF, 50 V, 0603 [1608 Metric], ± 10%, X7R, C Series" H 12050 8850 50  0001 C CNN "Desc"
+F 5 "Farnell" H 12050 8850 50  0001 C CNN "Dist"
+F 6 "1907318" H 12050 8850 50  0001 C CNN "Dist PN"
+F 7 "Vishay" H 12050 8850 50  0001 C CNN "Manu"
+F 8 "VJ0805Y104KXACW1BC" H 12050 8850 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 12050 8850 50  0001 C CNN "Config"
+	1    12050 8850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	11550 8600 12050 8600
+Connection ~ 11550 8600
+Wire Wire Line
+	12050 9100 11550 9100
+Wire Wire Line
+	11550 9100 11550 9200
+Connection ~ 11550 9100
+$Comp
+L power:GND #PWR?
+U 1 1 60579CD1
+P 11550 9200
+AR Path="/60579CD1" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60579CD1" Ref="#PWR0118"  Part="1" 
+F 0 "#PWR0118" H 11550 8950 50  0001 C CNN
+F 1 "GND" H 11555 9027 50  0000 C CNN
+F 2 "" H 11550 9200 50  0001 C CNN
+F 3 "" H 11550 9200 50  0001 C CNN
+	1    11550 9200
+	1    0    0    -1  
+$EndComp
+Connection ~ 4350 8600
+Connection ~ 6250 8600
+Wire Wire Line
+	3650 7400 3350 7400
+Connection ~ 3350 7400
+$Comp
+L power:GND #PWR?
+U 1 1 60579CF7
+P 3650 7900
+AR Path="/60579CF7" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60579CF7" Ref="#PWR0119"  Part="1" 
+F 0 "#PWR0119" H 3650 7650 50  0001 C CNN
+F 1 "GND" H 3655 7727 50  0000 C CNN
+F 2 "" H 3650 7900 50  0001 C CNN
+F 3 "" H 3650 7900 50  0001 C CNN
+	1    3650 7900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4350 6600 4350 8600
+Wire Wire Line
+	6250 6700 6250 8600
+Wire Wire Line
+	8250 6800 8250 8600
+Connection ~ 8250 8600
+Wire Wire Line
+	4350 6600 13000 6600
+Wire Wire Line
+	10150 6900 10150 8600
+Connection ~ 10150 8600
+$Comp
+L Device:R R?
+U 1 1 60579D08
+P 5350 7650
+AR Path="/60579D08" Ref="R?"  Part="1" 
+AR Path="/605286BD/60579D08" Ref="R17"  Part="1" 
+F 0 "R17" V 5555 7650 50  0000 C CNN
+F 1 "1.1K" V 5464 7650 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 5350 7650 50  0001 C CNN
+F 3 "-" H 5350 7650 50  0001 C CNN
+F 4 "SMD Chip Resistor, 1.1 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 5350 7650 50  0001 C CNN "Desc"
+F 5 "Farnell" H 5350 7650 50  0001 C CNN "Dist"
+F 6 "2502676" H 5350 7650 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 5350 7650 50  0001 C CNN "Manu"
+F 8 "WR08X1101FTL" H 5350 7650 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 5350 7650 50  0001 C CNN "Config"
+	1    5350 7650
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60579D0E
+P 5650 7650
+AR Path="/60579D0E" Ref="C?"  Part="1" 
+AR Path="/605286BD/60579D0E" Ref="C15"  Part="1" 
+F 0 "C15" H 5828 7696 50  0000 L CNN
+F 1 "DNF" H 5828 7605 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 5650 7650 50  0001 C CNN
+F 3 "-" H 5650 7650 50  0001 C CNN
+F 4 "-" H 5650 7650 50  0001 C CNN "Desc"
+F 5 "-" H 5650 7650 50  0001 C CNN "Dist"
+F 6 "-" H 5650 7650 50  0001 C CNN "Dist PN"
+F 7 "-" H 5650 7650 50  0001 C CNN "Manu"
+F 8 "-" H 5650 7650 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 5650 7650 50  0001 C CNN "Config"
+	1    5650 7650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5650 7400 5350 7400
+Connection ~ 5350 7400
+$Comp
+L power:GND #PWR?
+U 1 1 60579D16
+P 5650 7900
+AR Path="/60579D16" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60579D16" Ref="#PWR0120"  Part="1" 
+F 0 "#PWR0120" H 5650 7650 50  0001 C CNN
+F 1 "GND" H 5655 7727 50  0000 C CNN
+F 2 "" H 5650 7900 50  0001 C CNN
+F 3 "" H 5650 7900 50  0001 C CNN
+	1    5650 7900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5350 6700 5350 7400
+Connection ~ 5350 8600
+$Comp
+L Device:R R?
+U 1 1 60579D21
+P 7250 7650
+AR Path="/60579D21" Ref="R?"  Part="1" 
+AR Path="/605286BD/60579D21" Ref="R18"  Part="1" 
+F 0 "R18" V 7455 7650 50  0000 C CNN
+F 1 "1.1K" V 7364 7650 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 7250 7650 50  0001 C CNN
+F 3 "-" H 7250 7650 50  0001 C CNN
+F 4 "SMD Chip Resistor, 1.1 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 7250 7650 50  0001 C CNN "Desc"
+F 5 "Farnell" H 7250 7650 50  0001 C CNN "Dist"
+F 6 "2502676" H 7250 7650 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 7250 7650 50  0001 C CNN "Manu"
+F 8 "WR08X1101FTL" H 7250 7650 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 7250 7650 50  0001 C CNN "Config"
+	1    7250 7650
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60579D27
+P 7550 7650
+AR Path="/60579D27" Ref="C?"  Part="1" 
+AR Path="/605286BD/60579D27" Ref="C16"  Part="1" 
+F 0 "C16" H 7728 7696 50  0000 L CNN
+F 1 "DNF" H 7728 7605 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 7550 7650 50  0001 C CNN
+F 3 "-" H 7550 7650 50  0001 C CNN
+F 4 "-" H 7550 7650 50  0001 C CNN "Desc"
+F 5 "-" H 7550 7650 50  0001 C CNN "Dist"
+F 6 "-" H 7550 7650 50  0001 C CNN "Dist PN"
+F 7 "-" H 7550 7650 50  0001 C CNN "Manu"
+F 8 "-" H 7550 7650 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 7550 7650 50  0001 C CNN "Config"
+	1    7550 7650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7550 7400 7250 7400
+Connection ~ 7250 7400
+$Comp
+L power:GND #PWR?
+U 1 1 60579D2F
+P 7550 7900
+AR Path="/60579D2F" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60579D2F" Ref="#PWR0121"  Part="1" 
+F 0 "#PWR0121" H 7550 7650 50  0001 C CNN
+F 1 "GND" H 7555 7727 50  0000 C CNN
+F 2 "" H 7550 7900 50  0001 C CNN
+F 3 "" H 7550 7900 50  0001 C CNN
+	1    7550 7900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7250 6900 7250 7400
+Connection ~ 7250 8600
+$Comp
+L Device:R R?
+U 1 1 60579D3A
+P 9150 7650
+AR Path="/60579D3A" Ref="R?"  Part="1" 
+AR Path="/605286BD/60579D3A" Ref="R19"  Part="1" 
+F 0 "R19" V 9355 7650 50  0000 C CNN
+F 1 "1.1K" V 9264 7650 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 9150 7650 50  0001 C CNN
+F 3 "-" H 9150 7650 50  0001 C CNN
+F 4 "SMD Chip Resistor, 1.1 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 9150 7650 50  0001 C CNN "Desc"
+F 5 "Farnell" H 9150 7650 50  0001 C CNN "Dist"
+F 6 "2502676" H 9150 7650 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 9150 7650 50  0001 C CNN "Manu"
+F 8 "WR08X1101FTL" H 9150 7650 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 9150 7650 50  0001 C CNN "Config"
+	1    9150 7650
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60579D40
+P 9450 7650
+AR Path="/60579D40" Ref="C?"  Part="1" 
+AR Path="/605286BD/60579D40" Ref="C17"  Part="1" 
+F 0 "C17" H 9628 7696 50  0000 L CNN
+F 1 "DNF" H 9628 7605 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 9450 7650 50  0001 C CNN
+F 3 "-" H 9450 7650 50  0001 C CNN
+F 4 "-" H 9450 7650 50  0001 C CNN "Desc"
+F 5 "-" H 9450 7650 50  0001 C CNN "Dist"
+F 6 "-" H 9450 7650 50  0001 C CNN "Dist PN"
+F 7 "-" H 9450 7650 50  0001 C CNN "Manu"
+F 8 "-" H 9450 7650 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 9450 7650 50  0001 C CNN "Config"
+	1    9450 7650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9450 7400 9150 7400
+Connection ~ 9150 7400
+$Comp
+L power:GND #PWR?
+U 1 1 60579D48
+P 9450 7900
+AR Path="/60579D48" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60579D48" Ref="#PWR0122"  Part="1" 
+F 0 "#PWR0122" H 9450 7650 50  0001 C CNN
+F 1 "GND" H 9455 7727 50  0000 C CNN
+F 2 "" H 9450 7900 50  0001 C CNN
+F 3 "" H 9450 7900 50  0001 C CNN
+	1    9450 7900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9150 7100 9150 7400
+$Comp
+L Device:R R?
+U 1 1 60579D52
+P 11050 7650
+AR Path="/60579D52" Ref="R?"  Part="1" 
+AR Path="/605286BD/60579D52" Ref="R20"  Part="1" 
+F 0 "R20" V 11255 7650 50  0000 C CNN
+F 1 "1.1K" V 11164 7650 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 11050 7650 50  0001 C CNN
+F 3 "-" H 11050 7650 50  0001 C CNN
+F 4 "SMD Chip Resistor, 1.1 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 11050 7650 50  0001 C CNN "Desc"
+F 5 "Farnell" H 11050 7650 50  0001 C CNN "Dist"
+F 6 "2502676" H 11050 7650 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 11050 7650 50  0001 C CNN "Manu"
+F 8 "WR08X1101FTL" H 11050 7650 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 11050 7650 50  0001 C CNN "Config"
+	1    11050 7650
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60579D58
+P 11350 7650
+AR Path="/60579D58" Ref="C?"  Part="1" 
+AR Path="/605286BD/60579D58" Ref="C18"  Part="1" 
+F 0 "C18" H 11528 7696 50  0000 L CNN
+F 1 "DNF" H 11528 7605 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 11350 7650 50  0001 C CNN
+F 3 "-" H 11350 7650 50  0001 C CNN
+F 4 "-" H 11350 7650 50  0001 C CNN "Desc"
+F 5 "-" H 11350 7650 50  0001 C CNN "Dist"
+F 6 "-" H 11350 7650 50  0001 C CNN "Dist PN"
+F 7 "-" H 11350 7650 50  0001 C CNN "Manu"
+F 8 "-" H 11350 7650 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 11350 7650 50  0001 C CNN "Config"
+	1    11350 7650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	11350 7400 11050 7400
+$Comp
+L power:GND #PWR?
+U 1 1 60579D5F
+P 11350 7900
+AR Path="/60579D5F" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60579D5F" Ref="#PWR0123"  Part="1" 
+F 0 "#PWR0123" H 11350 7650 50  0001 C CNN
+F 1 "GND" H 11355 7727 50  0000 C CNN
+F 2 "" H 11350 7900 50  0001 C CNN
+F 3 "" H 11350 7900 50  0001 C CNN
+	1    11350 7900
+	1    0    0    -1  
+$EndComp
+Connection ~ 11050 8600
+Wire Wire Line
+	3050 8900 3050 9100
+Wire Wire Line
+	3050 8300 3050 8200
+$Comp
+L power:+5VA #PWR?
+U 1 1 60579D73
+P 3050 8200
+AR Path="/60579D73" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60579D73" Ref="#PWR0124"  Part="1" 
+F 0 "#PWR0124" H 3050 8050 50  0001 C CNN
+F 1 "+5VA" H 3065 8373 50  0000 C CNN
+F 2 "" H 3050 8200 50  0001 C CNN
+F 3 "" H 3050 8200 50  0001 C CNN
+	1    3050 8200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Diode:BAT54S D?
+U 1 1 60579D79
+P 5050 8600
+AR Path="/60579D79" Ref="D?"  Part="1" 
+AR Path="/605286BD/60579D79" Ref="D2"  Part="1" 
+F 0 "D2" V 5096 8688 50  0000 L CNN
+F 1 "BAT54S" V 5005 8688 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 5125 8725 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 4930 8600 50  0001 C CNN
+F 4 "Small Signal Schottky Diode, Dual Series, 30 V, 200 mA, 800 mV, 600 mA, 150 °C" H 5050 8600 50  0001 C CNN "Desc"
+F 5 "Farnell" H 5050 8600 50  0001 C CNN "Dist"
+F 6 "1081194" H 5050 8600 50  0001 C CNN "Dist PN"
+F 7 "NXP Semiconductors" H 5050 8600 50  0001 C CNN "Manu"
+F 8 "BAT54S,215" H 5050 8600 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 5050 8600 50  0001 C CNN "Config"
+	1    5050 8600
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5050 8900 5050 9100
+Wire Wire Line
+	5050 8300 5050 8200
+$Comp
+L power:+5VA #PWR?
+U 1 1 60579D81
+P 5050 8200
+AR Path="/60579D81" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60579D81" Ref="#PWR0125"  Part="1" 
+F 0 "#PWR0125" H 5050 8050 50  0001 C CNN
+F 1 "+5VA" H 5065 8373 50  0000 C CNN
+F 2 "" H 5050 8200 50  0001 C CNN
+F 3 "" H 5050 8200 50  0001 C CNN
+	1    5050 8200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3250 8600 3350 8600
+Connection ~ 3350 8600
+Wire Wire Line
+	5250 8600 5350 8600
+Wire Wire Line
+	5050 9100 5850 9100
+$Comp
+L Diode:BAT54S D?
+U 1 1 60579D8D
+P 6950 8600
+AR Path="/60579D8D" Ref="D?"  Part="1" 
+AR Path="/605286BD/60579D8D" Ref="D3"  Part="1" 
+F 0 "D3" V 6996 8688 50  0000 L CNN
+F 1 "BAT54S" V 6905 8688 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 7025 8725 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 6830 8600 50  0001 C CNN
+F 4 "Small Signal Schottky Diode, Dual Series, 30 V, 200 mA, 800 mV, 600 mA, 150 °C" H 6950 8600 50  0001 C CNN "Desc"
+F 5 "Farnell" H 6950 8600 50  0001 C CNN "Dist"
+F 6 "1081194" H 6950 8600 50  0001 C CNN "Dist PN"
+F 7 "NXP Semiconductors" H 6950 8600 50  0001 C CNN "Manu"
+F 8 "BAT54S,215" H 6950 8600 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 6950 8600 50  0001 C CNN "Config"
+	1    6950 8600
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	6950 8900 6950 9100
+Wire Wire Line
+	6950 8300 6950 8200
+$Comp
+L power:+5VA #PWR?
+U 1 1 60579D95
+P 6950 8200
+AR Path="/60579D95" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60579D95" Ref="#PWR0126"  Part="1" 
+F 0 "#PWR0126" H 6950 8050 50  0001 C CNN
+F 1 "+5VA" H 6965 8373 50  0000 C CNN
+F 2 "" H 6950 8200 50  0001 C CNN
+F 3 "" H 6950 8200 50  0001 C CNN
+	1    6950 8200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7150 8600 7250 8600
+Wire Wire Line
+	5850 9100 6250 9100
+Wire Wire Line
+	6950 9100 7750 9100
+$Comp
+L Diode:BAT54S D?
+U 1 1 60579D9F
+P 8850 8600
+AR Path="/60579D9F" Ref="D?"  Part="1" 
+AR Path="/605286BD/60579D9F" Ref="D4"  Part="1" 
+F 0 "D4" V 8896 8688 50  0000 L CNN
+F 1 "BAT54S" V 8805 8688 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 8925 8725 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 8730 8600 50  0001 C CNN
+F 4 "Small Signal Schottky Diode, Dual Series, 30 V, 200 mA, 800 mV, 600 mA, 150 °C" H 8850 8600 50  0001 C CNN "Desc"
+F 5 "Farnell" H 8850 8600 50  0001 C CNN "Dist"
+F 6 "1081194" H 8850 8600 50  0001 C CNN "Dist PN"
+F 7 "NXP Semiconductors" H 8850 8600 50  0001 C CNN "Manu"
+F 8 "BAT54S,215" H 8850 8600 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 8850 8600 50  0001 C CNN "Config"
+	1    8850 8600
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	8850 8900 8850 9100
+Wire Wire Line
+	8850 8300 8850 8200
+$Comp
+L power:+5VA #PWR?
+U 1 1 60579DA7
+P 8850 8200
+AR Path="/60579DA7" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60579DA7" Ref="#PWR0137"  Part="1" 
+F 0 "#PWR0137" H 8850 8050 50  0001 C CNN
+F 1 "+5VA" H 8865 8373 50  0000 C CNN
+F 2 "" H 8850 8200 50  0001 C CNN
+F 3 "" H 8850 8200 50  0001 C CNN
+	1    8850 8200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9050 8600 9150 8600
+Wire Wire Line
+	8850 9100 9650 9100
+Connection ~ 9150 8600
+Wire Wire Line
+	7750 9100 8250 9100
+Wire Wire Line
+	11050 7300 11050 7400
+Connection ~ 11050 7400
+$Comp
+L Diode:BAT54S D?
+U 1 1 60579DB4
+P 10750 8600
+AR Path="/60579DB4" Ref="D?"  Part="1" 
+AR Path="/605286BD/60579DB4" Ref="D5"  Part="1" 
+F 0 "D5" V 10796 8688 50  0000 L CNN
+F 1 "BAT54S" V 10705 8688 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 10825 8725 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 10630 8600 50  0001 C CNN
+F 4 "Small Signal Schottky Diode, Dual Series, 30 V, 200 mA, 800 mV, 600 mA, 150 °C" H 10750 8600 50  0001 C CNN "Desc"
+F 5 "Farnell" H 10750 8600 50  0001 C CNN "Dist"
+F 6 "1081194" H 10750 8600 50  0001 C CNN "Dist PN"
+F 7 "NXP Semiconductors" H 10750 8600 50  0001 C CNN "Manu"
+F 8 "BAT54S,215" H 10750 8600 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 10750 8600 50  0001 C CNN "Config"
+	1    10750 8600
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	10750 8900 10750 9100
+Wire Wire Line
+	10750 8300 10750 8200
+$Comp
+L power:+5VA #PWR?
+U 1 1 60579DBC
+P 10750 8200
+AR Path="/60579DBC" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60579DBC" Ref="#PWR0146"  Part="1" 
+F 0 "#PWR0146" H 10750 8050 50  0001 C CNN
+F 1 "+5VA" H 10765 8373 50  0000 C CNN
+F 2 "" H 10750 8200 50  0001 C CNN
+F 3 "" H 10750 8200 50  0001 C CNN
+	1    10750 8200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10950 8600 11050 8600
+Wire Wire Line
+	10750 9100 11550 9100
+Wire Wire Line
+	12050 8600 12050 7000
+Connection ~ 12050 8600
+Wire Wire Line
+	3050 9100 3850 9100
+Wire Wire Line
+	3350 7400 3350 7500
+Wire Wire Line
+	3650 7400 3650 7500
+Wire Wire Line
+	3350 7800 3350 8600
+Wire Wire Line
+	3650 7800 3650 7900
+Wire Wire Line
+	3350 8600 3450 8600
+Wire Wire Line
+	3750 8600 3850 8600
+Wire Wire Line
+	3850 8600 3850 8700
+Wire Wire Line
+	4350 8600 4350 8700
+Wire Wire Line
+	4350 9000 4350 9100
+Wire Wire Line
+	3850 9000 3850 9100
+Wire Wire Line
+	5850 9000 5850 9100
+Wire Wire Line
+	6250 9000 6250 9100
+Wire Wire Line
+	6250 8600 6250 8700
+Wire Wire Line
+	5850 8600 5850 8700
+Wire Wire Line
+	5750 8600 5850 8600
+Wire Wire Line
+	5350 8600 5450 8600
+Wire Wire Line
+	5350 7800 5350 8600
+Wire Wire Line
+	5350 7400 5350 7500
+Wire Wire Line
+	5650 7400 5650 7500
+Wire Wire Line
+	5650 7800 5650 7900
+Wire Wire Line
+	7250 7400 7250 7500
+Wire Wire Line
+	7250 7800 7250 8600
+Wire Wire Line
+	7550 7800 7550 7900
+Wire Wire Line
+	7550 7400 7550 7500
+Wire Wire Line
+	7250 8600 7350 8600
+Wire Wire Line
+	7650 8600 7750 8600
+Wire Wire Line
+	8250 8600 8250 8700
+Wire Wire Line
+	8250 9000 8250 9100
+Wire Wire Line
+	7750 9000 7750 9100
+Wire Wire Line
+	7750 8600 7750 8700
+Wire Wire Line
+	9150 8600 9250 8600
+Wire Wire Line
+	9550 8600 9650 8600
+Wire Wire Line
+	9650 8600 9650 8700
+Wire Wire Line
+	11550 8600 11550 8700
+Wire Wire Line
+	12050 8600 12050 8700
+Wire Wire Line
+	12050 9000 12050 9100
+Wire Wire Line
+	11550 9000 11550 9100
+Wire Wire Line
+	10150 8600 10150 8700
+Wire Wire Line
+	10150 9000 10150 9100
+Wire Wire Line
+	11050 8600 11150 8600
+Wire Wire Line
+	11450 8600 11550 8600
+Wire Wire Line
+	9650 9000 9650 9100
+Wire Wire Line
+	11050 7800 11050 8600
+Wire Wire Line
+	11350 7800 11350 7900
+Wire Wire Line
+	11350 7400 11350 7500
+Wire Wire Line
+	11050 7400 11050 7500
+Wire Wire Line
+	9450 7800 9450 7900
+Wire Wire Line
+	9150 7800 9150 8600
+Wire Wire Line
+	9150 7400 9150 7500
+Wire Wire Line
+	9450 7400 9450 7500
+Wire Wire Line
+	2600 6700 5350 6700
+Wire Wire Line
+	2600 6900 7250 6900
+Wire Wire Line
+	2600 7100 9150 7100
+Wire Wire Line
+	2600 7300 11050 7300
+Text Label 3100 6700 2    50   ~ 0
+ADC_CH4
+Text Label 3100 6900 2    50   ~ 0
+ADC_CH3
+Text Label 3100 7100 2    50   ~ 0
+ADC_CH2
+Text Label 3100 7300 2    50   ~ 0
+ADC_CH1
+Text Label 3100 6500 2    50   ~ 0
+ADC_CH5
+Wire Wire Line
+	3350 6500 3350 7400
+Wire Wire Line
+	2600 6500 3350 6500
+Wire Wire Line
+	6250 6700 13000 6700
+Wire Wire Line
+	8250 6800 13000 6800
+Wire Wire Line
+	10150 6900 13000 6900
+Wire Wire Line
+	12050 7000 13000 7000
+Text HLabel 13000 6600 2    50   Output ~ 0
+COND_OUT5
+Text HLabel 13000 7000 2    50   Output ~ 0
+COND_OUT1
+Text HLabel 13000 6900 2    50   Output ~ 0
+COND_OUT2
+Text HLabel 13000 6800 2    50   Output ~ 0
+COND_OUT3
+Text HLabel 13000 6700 2    50   Output ~ 0
+COND_OUT4
+$Comp
+L Device:R R?
+U 1 1 60579C22
+P 3850 8850
+AR Path="/60579C22" Ref="R?"  Part="1" 
+AR Path="/605286BD/60579C22" Ref="R2"  Part="1" 
+F 0 "R2" H 3918 8896 50  0000 L CNN
+F 1 "4.7K" H 3950 8800 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 3850 8850 50  0001 C CNN
+F 3 "-" H 3850 8850 50  0001 C CNN
+F 4 "SMD Chip Resistor, 4.7 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 3850 8850 50  0001 C CNN "Desc"
+F 5 "Walsin" H 3850 8850 50  0001 C CNN "Manu"
+F 6 "WR08X4701FTL" H 3850 8850 50  0001 C CNN "Manu PN"
+F 7 "Farnell" H 3850 8850 50  0001 C CNN "Dist"
+F 8 "2502731" H 3850 8850 50  0001 C CNN "Dist PN"
+F 9 "+Inter,+Motor" H 3850 8850 50  0001 C CNN "Config"
+	1    3850 8850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60579C17
+P 3600 8600
+AR Path="/60579C17" Ref="R?"  Part="1" 
+AR Path="/605286BD/60579C17" Ref="R1"  Part="1" 
+F 0 "R1" V 3805 8600 50  0000 C CNN
+F 1 "2K" V 3714 8600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 3600 8600 50  0001 C CNN
+F 3 "-" H 3600 8600 50  0001 C CNN
+F 4 "SMD Chip Resistor, 2 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" V 3600 8600 50  0001 C CNN "Desc"
+F 5 "Walsin" V 3600 8600 50  0001 C CNN "Manu"
+F 6 "WR08X2001FTL" V 3600 8600 50  0001 C CNN "Manu PN"
+F 7 "Farnell" V 3600 8600 50  0001 C CNN "Dist"
+F 8 "2502694" V 3600 8600 50  0001 C CNN "Dist PN"
+F 9 "+Inter,+Motor" H 3600 8600 50  0001 C CNN "Config"
+	1    3600 8600
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60579CEF
+P 3650 7650
+AR Path="/60579CEF" Ref="C?"  Part="1" 
+AR Path="/605286BD/60579CEF" Ref="C14"  Part="1" 
+F 0 "C14" H 3828 7696 50  0000 L CNN
+F 1 "DNF" H 3828 7605 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 3650 7650 50  0001 C CNN
+F 3 "-" H 3650 7650 50  0001 C CNN
+F 4 "-" H 3650 7650 50  0001 C CNN "Desc"
+F 5 "-" H 3650 7650 50  0001 C CNN "Dist"
+F 6 "-" H 3650 7650 50  0001 C CNN "Dist PN"
+F 7 "-" H 3650 7650 50  0001 C CNN "Manu"
+F 8 "-" H 3650 7650 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 3650 7650 50  0001 C CNN "Config"
+	1    3650 7650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60579CE8
+P 3350 7650
+AR Path="/60579CE8" Ref="R?"  Part="1" 
+AR Path="/605286BD/60579CE8" Ref="R16"  Part="1" 
+F 0 "R16" V 3555 7650 50  0000 C CNN
+F 1 "1.1K" V 3464 7650 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 3350 7650 50  0001 C CNN
+F 3 "-" H 3350 7650 50  0001 C CNN
+F 4 "SMD Chip Resistor, 1.1 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" V 3350 7650 50  0001 C CNN "Desc"
+F 5 "Walsin" V 3350 7650 50  0001 C CNN "Manu"
+F 6 "WR08X1101FTL" V 3350 7650 50  0001 C CNN "Manu PN"
+F 7 "Farnell" V 3350 7650 50  0001 C CNN "Dist"
+F 8 "2502676" V 3350 7650 50  0001 C CNN "Dist PN"
+F 9 "+Inter,+Motor" H 3350 7650 50  0001 C CNN "Config"
+	1    3350 7650
+	-1   0    0    1   
+$EndComp
+$Comp
+L Diode:BAT54S D?
+U 1 1 60579D6B
+P 3050 8600
+AR Path="/60579D6B" Ref="D?"  Part="1" 
+AR Path="/605286BD/60579D6B" Ref="D1"  Part="1" 
+F 0 "D1" V 3096 8688 50  0000 L CNN
+F 1 "BAT54S" V 3005 8688 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 3125 8725 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 2930 8600 50  0001 C CNN
+F 4 "Small Signal Schottky Diode, Dual Series, 30 V, 200 mA, 800 mV, 600 mA, 150 °C" V 3050 8600 50  0001 C CNN "Desc"
+F 5 "NXP Semiconductors" V 3050 8600 50  0001 C CNN "Manu"
+F 6 "BAT54S,215" V 3050 8600 50  0001 C CNN "Manu PN"
+F 7 "Farnell" V 3050 8600 50  0001 C CNN "Dist"
+F 8 "1081194" V 3050 8600 50  0001 C CNN "Dist PN"
+F 9 "+Inter,+Motor" H 3050 8600 50  0001 C CNN "Config"
+	1    3050 8600
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60CD11DB
+P 4350 4350
+AR Path="/60CD11DB" Ref="C?"  Part="1" 
+AR Path="/605286BD/60CD11DB" Ref="C33"  Part="1" 
+F 0 "C33" H 4528 4396 50  0000 L CNN
+F 1 "0.1uF" H 4528 4305 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 4350 4350 50  0001 C CNN
+F 3 "-" H 4350 4350 50  0001 C CNN
+F 4 "SMD Multilayer Ceramic Capacitor, 0.1 µF, 50 V, 0603 [1608 Metric], ± 10%, X7R, C Series" H 4350 4350 50  0001 C CNN "Desc"
+F 5 "Vishay" H 4350 4350 50  0001 C CNN "Manu"
+F 6 "VJ0805Y104KXACW1BC" H 4350 4350 50  0001 C CNN "Manu PN"
+F 7 "Farnell" H 4350 4350 50  0001 C CNN "Dist"
+F 8 "1907318" H 4350 4350 50  0001 C CNN "Dist PN"
+F 9 "-Inter,-Motor" H 4350 4350 50  0001 C CNN "Config"
+	1    4350 4350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3850 4100 4350 4100
+Connection ~ 3850 4100
+Wire Wire Line
+	4350 4600 3850 4600
+Wire Wire Line
+	3850 4600 3850 4700
+Connection ~ 3850 4600
+$Comp
+L power:GND #PWR?
+U 1 1 60CD11EA
+P 3850 4700
+AR Path="/60CD11EA" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60CD11EA" Ref="#PWR0129"  Part="1" 
+F 0 "#PWR0129" H 3850 4450 50  0001 C CNN
+F 1 "GND" H 3855 4527 50  0000 C CNN
+F 2 "" H 3850 4700 50  0001 C CNN
+F 3 "" H 3850 4700 50  0001 C CNN
+	1    3850 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60CD11F9
+P 5600 4100
+AR Path="/60CD11F9" Ref="R?"  Part="1" 
+AR Path="/605286BD/60CD11F9" Ref="R43"  Part="1" 
+F 0 "R43" V 5805 4100 50  0000 C CNN
+F 1 "2K" V 5714 4100 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 5600 4100 50  0001 C CNN
+F 3 "-" H 5600 4100 50  0001 C CNN
+F 4 "SMD Chip Resistor, 2 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 5600 4100 50  0001 C CNN "Desc"
+F 5 "Farnell" H 5600 4100 50  0001 C CNN "Dist"
+F 6 "2502694" H 5600 4100 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 5600 4100 50  0001 C CNN "Manu"
+F 8 "WR08X2001FTL" H 5600 4100 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 5600 4100 50  0001 C CNN "Config"
+	1    5600 4100
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60CD1208
+P 5850 4350
+AR Path="/60CD1208" Ref="R?"  Part="1" 
+AR Path="/605286BD/60CD1208" Ref="R44"  Part="1" 
+F 0 "R44" H 5918 4396 50  0000 L CNN
+F 1 "4.7K" H 5950 4300 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 5850 4350 50  0001 C CNN
+F 3 "-" H 5850 4350 50  0001 C CNN
+F 4 "SMD Chip Resistor, 4.7 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 5850 4350 50  0001 C CNN "Desc"
+F 5 "Farnell" H 5850 4350 50  0001 C CNN "Dist"
+F 6 "2502731" H 5850 4350 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 5850 4350 50  0001 C CNN "Manu"
+F 8 "WR08X4701FTL" H 5850 4350 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 5850 4350 50  0001 C CNN "Config"
+	1    5850 4350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60CD1217
+P 6250 4350
+AR Path="/60CD1217" Ref="C?"  Part="1" 
+AR Path="/605286BD/60CD1217" Ref="C35"  Part="1" 
+F 0 "C35" H 6428 4396 50  0000 L CNN
+F 1 "0.1uF" H 6428 4305 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 6250 4350 50  0001 C CNN
+F 3 "-" H 6250 4350 50  0001 C CNN
+F 4 "SMD Multilayer Ceramic Capacitor, 0.1 µF, 50 V, 0603 [1608 Metric], ± 10%, X7R, C Series" H 6250 4350 50  0001 C CNN "Desc"
+F 5 "Farnell" H 6250 4350 50  0001 C CNN "Dist"
+F 6 "1907318" H 6250 4350 50  0001 C CNN "Dist PN"
+F 7 "Vishay" H 6250 4350 50  0001 C CNN "Manu"
+F 8 "VJ0805Y104KXACW1BC" H 6250 4350 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 6250 4350 50  0001 C CNN "Config"
+	1    6250 4350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5850 4100 6250 4100
+Connection ~ 5850 4100
+Wire Wire Line
+	5850 4600 5850 4700
+Connection ~ 5850 4600
+$Comp
+L power:GND #PWR?
+U 1 1 60CD1225
+P 5850 4700
+AR Path="/60CD1225" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60CD1225" Ref="#PWR0130"  Part="1" 
+F 0 "#PWR0130" H 5850 4450 50  0001 C CNN
+F 1 "GND" H 5855 4527 50  0000 C CNN
+F 2 "" H 5850 4700 50  0001 C CNN
+F 3 "" H 5850 4700 50  0001 C CNN
+	1    5850 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60CD1234
+P 7500 4100
+AR Path="/60CD1234" Ref="R?"  Part="1" 
+AR Path="/605286BD/60CD1234" Ref="R46"  Part="1" 
+F 0 "R46" V 7705 4100 50  0000 C CNN
+F 1 "2K" V 7614 4100 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 7500 4100 50  0001 C CNN
+F 3 "-" H 7500 4100 50  0001 C CNN
+F 4 "SMD Chip Resistor, 2 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 7500 4100 50  0001 C CNN "Desc"
+F 5 "Farnell" H 7500 4100 50  0001 C CNN "Dist"
+F 6 "2502694" H 7500 4100 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 7500 4100 50  0001 C CNN "Manu"
+F 8 "WR08X2001FTL" H 7500 4100 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 7500 4100 50  0001 C CNN "Config"
+	1    7500 4100
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60CD1243
+P 7750 4350
+AR Path="/60CD1243" Ref="R?"  Part="1" 
+AR Path="/605286BD/60CD1243" Ref="R47"  Part="1" 
+F 0 "R47" H 7818 4396 50  0000 L CNN
+F 1 "4.7K" H 7850 4300 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 7750 4350 50  0001 C CNN
+F 3 "-" H 7750 4350 50  0001 C CNN
+F 4 "SMD Chip Resistor, 4.7 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 7750 4350 50  0001 C CNN "Desc"
+F 5 "Farnell" H 7750 4350 50  0001 C CNN "Dist"
+F 6 "2502731" H 7750 4350 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 7750 4350 50  0001 C CNN "Manu"
+F 8 "WR08X4701FTL" H 7750 4350 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 7750 4350 50  0001 C CNN "Config"
+	1    7750 4350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60CD1252
+P 8250 4350
+AR Path="/60CD1252" Ref="C?"  Part="1" 
+AR Path="/605286BD/60CD1252" Ref="C37"  Part="1" 
+F 0 "C37" H 8428 4396 50  0000 L CNN
+F 1 "0.1uF" H 8428 4305 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 8250 4350 50  0001 C CNN
+F 3 "-" H 8250 4350 50  0001 C CNN
+F 4 "SMD Multilayer Ceramic Capacitor, 0.1 µF, 50 V, 0603 [1608 Metric], ± 10%, X7R, C Series" H 8250 4350 50  0001 C CNN "Desc"
+F 5 "Farnell" H 8250 4350 50  0001 C CNN "Dist"
+F 6 "1907318" H 8250 4350 50  0001 C CNN "Dist PN"
+F 7 "Vishay" H 8250 4350 50  0001 C CNN "Manu"
+F 8 "VJ0805Y104KXACW1BC" H 8250 4350 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 8250 4350 50  0001 C CNN "Config"
+	1    8250 4350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7750 4100 8250 4100
+Connection ~ 7750 4100
+Wire Wire Line
+	7750 4600 7750 4700
+Connection ~ 7750 4600
+$Comp
+L power:GND #PWR?
+U 1 1 60CD1260
+P 7750 4700
+AR Path="/60CD1260" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60CD1260" Ref="#PWR0131"  Part="1" 
+F 0 "#PWR0131" H 7750 4450 50  0001 C CNN
+F 1 "GND" H 7755 4527 50  0000 C CNN
+F 2 "" H 7750 4700 50  0001 C CNN
+F 3 "" H 7750 4700 50  0001 C CNN
+	1    7750 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60CD126F
+P 9400 4100
+AR Path="/60CD126F" Ref="R?"  Part="1" 
+AR Path="/605286BD/60CD126F" Ref="R49"  Part="1" 
+F 0 "R49" V 9605 4100 50  0000 C CNN
+F 1 "2K" V 9514 4100 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 9400 4100 50  0001 C CNN
+F 3 "-" H 9400 4100 50  0001 C CNN
+F 4 "SMD Chip Resistor, 2 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 9400 4100 50  0001 C CNN "Desc"
+F 5 "Farnell" H 9400 4100 50  0001 C CNN "Dist"
+F 6 "2502694" H 9400 4100 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 9400 4100 50  0001 C CNN "Manu"
+F 8 "WR08X2001FTL" H 9400 4100 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 9400 4100 50  0001 C CNN "Config"
+	1    9400 4100
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60CD127E
+P 9650 4350
+AR Path="/60CD127E" Ref="R?"  Part="1" 
+AR Path="/605286BD/60CD127E" Ref="R50"  Part="1" 
+F 0 "R50" H 9718 4396 50  0000 L CNN
+F 1 "4.7K" H 9750 4300 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 9650 4350 50  0001 C CNN
+F 3 "-" H 9650 4350 50  0001 C CNN
+F 4 "SMD Chip Resistor, 4.7 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 9650 4350 50  0001 C CNN "Desc"
+F 5 "Farnell" H 9650 4350 50  0001 C CNN "Dist"
+F 6 "2502731" H 9650 4350 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 9650 4350 50  0001 C CNN "Manu"
+F 8 "WR08X4701FTL" H 9650 4350 50  0001 C CNN "Manu PN"
+F 9 "+Inter,+Motor" H 9650 4350 50  0001 C CNN "Config"
+	1    9650 4350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60CD128D
+P 10150 4350
+AR Path="/60CD128D" Ref="C?"  Part="1" 
+AR Path="/605286BD/60CD128D" Ref="C39"  Part="1" 
+F 0 "C39" H 10328 4396 50  0000 L CNN
+F 1 "0.1uF" H 10328 4305 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 10150 4350 50  0001 C CNN
+F 3 "-" H 10150 4350 50  0001 C CNN
+F 4 "SMD Multilayer Ceramic Capacitor, 0.1 µF, 50 V, 0603 [1608 Metric], ± 10%, X7R, C Series" H 10150 4350 50  0001 C CNN "Desc"
+F 5 "Farnell" H 10150 4350 50  0001 C CNN "Dist"
+F 6 "1907318" H 10150 4350 50  0001 C CNN "Dist PN"
+F 7 "Vishay" H 10150 4350 50  0001 C CNN "Manu"
+F 8 "VJ0805Y104KXACW1BC" H 10150 4350 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 10150 4350 50  0001 C CNN "Config"
+	1    10150 4350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9650 4100 10150 4100
+Connection ~ 9650 4100
+Wire Wire Line
+	10150 4600 9650 4600
+Wire Wire Line
+	9650 4600 9650 4700
+Connection ~ 9650 4600
+$Comp
+L power:GND #PWR?
+U 1 1 60CD129C
+P 9650 4700
+AR Path="/60CD129C" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60CD129C" Ref="#PWR0134"  Part="1" 
+F 0 "#PWR0134" H 9650 4450 50  0001 C CNN
+F 1 "GND" H 9655 4527 50  0000 C CNN
+F 2 "" H 9650 4700 50  0001 C CNN
+F 3 "" H 9650 4700 50  0001 C CNN
+	1    9650 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60CD12AB
+P 11300 4100
+AR Path="/60CD12AB" Ref="R?"  Part="1" 
+AR Path="/605286BD/60CD12AB" Ref="R52"  Part="1" 
+F 0 "R52" V 11505 4100 50  0000 C CNN
+F 1 "2K" V 11414 4100 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 11300 4100 50  0001 C CNN
+F 3 "-" H 11300 4100 50  0001 C CNN
+F 4 "SMD Chip Resistor, 2 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 11300 4100 50  0001 C CNN "Desc"
+F 5 "Farnell" H 11300 4100 50  0001 C CNN "Dist"
+F 6 "2502694" H 11300 4100 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 11300 4100 50  0001 C CNN "Manu"
+F 8 "WR08X2001FTL" H 11300 4100 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 11300 4100 50  0001 C CNN "Config"
+	1    11300 4100
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60CD12BA
+P 11550 4350
+AR Path="/60CD12BA" Ref="R?"  Part="1" 
+AR Path="/605286BD/60CD12BA" Ref="R53"  Part="1" 
+F 0 "R53" H 11618 4396 50  0000 L CNN
+F 1 "4.7K" H 11650 4300 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 11550 4350 50  0001 C CNN
+F 3 "-" H 11550 4350 50  0001 C CNN
+F 4 "SMD Chip Resistor, 4.7 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 11550 4350 50  0001 C CNN "Desc"
+F 5 "Farnell" H 11550 4350 50  0001 C CNN "Dist"
+F 6 "2502731" H 11550 4350 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 11550 4350 50  0001 C CNN "Manu"
+F 8 "WR08X4701FTL" H 11550 4350 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 11550 4350 50  0001 C CNN "Config"
+	1    11550 4350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60CD12C9
+P 12050 4350
+AR Path="/60CD12C9" Ref="C?"  Part="1" 
+AR Path="/605286BD/60CD12C9" Ref="C41"  Part="1" 
+F 0 "C41" H 12228 4396 50  0000 L CNN
+F 1 "0.1uF" H 12228 4305 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 12050 4350 50  0001 C CNN
+F 3 "-" H 12050 4350 50  0001 C CNN
+F 4 "SMD Multilayer Ceramic Capacitor, 0.1 µF, 50 V, 0603 [1608 Metric], ± 10%, X7R, C Series" H 12050 4350 50  0001 C CNN "Desc"
+F 5 "Farnell" H 12050 4350 50  0001 C CNN "Dist"
+F 6 "1907318" H 12050 4350 50  0001 C CNN "Dist PN"
+F 7 "Vishay" H 12050 4350 50  0001 C CNN "Manu"
+F 8 "VJ0805Y104KXACW1BC" H 12050 4350 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 12050 4350 50  0001 C CNN "Config"
+	1    12050 4350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	11550 4100 12050 4100
+Connection ~ 11550 4100
+Wire Wire Line
+	12050 4600 11550 4600
+Wire Wire Line
+	11550 4600 11550 4700
+Connection ~ 11550 4600
+$Comp
+L power:GND #PWR?
+U 1 1 60CD12D8
+P 11550 4700
+AR Path="/60CD12D8" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60CD12D8" Ref="#PWR0136"  Part="1" 
+F 0 "#PWR0136" H 11550 4450 50  0001 C CNN
+F 1 "GND" H 11555 4527 50  0000 C CNN
+F 2 "" H 11550 4700 50  0001 C CNN
+F 3 "" H 11550 4700 50  0001 C CNN
+	1    11550 4700
+	1    0    0    -1  
+$EndComp
+Connection ~ 4350 4100
+Connection ~ 6250 4100
+Wire Wire Line
+	3650 2900 3350 2900
+Connection ~ 3350 2900
+$Comp
+L power:GND #PWR?
+U 1 1 60CD12E6
+P 3650 3400
+AR Path="/60CD12E6" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60CD12E6" Ref="#PWR0142"  Part="1" 
+F 0 "#PWR0142" H 3650 3150 50  0001 C CNN
+F 1 "GND" H 3655 3227 50  0000 C CNN
+F 2 "" H 3650 3400 50  0001 C CNN
+F 3 "" H 3650 3400 50  0001 C CNN
+	1    3650 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4350 2100 4350 4100
+Wire Wire Line
+	6250 2200 6250 4100
+Wire Wire Line
+	8250 2300 8250 4100
+Connection ~ 8250 4100
+Wire Wire Line
+	4350 2100 13000 2100
+Wire Wire Line
+	10150 2400 10150 4100
+Connection ~ 10150 4100
+$Comp
+L Device:R R?
+U 1 1 60CD12FC
+P 5350 3150
+AR Path="/60CD12FC" Ref="R?"  Part="1" 
+AR Path="/605286BD/60CD12FC" Ref="R42"  Part="1" 
+F 0 "R42" V 5555 3150 50  0000 C CNN
+F 1 "1.1K" V 5464 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 5350 3150 50  0001 C CNN
+F 3 "-" H 5350 3150 50  0001 C CNN
+F 4 "SMD Chip Resistor, 1.1 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 5350 3150 50  0001 C CNN "Desc"
+F 5 "Farnell" H 5350 3150 50  0001 C CNN "Dist"
+F 6 "2502676" H 5350 3150 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 5350 3150 50  0001 C CNN "Manu"
+F 8 "WR08X1101FTL" H 5350 3150 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 5350 3150 50  0001 C CNN "Config"
+	1    5350 3150
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60CD130B
+P 5650 3150
+AR Path="/60CD130B" Ref="C?"  Part="1" 
+AR Path="/605286BD/60CD130B" Ref="C34"  Part="1" 
+F 0 "C34" H 5828 3196 50  0000 L CNN
+F 1 "DNF" H 5828 3105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 5650 3150 50  0001 C CNN
+F 3 "-" H 5650 3150 50  0001 C CNN
+F 4 "-" H 5650 3150 50  0001 C CNN "Desc"
+F 5 "-" H 5650 3150 50  0001 C CNN "Dist"
+F 6 "-" H 5650 3150 50  0001 C CNN "Dist PN"
+F 7 "-" H 5650 3150 50  0001 C CNN "Manu"
+F 8 "-" H 5650 3150 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 5650 3150 50  0001 C CNN "Config"
+	1    5650 3150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5650 2900 5350 2900
+Connection ~ 5350 2900
+$Comp
+L power:GND #PWR?
+U 1 1 60CD1317
+P 5650 3400
+AR Path="/60CD1317" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60CD1317" Ref="#PWR0143"  Part="1" 
+F 0 "#PWR0143" H 5650 3150 50  0001 C CNN
+F 1 "GND" H 5655 3227 50  0000 C CNN
+F 2 "" H 5650 3400 50  0001 C CNN
+F 3 "" H 5650 3400 50  0001 C CNN
+	1    5650 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5350 2200 5350 2900
+Connection ~ 5350 4100
+$Comp
+L Device:R R?
+U 1 1 60CD1328
+P 7250 3150
+AR Path="/60CD1328" Ref="R?"  Part="1" 
+AR Path="/605286BD/60CD1328" Ref="R45"  Part="1" 
+F 0 "R45" V 7455 3150 50  0000 C CNN
+F 1 "1.1K" V 7364 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 7250 3150 50  0001 C CNN
+F 3 "-" H 7250 3150 50  0001 C CNN
+F 4 "SMD Chip Resistor, 1.1 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 7250 3150 50  0001 C CNN "Desc"
+F 5 "Farnell" H 7250 3150 50  0001 C CNN "Dist"
+F 6 "2502676" H 7250 3150 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 7250 3150 50  0001 C CNN "Manu"
+F 8 "WR08X1101FTL" H 7250 3150 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 7250 3150 50  0001 C CNN "Config"
+	1    7250 3150
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60CD1337
+P 7550 3150
+AR Path="/60CD1337" Ref="C?"  Part="1" 
+AR Path="/605286BD/60CD1337" Ref="C36"  Part="1" 
+F 0 "C36" H 7728 3196 50  0000 L CNN
+F 1 "DNF" H 7728 3105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 7550 3150 50  0001 C CNN
+F 3 "-" H 7550 3150 50  0001 C CNN
+F 4 "-" H 7550 3150 50  0001 C CNN "Desc"
+F 5 "-" H 7550 3150 50  0001 C CNN "Dist"
+F 6 "-" H 7550 3150 50  0001 C CNN "Dist PN"
+F 7 "-" H 7550 3150 50  0001 C CNN "Manu"
+F 8 "-" H 7550 3150 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 7550 3150 50  0001 C CNN "Config"
+	1    7550 3150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7550 2900 7250 2900
+Connection ~ 7250 2900
+$Comp
+L power:GND #PWR?
+U 1 1 60CD1343
+P 7550 3400
+AR Path="/60CD1343" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60CD1343" Ref="#PWR0144"  Part="1" 
+F 0 "#PWR0144" H 7550 3150 50  0001 C CNN
+F 1 "GND" H 7555 3227 50  0000 C CNN
+F 2 "" H 7550 3400 50  0001 C CNN
+F 3 "" H 7550 3400 50  0001 C CNN
+	1    7550 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7250 2400 7250 2900
+Connection ~ 7250 4100
+$Comp
+L Device:R R?
+U 1 1 60CD1354
+P 9150 3150
+AR Path="/60CD1354" Ref="R?"  Part="1" 
+AR Path="/605286BD/60CD1354" Ref="R48"  Part="1" 
+F 0 "R48" V 9355 3150 50  0000 C CNN
+F 1 "1.1K" V 9264 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 9150 3150 50  0001 C CNN
+F 3 "-" H 9150 3150 50  0001 C CNN
+F 4 "SMD Chip Resistor, 1.1 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 9150 3150 50  0001 C CNN "Desc"
+F 5 "Farnell" H 9150 3150 50  0001 C CNN "Dist"
+F 6 "2502676" H 9150 3150 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 9150 3150 50  0001 C CNN "Manu"
+F 8 "WR08X1101FTL" H 9150 3150 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 9150 3150 50  0001 C CNN "Config"
+	1    9150 3150
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60CD1363
+P 9450 3150
+AR Path="/60CD1363" Ref="C?"  Part="1" 
+AR Path="/605286BD/60CD1363" Ref="C38"  Part="1" 
+F 0 "C38" H 9628 3196 50  0000 L CNN
+F 1 "DNF" H 9628 3105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 9450 3150 50  0001 C CNN
+F 3 "-" H 9450 3150 50  0001 C CNN
+F 4 "-" H 9450 3150 50  0001 C CNN "Desc"
+F 5 "-" H 9450 3150 50  0001 C CNN "Dist"
+F 6 "-" H 9450 3150 50  0001 C CNN "Dist PN"
+F 7 "-" H 9450 3150 50  0001 C CNN "Manu"
+F 8 "-" H 9450 3150 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 9450 3150 50  0001 C CNN "Config"
+	1    9450 3150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9450 2900 9150 2900
+Connection ~ 9150 2900
+$Comp
+L power:GND #PWR?
+U 1 1 60CD136F
+P 9450 3400
+AR Path="/60CD136F" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60CD136F" Ref="#PWR0145"  Part="1" 
+F 0 "#PWR0145" H 9450 3150 50  0001 C CNN
+F 1 "GND" H 9455 3227 50  0000 C CNN
+F 2 "" H 9450 3400 50  0001 C CNN
+F 3 "" H 9450 3400 50  0001 C CNN
+	1    9450 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9150 2600 9150 2900
+$Comp
+L Device:R R?
+U 1 1 60CD137F
+P 11050 3150
+AR Path="/60CD137F" Ref="R?"  Part="1" 
+AR Path="/605286BD/60CD137F" Ref="R51"  Part="1" 
+F 0 "R51" V 11255 3150 50  0000 C CNN
+F 1 "1.1K" V 11164 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 11050 3150 50  0001 C CNN
+F 3 "-" H 11050 3150 50  0001 C CNN
+F 4 "SMD Chip Resistor, 1.1 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 11050 3150 50  0001 C CNN "Desc"
+F 5 "Farnell" H 11050 3150 50  0001 C CNN "Dist"
+F 6 "2502676" H 11050 3150 50  0001 C CNN "Dist PN"
+F 7 "Walsin" H 11050 3150 50  0001 C CNN "Manu"
+F 8 "WR08X1101FTL" H 11050 3150 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 11050 3150 50  0001 C CNN "Config"
+	1    11050 3150
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60CD138E
+P 11350 3150
+AR Path="/60CD138E" Ref="C?"  Part="1" 
+AR Path="/605286BD/60CD138E" Ref="C40"  Part="1" 
+F 0 "C40" H 11528 3196 50  0000 L CNN
+F 1 "DNF" H 11528 3105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 11350 3150 50  0001 C CNN
+F 3 "-" H 11350 3150 50  0001 C CNN
+F 4 "-" H 11350 3150 50  0001 C CNN "Desc"
+F 5 "-" H 11350 3150 50  0001 C CNN "Dist"
+F 6 "-" H 11350 3150 50  0001 C CNN "Dist PN"
+F 7 "-" H 11350 3150 50  0001 C CNN "Manu"
+F 8 "-" H 11350 3150 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 11350 3150 50  0001 C CNN "Config"
+	1    11350 3150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	11350 2900 11050 2900
+$Comp
+L power:GND #PWR?
+U 1 1 60CD1399
+P 11350 3400
+AR Path="/60CD1399" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60CD1399" Ref="#PWR0148"  Part="1" 
+F 0 "#PWR0148" H 11350 3150 50  0001 C CNN
+F 1 "GND" H 11355 3227 50  0000 C CNN
+F 2 "" H 11350 3400 50  0001 C CNN
+F 3 "" H 11350 3400 50  0001 C CNN
+	1    11350 3400
+	1    0    0    -1  
+$EndComp
+Connection ~ 11050 4100
+Wire Wire Line
+	3050 4400 3050 4600
+Wire Wire Line
+	3050 3800 3050 3700
+$Comp
+L power:+5VA #PWR?
+U 1 1 60CD13A6
+P 3050 3700
+AR Path="/60CD13A6" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60CD13A6" Ref="#PWR0152"  Part="1" 
+F 0 "#PWR0152" H 3050 3550 50  0001 C CNN
+F 1 "+5VA" H 3065 3873 50  0000 C CNN
+F 2 "" H 3050 3700 50  0001 C CNN
+F 3 "" H 3050 3700 50  0001 C CNN
+	1    3050 3700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Diode:BAT54S D?
+U 1 1 60CD13B5
+P 5050 4100
+AR Path="/60CD13B5" Ref="D?"  Part="1" 
+AR Path="/605286BD/60CD13B5" Ref="D10"  Part="1" 
+F 0 "D10" V 5096 4188 50  0000 L CNN
+F 1 "BAT54S" V 5005 4188 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 5125 4225 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 4930 4100 50  0001 C CNN
+F 4 "Small Signal Schottky Diode, Dual Series, 30 V, 200 mA, 800 mV, 600 mA, 150 °C" H 5050 4100 50  0001 C CNN "Desc"
+F 5 "Farnell" H 5050 4100 50  0001 C CNN "Dist"
+F 6 "1081194" H 5050 4100 50  0001 C CNN "Dist PN"
+F 7 "NXP Semiconductors" H 5050 4100 50  0001 C CNN "Manu"
+F 8 "BAT54S,215" H 5050 4100 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 5050 4100 50  0001 C CNN "Config"
+	1    5050 4100
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5050 4400 5050 4600
+Wire Wire Line
+	5050 3800 5050 3700
+$Comp
+L power:+5VA #PWR?
+U 1 1 60CD13C1
+P 5050 3700
+AR Path="/60CD13C1" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60CD13C1" Ref="#PWR0158"  Part="1" 
+F 0 "#PWR0158" H 5050 3550 50  0001 C CNN
+F 1 "+5VA" H 5065 3873 50  0000 C CNN
+F 2 "" H 5050 3700 50  0001 C CNN
+F 3 "" H 5050 3700 50  0001 C CNN
+	1    5050 3700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3250 4100 3350 4100
+Connection ~ 3350 4100
+Wire Wire Line
+	5250 4100 5350 4100
+Wire Wire Line
+	5050 4600 5850 4600
+$Comp
+L Diode:BAT54S D?
+U 1 1 60CD13D4
+P 6950 4100
+AR Path="/60CD13D4" Ref="D?"  Part="1" 
+AR Path="/605286BD/60CD13D4" Ref="D11"  Part="1" 
+F 0 "D11" V 6996 4188 50  0000 L CNN
+F 1 "BAT54S" V 6905 4188 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 7025 4225 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 6830 4100 50  0001 C CNN
+F 4 "Small Signal Schottky Diode, Dual Series, 30 V, 200 mA, 800 mV, 600 mA, 150 °C" H 6950 4100 50  0001 C CNN "Desc"
+F 5 "Farnell" H 6950 4100 50  0001 C CNN "Dist"
+F 6 "1081194" H 6950 4100 50  0001 C CNN "Dist PN"
+F 7 "NXP Semiconductors" H 6950 4100 50  0001 C CNN "Manu"
+F 8 "BAT54S,215" H 6950 4100 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 6950 4100 50  0001 C CNN "Config"
+	1    6950 4100
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	6950 4400 6950 4600
+Wire Wire Line
+	6950 3800 6950 3700
+$Comp
+L power:+5VA #PWR?
+U 1 1 60CD13E0
+P 6950 3700
+AR Path="/60CD13E0" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60CD13E0" Ref="#PWR0182"  Part="1" 
+F 0 "#PWR0182" H 6950 3550 50  0001 C CNN
+F 1 "+5VA" H 6965 3873 50  0000 C CNN
+F 2 "" H 6950 3700 50  0001 C CNN
+F 3 "" H 6950 3700 50  0001 C CNN
+	1    6950 3700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7150 4100 7250 4100
+Wire Wire Line
+	5850 4600 6250 4600
+Wire Wire Line
+	6950 4600 7750 4600
+$Comp
+L Diode:BAT54S D?
+U 1 1 60CD13F2
+P 8850 4100
+AR Path="/60CD13F2" Ref="D?"  Part="1" 
+AR Path="/605286BD/60CD13F2" Ref="D12"  Part="1" 
+F 0 "D12" V 8896 4188 50  0000 L CNN
+F 1 "BAT54S" V 8805 4188 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 8925 4225 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 8730 4100 50  0001 C CNN
+F 4 "Small Signal Schottky Diode, Dual Series, 30 V, 200 mA, 800 mV, 600 mA, 150 °C" H 8850 4100 50  0001 C CNN "Desc"
+F 5 "Farnell" H 8850 4100 50  0001 C CNN "Dist"
+F 6 "1081194" H 8850 4100 50  0001 C CNN "Dist PN"
+F 7 "NXP Semiconductors" H 8850 4100 50  0001 C CNN "Manu"
+F 8 "BAT54S,215" H 8850 4100 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 8850 4100 50  0001 C CNN "Config"
+	1    8850 4100
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	8850 4400 8850 4600
+Wire Wire Line
+	8850 3800 8850 3700
+$Comp
+L power:+5VA #PWR?
+U 1 1 60CD13FE
+P 8850 3700
+AR Path="/60CD13FE" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60CD13FE" Ref="#PWR0183"  Part="1" 
+F 0 "#PWR0183" H 8850 3550 50  0001 C CNN
+F 1 "+5VA" H 8865 3873 50  0000 C CNN
+F 2 "" H 8850 3700 50  0001 C CNN
+F 3 "" H 8850 3700 50  0001 C CNN
+	1    8850 3700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9050 4100 9150 4100
+Wire Wire Line
+	8850 4600 9650 4600
+Connection ~ 9150 4100
+Wire Wire Line
+	7750 4600 8250 4600
+Wire Wire Line
+	11050 2800 11050 2900
+Connection ~ 11050 2900
+$Comp
+L Diode:BAT54S D?
+U 1 1 60CD1413
+P 10750 4100
+AR Path="/60CD1413" Ref="D?"  Part="1" 
+AR Path="/605286BD/60CD1413" Ref="D13"  Part="1" 
+F 0 "D13" V 10796 4188 50  0000 L CNN
+F 1 "BAT54S" V 10705 4188 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 10825 4225 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 10630 4100 50  0001 C CNN
+F 4 "Small Signal Schottky Diode, Dual Series, 30 V, 200 mA, 800 mV, 600 mA, 150 °C" H 10750 4100 50  0001 C CNN "Desc"
+F 5 "Farnell" H 10750 4100 50  0001 C CNN "Dist"
+F 6 "1081194" H 10750 4100 50  0001 C CNN "Dist PN"
+F 7 "NXP Semiconductors" H 10750 4100 50  0001 C CNN "Manu"
+F 8 "BAT54S,215" H 10750 4100 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 10750 4100 50  0001 C CNN "Config"
+	1    10750 4100
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	10750 4400 10750 4600
+Wire Wire Line
+	10750 3800 10750 3700
+$Comp
+L power:+5VA #PWR?
+U 1 1 60CD141F
+P 10750 3700
+AR Path="/60CD141F" Ref="#PWR?"  Part="1" 
+AR Path="/605286BD/60CD141F" Ref="#PWR0184"  Part="1" 
+F 0 "#PWR0184" H 10750 3550 50  0001 C CNN
+F 1 "+5VA" H 10765 3873 50  0000 C CNN
+F 2 "" H 10750 3700 50  0001 C CNN
+F 3 "" H 10750 3700 50  0001 C CNN
+	1    10750 3700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10950 4100 11050 4100
+Wire Wire Line
+	10750 4600 11550 4600
+Wire Wire Line
+	12050 4100 12050 2500
+Connection ~ 12050 4100
+Wire Wire Line
+	3050 4600 3850 4600
+Wire Wire Line
+	3350 2900 3350 3000
+Wire Wire Line
+	3650 2900 3650 3000
+Wire Wire Line
+	3350 3300 3350 4100
+Wire Wire Line
+	3650 3300 3650 3400
+Wire Wire Line
+	3350 4100 3450 4100
+Wire Wire Line
+	3750 4100 3850 4100
+Wire Wire Line
+	3850 4100 3850 4200
+Wire Wire Line
+	4350 4100 4350 4200
+Wire Wire Line
+	4350 4500 4350 4600
+Wire Wire Line
+	3850 4500 3850 4600
+Wire Wire Line
+	5850 4500 5850 4600
+Wire Wire Line
+	6250 4500 6250 4600
+Wire Wire Line
+	6250 4100 6250 4200
+Wire Wire Line
+	5850 4100 5850 4200
+Wire Wire Line
+	5750 4100 5850 4100
+Wire Wire Line
+	5350 4100 5450 4100
+Wire Wire Line
+	5350 3300 5350 4100
+Wire Wire Line
+	5350 2900 5350 3000
+Wire Wire Line
+	5650 2900 5650 3000
+Wire Wire Line
+	5650 3300 5650 3400
+Wire Wire Line
+	7250 2900 7250 3000
+Wire Wire Line
+	7250 3300 7250 4100
+Wire Wire Line
+	7550 3300 7550 3400
+Wire Wire Line
+	7550 2900 7550 3000
+Wire Wire Line
+	7250 4100 7350 4100
+Wire Wire Line
+	7650 4100 7750 4100
+Wire Wire Line
+	8250 4100 8250 4200
+Wire Wire Line
+	8250 4500 8250 4600
+Wire Wire Line
+	7750 4500 7750 4600
+Wire Wire Line
+	7750 4100 7750 4200
+Wire Wire Line
+	9150 4100 9250 4100
+Wire Wire Line
+	9550 4100 9650 4100
+Wire Wire Line
+	9650 4100 9650 4200
+Wire Wire Line
+	11550 4100 11550 4200
+Wire Wire Line
+	12050 4100 12050 4200
+Wire Wire Line
+	12050 4500 12050 4600
+Wire Wire Line
+	11550 4500 11550 4600
+Wire Wire Line
+	10150 4100 10150 4200
+Wire Wire Line
+	10150 4500 10150 4600
+Wire Wire Line
+	11050 4100 11150 4100
+Wire Wire Line
+	11450 4100 11550 4100
+Wire Wire Line
+	9650 4500 9650 4600
+Wire Wire Line
+	11050 3300 11050 4100
+Wire Wire Line
+	11350 3300 11350 3400
+Wire Wire Line
+	11350 2900 11350 3000
+Wire Wire Line
+	11050 2900 11050 3000
+Wire Wire Line
+	9450 3300 9450 3400
+Wire Wire Line
+	9150 3300 9150 4100
+Wire Wire Line
+	9150 2900 9150 3000
+Wire Wire Line
+	9450 2900 9450 3000
+Wire Wire Line
+	2600 2200 5350 2200
+Wire Wire Line
+	2600 2400 7250 2400
+Wire Wire Line
+	2600 2600 9150 2600
+Wire Wire Line
+	2600 2800 11050 2800
+Text HLabel 2600 2800 0    50   Input ~ 0
+ADC_CH6
+Text HLabel 2600 2600 0    50   Input ~ 0
+ADC_CH7
+Text HLabel 2600 2400 0    50   Input ~ 0
+ADC_CH8
+Text HLabel 2600 2200 0    50   Input ~ 0
+ADC_CH9
+Text Label 3100 2200 2    50   ~ 0
+ADC_CH9
+Text Label 3100 2400 2    50   ~ 0
+ADC_CH8
+Text Label 3100 2600 2    50   ~ 0
+ADC_CH7
+Text Label 3100 2800 2    50   ~ 0
+ADC_CH6
+Text Label 3100 2000 2    50   ~ 0
+ADC_CH10
+Wire Wire Line
+	3350 2000 3350 2900
+Wire Wire Line
+	2600 2000 3350 2000
+Text HLabel 2600 2000 0    50   Input ~ 0
+ADC_CH10
+Wire Wire Line
+	6250 2200 13000 2200
+Wire Wire Line
+	8250 2300 13000 2300
+Wire Wire Line
+	10150 2400 13000 2400
+Wire Wire Line
+	12050 2500 13000 2500
+Text HLabel 13000 2100 2    50   Output ~ 0
+COND_OUT10
+Text HLabel 13000 2500 2    50   Output ~ 0
+COND_OUT6
+Text HLabel 13000 2400 2    50   Output ~ 0
+COND_OUT7
+Text HLabel 13000 2300 2    50   Output ~ 0
+COND_OUT8
+Text HLabel 13000 2200 2    50   Output ~ 0
+COND_OUT9
+$Comp
+L Device:R R?
+U 1 1 60CD147E
+P 3850 4350
+AR Path="/60CD147E" Ref="R?"  Part="1" 
+AR Path="/605286BD/60CD147E" Ref="R41"  Part="1" 
+F 0 "R41" H 3918 4396 50  0000 L CNN
+F 1 "4.7K" H 3950 4300 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 3850 4350 50  0001 C CNN
+F 3 "-" H 3850 4350 50  0001 C CNN
+F 4 "SMD Chip Resistor, 4.7 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" H 3850 4350 50  0001 C CNN "Desc"
+F 5 "Walsin" H 3850 4350 50  0001 C CNN "Manu"
+F 6 "WR08X4701FTL" H 3850 4350 50  0001 C CNN "Manu PN"
+F 7 "Farnell" H 3850 4350 50  0001 C CNN "Dist"
+F 8 "2502731" H 3850 4350 50  0001 C CNN "Dist PN"
+F 9 "-Inter,-Motor" H 3850 4350 50  0001 C CNN "Config"
+	1    3850 4350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60CD148D
+P 3600 4100
+AR Path="/60CD148D" Ref="R?"  Part="1" 
+AR Path="/605286BD/60CD148D" Ref="R40"  Part="1" 
+F 0 "R40" V 3805 4100 50  0000 C CNN
+F 1 "2K" V 3714 4100 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 3600 4100 50  0001 C CNN
+F 3 "-" H 3600 4100 50  0001 C CNN
+F 4 "SMD Chip Resistor, 2 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" V 3600 4100 50  0001 C CNN "Desc"
+F 5 "Walsin" V 3600 4100 50  0001 C CNN "Manu"
+F 6 "WR08X2001FTL" V 3600 4100 50  0001 C CNN "Manu PN"
+F 7 "Farnell" V 3600 4100 50  0001 C CNN "Dist"
+F 8 "2502694" V 3600 4100 50  0001 C CNN "Dist PN"
+F 9 "-Inter,-Motor" H 3600 4100 50  0001 C CNN "Config"
+	1    3600 4100
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 60CD149C
+P 3650 3150
+AR Path="/60CD149C" Ref="C?"  Part="1" 
+AR Path="/605286BD/60CD149C" Ref="C32"  Part="1" 
+F 0 "C32" H 3828 3196 50  0000 L CNN
+F 1 "DNF" H 3828 3105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 3650 3150 50  0001 C CNN
+F 3 "-" H 3650 3150 50  0001 C CNN
+F 4 "-" H 3650 3150 50  0001 C CNN "Desc"
+F 5 "-" H 3650 3150 50  0001 C CNN "Dist"
+F 6 "-" H 3650 3150 50  0001 C CNN "Dist PN"
+F 7 "-" H 3650 3150 50  0001 C CNN "Manu"
+F 8 "-" H 3650 3150 50  0001 C CNN "Manu PN"
+F 9 "-Inter,-Motor" H 3650 3150 50  0001 C CNN "Config"
+	1    3650 3150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60CD14AB
+P 3350 3150
+AR Path="/60CD14AB" Ref="R?"  Part="1" 
+AR Path="/605286BD/60CD14AB" Ref="R39"  Part="1" 
+F 0 "R39" V 3555 3150 50  0000 C CNN
+F 1 "1.1K" V 3464 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 3350 3150 50  0001 C CNN
+F 3 "-" H 3350 3150 50  0001 C CNN
+F 4 "SMD Chip Resistor, 1.1 kohm, ± 1%, 125 mW, 0805 [2012 Metric], Thick Film, General Purpose" V 3350 3150 50  0001 C CNN "Desc"
+F 5 "Walsin" V 3350 3150 50  0001 C CNN "Manu"
+F 6 "WR08X1101FTL" V 3350 3150 50  0001 C CNN "Manu PN"
+F 7 "Farnell" V 3350 3150 50  0001 C CNN "Dist"
+F 8 "2502676" V 3350 3150 50  0001 C CNN "Dist PN"
+F 9 "-Inter,-Motor" H 3350 3150 50  0001 C CNN "Config"
+	1    3350 3150
+	-1   0    0    1   
+$EndComp
+$Comp
+L Diode:BAT54S D?
+U 1 1 60CD14BA
+P 3050 4100
+AR Path="/60CD14BA" Ref="D?"  Part="1" 
+AR Path="/605286BD/60CD14BA" Ref="D9"  Part="1" 
+F 0 "D9" V 3096 4188 50  0000 L CNN
+F 1 "BAT54S" V 3005 4188 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 3125 4225 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 2930 4100 50  0001 C CNN
+F 4 "Small Signal Schottky Diode, Dual Series, 30 V, 200 mA, 800 mV, 600 mA, 150 °C" V 3050 4100 50  0001 C CNN "Desc"
+F 5 "NXP Semiconductors" V 3050 4100 50  0001 C CNN "Manu"
+F 6 "BAT54S,215" V 3050 4100 50  0001 C CNN "Manu PN"
+F 7 "Farnell" V 3050 4100 50  0001 C CNN "Dist"
+F 8 "1081194" V 3050 4100 50  0001 C CNN "Dist PN"
+F 9 "-Inter,-Motor" H 3050 4100 50  0001 C CNN "Config"
+	1    3050 4100
+	0    -1   -1   0   
+$EndComp
+Text HLabel 2600 6500 0    50   Input ~ 0
+ADC_CH5
+Text HLabel 2600 6700 0    50   Input ~ 0
+ADC_CH4
+Text HLabel 2600 6900 0    50   Input ~ 0
+ADC_CH3
+Text HLabel 2600 7100 0    50   Input ~ 0
+ADC_CH2
+Text HLabel 2600 7300 0    50   Input ~ 0
+ADC_CH1
+Wire Notes Line
+	13600 5000 2100 5000
+Wire Notes Line
+	2100 5000 2100 1850
+Wire Notes Line
+	2100 1850 13600 1850
+Wire Notes Line
+	13600 1850 13600 5000
+Text Notes 13000 4850 0    50   ~ 10
+Not Fitted
+$EndSCHEMATC
