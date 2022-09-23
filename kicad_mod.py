@@ -6,9 +6,12 @@
 #  This is copyright (C) 2022 to Alan Milne
 #  ===================================================================
 
+from easygui import *
 import os
 
 from kiutils.footprint import Footprint
+
+from debug_print import *
 
 # ==================================================================================================================
 def process_kicad_mod(fdir, fname, fext):
@@ -21,8 +24,12 @@ def process_kicad_mod(fdir, fname, fext):
 
     new_filename = fdir + "\\" + sub_folder + "\\" + fname + fext
 
-    print("KiCad Footprint filename is %s." % filename)
+    debug_print("KiCad Footprint filename is %s." % filename)
 
     footprint = Footprint().from_file(filename)
     # Do stuff ...
     footprint.to_file(new_filename)
+
+    msgbox(msg="KiCad Input file " + filename + " has been processed.\n\r \n\rProcessed file is " + new_filename + ".",
+           title="KiCad Footprint file",
+           ok_button="Program will now close")

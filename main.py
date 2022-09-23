@@ -30,23 +30,9 @@ from kicad_mod import *
 from kicad_sym import *
 from kicad_wks import *
 from kicad_dru import *
+from kicad_pro import *
 
-
-# ==================================================================================================================
-def process_kicad_pro(fdir, fname, fext):
-    Filename = fdir + fname + fext
-
-    # Create new sub-folder (if it does not exist  for the output
-    SubFolder = "Modified"
-    if not os.path.exists(os.path.join(fdir, SubFolder)):
-        os.mkdir(os.path.join(fdir, SubFolder))
-
-    New_Filename = fdir + "\\" + SubFolder + "\\" + fname + fext
-
-    print("KiCad Project filename is %s." % Filename)
-
-    # This is a special case as this is not supported by kiutils.
-
+# Import the file to be processed - only shows KiCad files.
 Input_Filename = fileopenbox(msg="Open file",
                              title="KiCad Input File",
                              filetypes=[["*.kicad_pro", "KiCad Project file"],
@@ -58,26 +44,29 @@ Input_Filename = fileopenbox(msg="Open file",
                                         ["*.kicad_dru", "KiCad Design Rules file"]],
                              multiple=False)
 
+# Input_filename is none if "cancel is selected"!
 if Input_Filename is None:
     msgbox(msg="No KiCad Input file was selected!",
            title="Open file",
            ok_button="Program will now close")
+# Got a file so split it into bits.
 else:
     # Direction is to the last "/"
     # Filename is from the last "/" to the last "."
     # Extension is from the last "." to the end of the string
 
-    print("=== Input Filename is %s." % Input_Filename)
+    debug_print("Full Input Filename is |%s|." % Input_Filename)
 
     Input_Directory = Input_Filename[0:Input_Filename.rfind("\\") + 1]
     Input_Filename_Extension = Input_Filename[Input_Filename.rfind("."):len(Input_Filename)]
 
-    print("=== Input Directory is |%s|." % Input_Directory)
-    print("=== Input Filename Extensions is |%s|." % Input_Filename_Extension)
+    debug_print("Input Directory is |%s|." % Input_Directory)
+    debug_print("Input Filename Extensions is |%s|." % Input_Filename_Extension)
 
     Input_Filename = Input_Filename[Input_Filename.rfind("\\") + 1:Input_Filename.rfind(".")]
-    print("=== Input Filename is |%s|." % Input_Filename)
+    debug_print("Input Filename is |%s|." % Input_Filename)
 
+    # Process it based on it's extension/type.
     match Input_Filename_Extension:
         case ".kicad_pcb":
             process_kicad_pcb(Input_Directory, Input_Filename, Input_Filename_Extension)
@@ -93,6 +82,7 @@ else:
             process_kicad_dru(Input_Directory, Input_Filename, Input_Filename_Extension)
         case ".kicad_pro":
             process_kicad_pro(Input_Directory, Input_Filename, Input_Filename_Extension)
+        # Just in case the user selects a non-KiCad file
         case other:
             msgbox(msg="KiCad Input file extension was not recognised!",
                    title="Open file",

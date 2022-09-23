@@ -6,9 +6,12 @@
 #  This is copyright (C) 2022 to Alan Milne
 #  ===================================================================
 
+from easygui import *
 import os
 
 from kiutils.symbol import SymbolLib
+
+from debug_print import *
 
 
 # ==================================================================================================================
@@ -22,8 +25,12 @@ def process_kicad_sym(fdir, fname, fext):
 
     new_filename = fdir + "\\" + sub_folder + "\\" + fname + fext
 
-    print("KiCad Symbol filename is %s." % filename)
+    debug_print("KiCad Symbol filename is %s." % filename)
 
     symbollib = SymbolLib().from_file(filename)
     # Do stuff ...
     symbollib.to_file(new_filename)
+
+    msgbox(msg="KiCad Input file " + filename + " has been processed.\n\r \n\rProcessed file is " + new_filename + ".",
+           title="KiCad Symbol file",
+           ok_button="Program will now close")
