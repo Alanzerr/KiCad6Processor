@@ -1,0 +1,7 @@
+(fp_lib_table
+  (lib (name "DASADSTL")(type "KiCad")(uri "${KIPRJMOD}/DASADSTL.pretty")(options "")(descr ""))
+  (lib (name "Miscellaneous")(type "KiCad")(uri "D:/KiCad_Master_Library/bitwise-footprints/Miscellaneous.pretty")(options "")(descr ""))
+  (lib (name "Connector")(type "KiCad")(uri "D:/KiCad_Master_Library/bitwise-footprints/Connector.pretty")(options "")(descr ""))
+  (lib (name "BOM_Only_Parts")(type "KiCad")(uri "D:/KiCad_Master_Library/bitwise-footprints/BOM_Only_Parts.pretty")(options "")(descr ""))
+  (lib (name "MTP")(type "KiCad")(uri "D:/KiCad_Master_Library/bitwise-footprints/MTP.pretty")(options "")(descr ""))
+)

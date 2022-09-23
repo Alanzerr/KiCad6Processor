@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "DASADSTL")(type "KiCad")(uri "${KIPRJMOD}/DASADSTL.kicad_sym")(options "")(descr ""))
+)

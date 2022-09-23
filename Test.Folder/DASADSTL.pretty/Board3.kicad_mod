@@ -1,0 +1,24 @@
+(footprint "Board3" (version 20210824) (generator pcbnew) (layer "F.Cu")
+  (tedit 613C8501)
+  (descr "Board3")
+  (attr exclude_from_pos_files exclude_from_bom)
+  (fp_text reference "REF**" (at 0 1.905) (layer "F.SilkS") hide
+    (effects (font (size 1 1) (thickness 0.15)))
+    (tstamp 5ce3c70c-c7e5-40a8-ae86-5dfa570c45b4)
+  )
+  (fp_text value "Board3" (at 0 -1.905) (layer "F.Fab") hide
+    (effects (font (size 1 1) (thickness 0.15)))
+    (tstamp 6c271bd1-ce0d-4c41-9b16-368a684a18fb)
+  )
+  (fp_poly (pts
+      (xy -0.5 -0.5)
+      (xy 0.5 -0.5)
+      (xy 0.5 0.5)
+      (xy -0.5 0.5)
+    ) (layer "Eco1.User") (width 0.1) (fill solid) (tstamp fec15ecb-eaac-4962-8552-c7ec6ab27153))
+  (model "${KIPRJMOD}/DASADSTL.pretty/Shapes_3D/Board3.step"
+    (offset (xyz 0 0 21.209))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
+)

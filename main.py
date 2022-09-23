@@ -5,65 +5,95 @@ from kiutils.symbol import Symbol
 from kiutils.footprint import Footprint
 from kiutils.wks import WorkSheet
 from kiutils.dru import DesignRules
+from kiutils.libraries import LibTable
 
 # ==================================================================================================================
 def process_kicad_pcb(fdir, fname, fext):
-    filename = fdir + fname + fext
-    print("KiCad PCB filename is %s." % filename)
+    Filename = fdir + fname + fext
+    LibTable_Filename = fdir + "fp-lib-table"
 
-    board = Board().from_file(filename)
+    New_Filename = fdir + fname + "_Modified" + fext
+    New_LibTable_Filename = fdir + "fp-lib-table" + "_Modified"
+
+    print("KiCad PCB filename is %s." % Filename)
+    print("KiCad PCB Library filename is %s." % LibTable_Filename)
+
+    PCB_LibTable = LibTable().from_file(LibTable_Filename)
+    board = Board().from_file(Filename)
     # Do stuff ...
-    board.to_file(filename)
+    board.to_file(New_Filename)
+    PCB_LibTable.to_file(New_LibTable_Filename)
 
 # ==================================================================================================================
 def process_kicad_sch(fdir, fname, fext):
-    filename = fdir + fname + fext
-    print("KiCad Schematics filename is %s." % filename)
+    Filename = fdir + fname + fext
+    LibTable_Filename = fdir + "sym-lib-table"
 
-    schematic = Schematic().from_file(filename)
+    New_Filename = fdir + fname + "_Modified" + fext
+    New_LibTable_Filename = fdir + "sym-lib-table" + "_Modified"
+
+    print("KiCad Schematics filename is %s." % Filename)
+    print("KiCad Schematic Library filename is %s." % LibTable_Filename)
+
+    Symbol_LibTable = LibTable().from_file(LibTable_Filename)
+    schematic = Schematic().from_file(Filename)
     # Do stuff ...
-    schematic.to_file(filename)
+    schematic.to_file(New_Filename)
+    Symbol_LibTable.to_file(New_LibTable_Filename)
 
 # ==================================================================================================================
 def process_kicad_mod(fdir, fname, fext):
-    filename = fdir + fname + fext
-    print("KiCad Footprint filename is %s." % filename)
+    Filename = fdir + fname + fext
 
-    footprint = Footprint().from_file(fdir + filename)
+    New_Filename = fdir + fname + "_Modified" + fext
+
+    print("KiCad Footprint filename is %s." % Filename)
+
+    footprint = Footprint().from_file(Filename)
     # Do stuff ...
-    footprint.to_file(fdir + fname + fext)
+    footprint.to_file(New_Filename)
 
 # ==================================================================================================================
 def process_kicad_sym(fdir, fname, fext):
-    filename = fdir + fname + fext
-    print("KiCad Symbol filename is %s." % filename)
+    Filename = fdir + fname + fext
 
-    symbol = Symbol().from_file(filename)
-    # Do stuff ...
-    symbol.to_file(filename)
+    New_Filename = fdir + fname + "_Modified" + fext
+
+    print("KiCad Symbol filename is %s." % Filename)
+
+    # This is a special case as this does not appear to be supported by kiutils.
 
 # ==================================================================================================================
 def process_kicad_wks(fdir, fname, fext):
-    filename = fdir + fname + fext
-    print("KiCad Worksheet filename is %s." % filename)
+    Filename = fdir + fname + fext
 
-    worksheet = WorkSheet().from_file(filename)
+    New_Filename = fdir + fname + "_Modified" + fext
+
+    print("KiCad Worksheet filename is %s." % Filename)
+
+    worksheet = WorkSheet().from_file(Filename)
     # Do stuff ...
-    worksheet.to_file(filename)
+    worksheet.to_file(New_Filename)
 
 # ==================================================================================================================
 def process_kicad_dru(fdir, fname, fext):
-    filename = fdir + fname + fext
-    print("KiCad Design Rule filename is %s." % filename)
+    Filename = fdir + fname + fext
 
-    designrules = DesignRules().from_file(filename)
+    New_Filename = fdir + fname + "_Modified" + fext
+
+    print("KiCad Design Rule filename is %s." % Filename)
+
+    designrules = DesignRules().from_file(Filename)
     # Do stuff ...
-    designrules.to_file(filename)
+    designrules.to_file(New_Filename)
 
 # ==================================================================================================================
 def process_kicad_pro(fdir, fname, fext):
-    filename = fdir + fname + fext
-    print("KiCad Project filename is %s." % filename)
+    Filename = fdir + fname + fext
+
+    New_Filename = fdir + fname + "_Modified" + fext
+
+    print("KiCad Project filename is %s." % Filename)
 
     # This is a special case as this is not supported by kiutils.
 
@@ -92,9 +122,6 @@ else:
     Input_Directory = Input_Filename[0:Input_Filename.rfind("\\") + 1]
     Input_Filename_Extension = Input_Filename[Input_Filename.rfind("."):len(Input_Filename)]
 
-    #print("Start is %i." % Input_Filename.rfind("\\"))
-    #print("Mid is %i." % Input_Filename.rfind("."))
-    #print("Length is %i." % len(Input_Filename))
     print("=== Input Directory is |%s|." % Input_Directory)
     print("=== Input Filename Extensions is |%s|." % Input_Filename_Extension)
 
