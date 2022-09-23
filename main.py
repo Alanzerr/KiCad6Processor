@@ -1,3 +1,11 @@
+#  ===================================================================
+#  Source File Name : *.py
+#  Purpose          : t.b.a.
+#  Author           : Alan Milne
+#  #
+#  This is copyright (C) 2022 to Alan Milne
+#  ===================================================================
+
 from easygui import *
 import os
 
@@ -16,117 +24,13 @@ from kiutils.libraries import LibTable
 from kiutils.wks import WorkSheet
 from kiutils.dru import DesignRules
 
-# ==================================================================================================================
-def process_kicad_pcb(fdir, fname, fext):
-    Filename = fdir + fname + fext
-    LibTable_Filename = fdir + "fp-lib-table"
+from kicad_pcb import *
+from kicad_sch import *
+from kicad_mod import *
+from kicad_sym import *
+from kicad_wks import *
+from kicad_dru import *
 
-    # Create new sub-folder (if it does not exist  for the output
-    SubFolder = "Modified"
-    if not os.path.exists(os.path.join(fdir, SubFolder)):
-        os.mkdir(os.path.join(fdir, SubFolder))
-
-    New_Filename = fdir + "\\" + SubFolder + "\\" + fname + fext
-    New_LibTable_Filename = fdir + "\\" + SubFolder + "\\" + "fp-lib-table"
-
-    print("KiCad PCB filename is %s." % Filename)
-    print("KiCad PCB Library filename is %s." % LibTable_Filename)
-
-    PCB_LibTable = LibTable().from_file(LibTable_Filename)
-    board = Board().from_file(Filename)
-    # Do stuff ...
-    board.to_file(New_Filename)
-    PCB_LibTable.to_file(New_LibTable_Filename)
-
-# ==================================================================================================================
-def process_kicad_sch(fdir, fname, fext):
-    Filename = fdir + fname + fext
-    LibTable_Filename = fdir + "sym-lib-table"
-
-    # Create new sub-folder (if it does not exist  for the output
-    SubFolder = "Modified"
-    if not os.path.exists(os.path.join(fdir, SubFolder)):
-        os.mkdir(os.path.join(fdir, SubFolder))
-
-    New_Filename = fdir + "\\" + SubFolder + "\\" + fname + fext
-    New_LibTable_Filename = fdir + "\\" + SubFolder + "\\" + "sym-lib-table"
-
-    print("KiCad Schematics filename is %s." % Filename)
-    print("KiCad Schematic Library filename is %s." % LibTable_Filename)
-
-    Symbol_LibTable = LibTable().from_file(LibTable_Filename)
-    schematic = Schematic().from_file(Filename)
-    # Do stuff ...
-    schematic.to_file(New_Filename)
-    Symbol_LibTable.to_file(New_LibTable_Filename)
-
-# ==================================================================================================================
-def process_kicad_mod(fdir, fname, fext):
-    Filename = fdir + fname + fext
-
-    # Create new sub-folder (if it does not exist  for the output
-    SubFolder = "Modified"
-    if not os.path.exists(os.path.join(fdir, SubFolder)):
-        os.mkdir(os.path.join(fdir, SubFolder))
-
-    New_Filename = fdir + "\\" + SubFolder + "\\" + fname + fext
-
-    print("KiCad Footprint filename is %s." % Filename)
-
-    footprint = Footprint().from_file(Filename)
-    # Do stuff ...
-    footprint.to_file(New_Filename)
-
-# ==================================================================================================================
-def process_kicad_sym(fdir, fname, fext):
-    Filename = fdir + fname + fext
-
-    # Create new sub-folder (if it does not exist  for the output
-    SubFolder = "Modified"
-    if not os.path.exists(os.path.join(fdir, SubFolder)):
-        os.mkdir(os.path.join(fdir, SubFolder))
-
-    New_Filename = fdir + "\\" + SubFolder + "\\" + fname + fext
-
-    print("KiCad Symbol filename is %s." % Filename)
-
-    symbollib = SymbolLib().from_file(Filename)
-    # Do stuff ...
-    symbollib.to_file(New_Filename)
-
-# ==================================================================================================================
-def process_kicad_wks(fdir, fname, fext):
-    Filename = fdir + fname + fext
-
-    # Create new sub-folder (if it does not exist  for the output
-    SubFolder = "Modified"
-    if not os.path.exists(os.path.join(fdir, SubFolder)):
-        os.mkdir(os.path.join(fdir, SubFolder))
-
-    New_Filename = fdir + "\\" + SubFolder + "\\" + fname + fext
-
-    print("KiCad Worksheet filename is %s." % Filename)
-
-    worksheet = WorkSheet().from_file(Filename)
-    # Do stuff ...
-    worksheet.to_file(New_Filename)
-
-# ==================================================================================================================
-def process_kicad_dru(fdir, fname, fext):
-    Filename = fdir + fname + fext
-
-    # Create new sub-folder (if it does not exist  for the output
-    SubFolder = "Modified"
-    if not os.path.exists(os.path.join(fdir, SubFolder)):
-        os.mkdir(os.path.join(fdir, SubFolder))
-
-    New_Filename = fdir + "\\" + SubFolder + "\\" + fname + fext
-
-    print("KiCad Design Rule filename is %s." % Filename)
-
-    designrules = DesignRules().from_file(Filename)
-    # Do stuff ...
-    designrules.to_file(New_Filename)
 
 # ==================================================================================================================
 def process_kicad_pro(fdir, fname, fext):
