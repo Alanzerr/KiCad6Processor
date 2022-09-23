@@ -23,7 +23,7 @@ def process_kicad_dru(fdir, fname, fext):
     if not os.path.exists(os.path.join(fdir, sub_folder)):
         os.mkdir(os.path.join(fdir, sub_folder))
 
-    new_filename = fdir + "\\" + sub_folder + "\\" + fname + fext
+    new_filename = fdir + sub_folder + "\\" + fname + fext
 
     debug_print("KiCad Design Rule filename is %s." % filename)
 

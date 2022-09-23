@@ -12,6 +12,8 @@ import os
 from kiutils.board import Board
 from kiutils.libraries import LibTable
 
+from kiutils.footprint import *
+
 from debug_print import *
 
 
@@ -25,8 +27,8 @@ def process_kicad_pcb(fdir, fname, fext):
     if not os.path.exists(os.path.join(fdir, sub_folder)):
         os.mkdir(os.path.join(fdir, sub_folder))
 
-    new_filename = fdir + "\\" + sub_folder + "\\" + fname + fext
-    new_lib_table_filename = fdir + "\\" + sub_folder + "\\" + "fp-lib-table"
+    new_filename = fdir + sub_folder + "\\" + fname + fext
+    new_lib_table_filename = fdir + sub_folder + "\\" + "fp-lib-table"
 
     debug_print("KiCad PCB filename is %s." % filename)
     debug_print("KiCad PCB Library filename is %s." % lib_table_filename)
@@ -34,6 +36,12 @@ def process_kicad_pcb(fdir, fname, fext):
     pcb_lib_table = LibTable().from_file(lib_table_filename)
     board = Board().from_file(filename)
     # Do stuff ...
+
+    # Experimental code
+    for footprint in board.footprints:
+        print(footprint.placed)
+    # End Experimental code
+
     board.to_file(new_filename)
     pcb_lib_table.to_file(new_lib_table_filename)
 

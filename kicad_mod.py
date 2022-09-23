@@ -22,7 +22,7 @@ def process_kicad_mod(fdir, fname, fext):
     if not os.path.exists(os.path.join(fdir, sub_folder)):
         os.mkdir(os.path.join(fdir, sub_folder))
 
-    new_filename = fdir + "\\" + sub_folder + "\\" + fname + fext
+    new_filename = fdir + sub_folder + "\\" + fname + fext
 
     debug_print("KiCad Footprint filename is %s." % filename)
 

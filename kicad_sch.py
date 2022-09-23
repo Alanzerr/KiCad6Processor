@@ -25,8 +25,8 @@ def process_kicad_sch(fdir, fname, fext):
     if not os.path.exists(os.path.join(fdir, sub_folder)):
         os.mkdir(os.path.join(fdir, sub_folder))
 
-    new_filename = fdir + "\\" + sub_folder + "\\" + fname + fext
-    new_lib_table_filename = fdir + "\\" + sub_folder + "\\" + "sym-lib-table"
+    new_filename = fdir + sub_folder + "\\" + fname + fext
+    new_lib_table_filename = fdir + sub_folder + "\\" + "sym-lib-table"
 
     debug_print("KiCad Schematics filename is %s." % filename)
     debug_print("KiCad Schematic Library filename is %s." % lib_table_filename)
