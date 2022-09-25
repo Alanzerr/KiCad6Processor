@@ -7,7 +7,11 @@
 #  ===================================================================
 
 from easygui import *
+# Could use tkinter however whilst it will be prettier, its much more complex!
+import tkinter as tk
 import os
+
+from debug_print import *
 
 # PCB related stuff
 from kiutils.board import Board
@@ -60,11 +64,11 @@ else:
     Input_Directory = Input_Filename[0:Input_Filename.rfind("\\") + 1]
     Input_Filename_Extension = Input_Filename[Input_Filename.rfind("."):len(Input_Filename)]
 
-    debug_print("Input Directory is |%s|." % Input_Directory)
-    debug_print("Input Filename Extensions is |%s|." % Input_Filename_Extension)
+    debug_print("Input Directory is \"%s\"." % Input_Directory)
+    debug_print("Input Filename Extensions is \"%s\"." % Input_Filename_Extension)
 
     Input_Filename = Input_Filename[Input_Filename.rfind("\\") + 1:Input_Filename.rfind(".")]
-    debug_print("Input Filename is |%s|." % Input_Filename)
+    debug_print("Input Filename is \"%s\"." % Input_Filename)
 
     # Process it based on it's extension/type.
     match Input_Filename_Extension:

@@ -7,11 +7,13 @@
 #  ===================================================================
 
 from easygui import *
+import tkinter as tk
 import os
 
 from kiutils.dru import DesignRules
 
 from debug_print import *
+from user_display import *
 
 
 # ==================================================================================================================
@@ -28,9 +30,30 @@ def process_kicad_dru(fdir, fname, fext):
     debug_print("KiCad Design Rule filename is %s." % filename)
 
     designrules = DesignRules().from_file(filename)
-    # Do stuff ...
-    designrules.to_file(new_filename)
 
-    msgbox(msg="KiCad Input file " + filename + " has been processed.\n\r \n\rProcessed file is " + new_filename + ".",
-           title="KiCad Design Rules file",
-           ok_button="Program will now close")
+    # Now ask user what they want to do and keep doing it till they quit (via cancel if "x")
+    choice = None
+
+    while (choice != "Quit") and (choice != "Exit"):
+        msg = "Design Rule(s)"
+
+        choices = list()
+        # Currently nothing to do!
+
+        choice = user_selection(msg, choices)
+
+        match choice:
+            case "Quit":
+                # User has selected cancel so nothing to do
+                debug_print("User selected Quit.")
+            case "Exit":
+                debug_print("User selected Exit.")
+
+                designrules.to_file(new_filename)
+
+                msgbox(
+                    msg="KiCad Input file " + filename + " has been processed.\n\r \n\rProcessed file is " + new_filename + ".",
+                    title="KiCad Design Rules file",
+                    ok_button="Program will now close")
+            case other:
+                debug_print("User selected illegal option (%s)!" % choice)

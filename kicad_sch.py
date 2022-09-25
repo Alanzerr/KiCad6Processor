@@ -7,12 +7,14 @@
 #  ===================================================================
 
 from easygui import *
+import tkinter as tk
 import os
 
 from kiutils.schematic import Schematic
 from kiutils.libraries import LibTable
 
 from debug_print import *
+from user_display import *
 
 
 # ==================================================================================================================
@@ -33,12 +35,31 @@ def process_kicad_sch(fdir, fname, fext):
 
     symbol_lib_table = LibTable().from_file(lib_table_filename)
     schematic = Schematic().from_file(filename)
-    # Do stuff ...
-    schematic.to_file(new_filename)
-    symbol_lib_table.to_file(new_lib_table_filename)
 
-    msgbox(msg="KiCad Input file " + filename
-               + " (and its Library table) have been processed.\n\r \n\rProcessed files are "
-               + new_filename + " and " + new_lib_table_filename + ".",
-           title="KiCad Schematic file (and Library Table)",
-           ok_button="Program will now close")
+    # Now ask user what they want to do and keep doing it till they quit (via cancel if "x")
+    choice = None
+
+    while (choice != "Quit") and (choice != "Exit"):
+        msg = "Schematic"
+
+        choices = list()
+
+        choice = user_selection(msg, choices)
+
+        match choice:
+            case "Quit":
+                # User has selected cancel so nothing to do
+                debug_print("User selected Quit.")
+            case "Exit":
+                debug_print("User selected Exit.")
+
+                schematic.to_file(new_filename)
+                symbol_lib_table.to_file(new_lib_table_filename)
+
+                msgbox(msg="KiCad Input file " + filename
+                           + " (and its Library table) have been processed.\n\r \n\rProcessed files are "
+                           + new_filename + " and " + new_lib_table_filename + ".",
+                       title="KiCad Schematic file (and Library Table)",
+                       ok_button="Program will now close")
+            case other:
+                debug_print("User selected illegal option (%s)!" % choice)
