@@ -6,8 +6,6 @@
 #  This is copyright (C) 2022 to Alan Milne
 #  ===================================================================
 
-from easygui import *
-import tkinter as tk
 import os
 
 from kiutils.wks import WorkSheet
@@ -38,22 +36,33 @@ def process_kicad_wks(fdir, fname, fext):
         msg = "Worksheet"
 
         choices = list()
-        # Currently nothing to do!
+        choices.append("TestBed")    # Task 1
 
         choice = user_selection(msg, choices)
 
         match choice:
-            case "Quit":
-                # User has selected cancel so nothing to do
-                debug_print("User selected Quit.")
-            case "Exit":
-                debug_print("User selected Exit.")
+            case "Task 1":
+                debug_print("User selected %s." % choice)
+
+                print("Version   \"%s.\"" % worksheet.version)
+                print("Generator \"%s.\"" % worksheet.generator)
+                print("Setup     \"%s.\"" % worksheet.setup)
+
+                for item in worksheet.drawingObjects:
+                    print("Object    \"%s.\"" % item)
+
+                print("Filepath  \"%s.\"" % worksheet.filePath)
 
                 worksheet.to_file(new_filename)
 
                 msgbox(
                     msg="KiCad Input file " + filename + " has been processed.\n\r \n\rProcessed file is " + new_filename + ".",
                     title="KiCad Worksheet file",
-                    ok_button="Program will now close")
-            case other:
-                debug_print("User selected illegal option (%s)!" % choice)
+                    ok_button="Exit function")
+
+            case "Quit":
+                # User has selected cancel so nothing to do
+                debug_print("User selected Quit.")
+
+            case "Exit":
+                debug_print("User selected Exit.")

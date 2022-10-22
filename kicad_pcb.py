@@ -6,17 +6,36 @@
 #  This is copyright (C) 2022 to Alan Milne
 #  ===================================================================
 
-from easygui import *
-import tkinter as tk
 import os
+from datetime import datetime
 
 from kiutils.board import Board
 from kiutils.libraries import LibTable
 
-from kiutils.footprint import *
-
 from debug_print import *
 from user_display import *
+
+
+# from kiutils.footprint import *
+
+
+def init_footprint(name):
+    footprint = Footprint()
+
+    # Update to reflect Base Information
+    # current date and time
+    date = datetime.now()
+
+    footprint.LibraryLink = name
+    footprint.version     = date.strftime("%Y") + date.strftime("%m") + date.strftime("%d")
+    footprint.generator   = "pcbnew"
+    footprint.locked      = False
+    footprint.placed      = False
+    footprint.layer       = "F.Cu"
+    footprint.placed      = False
+    footprint.tedit       = 0
+
+    return footprint
 
 
 # ==================================================================================================================
@@ -44,36 +63,56 @@ def process_kicad_pcb(fdir, fname, fext):
     while (choice != "Quit") and (choice != "Exit"):
         msg = "PCB"
 
-        choices = list()
-        choices.append("Vanilla")    # Task 1
-        choices.append("Chocolate")  # Task 2
-        choices.append("Strawberry") # Task 3
-        choices.append("Rocky Road") # Task 4
+        choices: list[str] = list()
+        choices.append("TestBed")    # Task 1
+        choices.append("Generate Footprint from Board")    # Task 2
 
         choice = user_selection(msg, choices)
 
         match choice:
-            case "Quit":
-                # User has selected cancel so nothing to do
-                debug_print("User selected Quit.")
             case "Task 1":
                 debug_print("User selected %s." % choice)
-            case "Task 2":
-                debug_print("User selected %s." % choice)
-            case "Task 3":
-                debug_print("User selected %s." % choice)
-            case "Task 4":
-                debug_print("User selected %s." % choice)
-            case "Exit":
-                debug_print("User selected Exit.")
+
+                print("Version is %s" % board.version)
+                print("Generator is %s" % board.generator)
+
+                for net in board.nets:
+                    print(f"Net-name is \"{net.name}\" and number is \"{net.number}\"")
+
+                for layer in board.layers:
+                    print(f"Layer-name is \"{layer.name}\" and username is \"{layer.userName}\"")
 
                 board.to_file(new_filename)
                 pcb_lib_table.to_file(new_lib_table_filename)
 
                 msgbox(msg="KiCad Input file " + filename
-                       + " (and its library table) have been processed.\n\r \n\rProcessed files are "
-                       + new_filename + " and " + new_lib_table_filename + ".",
+                           + " (and its library table) have been processed.\n\r \n\rProcessed files are "
+                           + new_filename + " and " + new_lib_table_filename + ".",
                        title="KiCad PCB file (and Library Table)",
-                       ok_button="Program will now close")
-            case other:
-                debug_print("User selected illegal option (%s)!" % choice)
+                       ok_button="Exit function")
+
+            case "Task 2":
+                # Get name for new footprint
+                footprintname = user_input()
+
+                # set the basic attributes
+                footprint = init_footprint(footprintname)
+
+                print_footprint(footprintname, footprint, True)
+
+                modfilename = fdir + sub_folder + "\\" + footprintname + ".kicad_mod"
+                footprint.to_file(modfilename)
+
+                msgbox(msg="KiCad Input file " + filename
+                           + " have been processed.\n\r \n\rProcessed files are "
+                           + modfilename + ".",
+                       title="KiCad Footprint file)",
+                       ok_button="Exit function")
+
+            case "Quit":
+                # User has selected cancel so nothing to do
+                debug_print("User selected Quit.")
+
+            case "Exit":
+                # User has selected cancel so nothing to do
+                debug_print("User selected Exit.")

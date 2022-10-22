@@ -6,8 +6,6 @@
 #  This is copyright (C) 2022 to Alan Milne
 #  ===================================================================
 
-from easygui import *
-import tkinter as tk
 import os
 
 from kiutils.schematic import Schematic
@@ -43,15 +41,16 @@ def process_kicad_sch(fdir, fname, fext):
         msg = "Schematic"
 
         choices = list()
+        choices.append("TestBed")    # Task 1
 
         choice = user_selection(msg, choices)
 
         match choice:
-            case "Quit":
-                # User has selected cancel so nothing to do
-                debug_print("User selected Quit.")
-            case "Exit":
-                debug_print("User selected Exit.")
+            case "Task 1":
+                debug_print("User selected %s." % choice)
+
+                for item in Schematic:
+                    print(f"{item}\"")
 
                 schematic.to_file(new_filename)
                 symbol_lib_table.to_file(new_lib_table_filename)
@@ -60,6 +59,11 @@ def process_kicad_sch(fdir, fname, fext):
                            + " (and its Library table) have been processed.\n\r \n\rProcessed files are "
                            + new_filename + " and " + new_lib_table_filename + ".",
                        title="KiCad Schematic file (and Library Table)",
-                       ok_button="Program will now close")
-            case other:
-                debug_print("User selected illegal option (%s)!" % choice)
+                       ok_button="Exit function")
+
+            case "Quit":
+                # User has selected cancel so nothing to do
+                debug_print("User selected Quit.")
+
+            case "Exit":
+                debug_print("User selected Exit.")
