@@ -13,7 +13,7 @@ from kiutils.dru import DesignRules
 from kiutils.dru import Rule
 
 from debug_print import *
-from user_display import *
+from user_display_dru import *
 
 
 # ==================================================================================================================

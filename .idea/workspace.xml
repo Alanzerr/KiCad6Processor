@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Added documentation from https://kiutils.readthedocs.io/en/latest/index.html for convenience.">
+    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can now print the print a footprint!">
+      <change afterPath="$PROJECT_DIR$/user_display_board.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user_display_dru.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user_display_footprint.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user_display_schematic.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user_display_symbol.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user_display_wks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kicad_dru.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_dru.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kicad_mod.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_mod.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kicad_pcb.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_pcb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kicad_pro.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/kicad_sch.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_sch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kicad_sym.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_sym.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kicad_wks.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_wks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user_display.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +39,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectId" id="2F7dL8SOS6xN9vCljbx7X8lnMH0" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -44,9 +51,15 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Alan/PycharmProjects/pythonProject&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Alan\PycharmProjects\pythonProject" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="KiCad6Processor" />
@@ -170,7 +183,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664390212788</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Can now print the print a footprint!">
+      <created>1666460617292</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1666460617292</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -188,7 +208,8 @@
     <MESSAGE value="Basic program - allows user to select file opens and closes it!" />
     <MESSAGE value="Can now input all file types!" />
     <MESSAGE value="Re-structured so that each file type allows the selection of a task (althought most currently have none beyond saving the input file). PCB has an example of adding options albeit none of them actually do anything." />
-    <option name="LAST_COMMIT_MESSAGE" value="Re-structured so that each file type allows the selection of a task (althought most currently have none beyond saving the input file). PCB has an example of adding options albeit none of them actually do anything." />
+    <MESSAGE value="Can now print the print a footprint!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Can now print the print a footprint!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -200,7 +221,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/user_display.py</url>
-          <line>451</line>
+          <line>176</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -210,8 +231,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/kicad_mod.py</url>
-          <line>48</line>
+          <line>47</line>
           <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/kicad_dru.py</url>
+          <line>8</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

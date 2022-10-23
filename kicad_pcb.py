@@ -13,12 +13,13 @@ from kiutils.board import Board
 from kiutils.libraries import LibTable
 
 from debug_print import *
-from user_display import *
+# from user_display_board import *
+from user_display_footprint import *
+
+from kiutils.footprint import *
 
 
-# from kiutils.footprint import *
-
-
+# ==================================================================================================================
 def init_footprint(name):
     footprint = Footprint()
 

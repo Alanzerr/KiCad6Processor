@@ -6,12 +6,10 @@
 #  This is copyright (C) 2022 to Alan Milne
 #  ===================================================================
 
-# from easygui import *
-# import tkinter as tk
 import os
 
 from debug_print import *
-from user_display import *
+from user_display_footprint import *
 
 
 # ==================================================================================================================

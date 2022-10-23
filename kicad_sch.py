@@ -12,7 +12,7 @@ from kiutils.schematic import Schematic
 from kiutils.libraries import LibTable
 
 from debug_print import *
-from user_display import *
+from user_display_schematic import *
 
 
 # ==================================================================================================================

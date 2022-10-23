@@ -11,7 +11,7 @@ import os
 from kiutils.symbol import SymbolLib
 
 from debug_print import *
-from user_display import *
+from user_display_symbol import *
 
 
 # ==================================================================================================================
