@@ -15,6 +15,8 @@ from kiutils.items.common import *
 from kiutils.items.zones import *
 from kiutils.items.fpitems import *
 
+from kiutils.wks import *
+
 
 # ==================================================================================================================
 def user_input():
@@ -132,35 +134,29 @@ def merge_data(optional, newline, prefix, data):
             else:
                 return "\n" + prefix + str(data.X) + "," + str(data.Y) + " " + str(data.angle) + " " + str(data.unlocked)
 
-    elif isinstance(data, Zone):
-        return "\n" + prefix + "Zone"
-
-    elif isinstance(data, Group):
-        return "\n" + prefix + "Group"
-
-    elif isinstance(data, Model):
-        return "\n" + prefix + "Model"
-
-    elif isinstance(data, Dict):
-        return "\n" + prefix + "Dict"
-
     elif isinstance(data, Coordinate):
         if newline:
             return prefix + str(data.X) + "," + str(data.Y) + "," + str(data.Z)
         else:
             return "\n" + prefix + str(data.X) + "," + str(data.Y) + "," + str(data.Z)
 
-    elif isinstance(data, Effects):
-        if newline:
-            return prefix + str(data.font) + "\n" + prefix + str(data.justify) + "," + str(data.hide)
-        else:
-            return "\n" + prefix + str(data.font) + "\n" + prefix + str(data.justify) + "," + str(data.hide)
-
     elif isinstance(data, Stroke):
         if newline:
             return prefix + str(data.width) + " " + data.type + "\n" + prefix  + str(data.color)
         else:
             return "\n" + prefix + str(data.width) + " " + data.type + "\n" + prefix  + str(data.color)
+
+    elif isinstance(data, WksPosition):
+        if newline:
+            return prefix + str(data.X) + "/" + str(data.Y) + " " + str(data.corner)
+        else:
+            return "\n" + prefix + str(data.X) + "/" + str(data.Y) + " " + str(data.corner)
+
+    elif isinstance(data, TextSize):
+        if newline:
+            return prefix + str(data.width) + "/" + str(data.height)
+        else:
+            return "\n" + prefix + str(data.width) + "/" + str(data.height)
 
     elif data is None:
         # if Options and is None, then nothing is defined so don't need to print

@@ -53,9 +53,23 @@ def print_fptext(graphicitem, printout=False):
                               merge_data(False, False, " gitem/text/text  : ", graphicitem.text),
                               merge_data(False, False, " gitem/text/pos   : ", graphicitem.position),
                               merge_data(False, False, " gitem/text/layer : ", graphicitem.layer),
-                              merge_data(False, False, " gitem/text/hide  : ", graphicitem.hide),
-                              merge_data(False, False, " gitem/text/effect: ", graphicitem.effects),
-                              merge_data(True,  False, "*gitem/text/tstamp: ", graphicitem.tstamp)]
+                              merge_data(False, False, " gitem/text/hide  : ", graphicitem.hide)]
+
+    if not (graphicitem.effects.font is None):
+        output_text.append(merge_data(False, False, " gitem/text/fnt/fa: ", graphicitem.effects.font.face))
+        output_text.append(merge_data(False, False, " gitem/text/fnt/he: ", graphicitem.effects.font.height))
+        output_text.append(merge_data(False, False, " gitem/text/fnt/wi: ", graphicitem.effects.font.width))
+        output_text.append(merge_data(True,  False, "*gitem/text/fnt/th: ", graphicitem.effects.font.thickness))
+        output_text.append(merge_data(False, False, " gitem/text/fnt/bo: ", graphicitem.effects.font.bold))
+        output_text.append(merge_data(False, False, " gitem/text/fnt/it: ", graphicitem.effects.font.italic))
+        output_text.append(merge_data(True,  False, "*gitem/text/fnt/lS: ", graphicitem.effects.font.lineSpacing))
+
+    if not (graphicitem.effects.justify is None):
+        output_text.append(merge_data(True,  False, "*gitem/text/jst/ho: ", graphicitem.effects.justify.horizontally))
+        output_text.append(merge_data(True,  False, "*gitem/text/jst/ve: ", graphicitem.effects.justify.vertically))
+        output_text.append(merge_data(False, False, " gitem/text/jst/mi: ", graphicitem.effects.justify.mirror))
+
+    output_text.append(merge_data(True,  False, "*gitem/text/tstamp: ", graphicitem.tstamp))
 
     if printout:
         textbox("Details for Footprint Text ", output_text, False)
@@ -112,7 +126,9 @@ def print_fptextbox(graphicitem, printout=False):
     output_text.append(merge_data(False, False, " gitem/tbox/angle : ", graphicitem.angle))
     output_text.append(merge_data(False, False, " gitem/tbox/layer : ", graphicitem.layer))
     output_text.append(merge_data(False, False, " gitem/tbox/tstamp: ", graphicitem.tstamp))
+
     output_text.append(merge_data(False, False, " gitem/tbox/effect: ", graphicitem.effects))
+
     output_text.append(merge_data(False, False, " gitem/tbox/stroke: ", graphicitem.stroke))
     output_text.append(merge_data(True,  False, "*gitem/tbox/rCache: ", graphicitem.renderCache))
 
@@ -166,7 +182,7 @@ def print_fppoly(graphicitem, printout=False):
     loop = 1
 
     for coord in graphicitem.coordinates:
-        output_text.append(merge_data(False, False, " gitem/poly/co " + format(loop, ' 3d') + " : ", coord))
+        output_text.append(merge_data(False, False, " gitem/poly/co " + format(loop, '3d') + ": ", coord))
         loop += 1
 
     output_text.append(merge_data(True,  False, "*gitem/poly/width : ", graphicitem.width))
@@ -376,17 +392,20 @@ def print_zones(zones, printout=False):
 
         for zpoly in zone.polygons:
             output_text.append(merge_data(False, False, " zones/polygons: " + zpoly.polygons))
-        #    coordinates: List[Position] = field(default_factory=list)
+
+            for coord in zone.polygons.coordinates:
+                output_text.append(merge_data(False, False, " zones/fillS/cor: " + coord))
 
         for fpoly in zone.filledPolygons:
             output_text.append(merge_data(False, False, " zones/fPoly/layer: " + fpoly.layer))
-        #    layer: str = "F.Cu"
-        #    island: bool = False
-        #    coordinates: List[Position] = field(default_factory=list)
+            output_text.append(merge_data(False, False, " zones/fPoly/islnd: " + fpoly.island))
+            output_text.append(merge_data(False, False, " zones/fPoly/coord: " + fpoly.coordinates))
 
         if not (zone.fillSegments is None):
-            output_text.append(merge_data(True, False, " zones/fillS/lay: " + zone.fillSegments.layer))
-        #     coordinates: List[Position] = field(default_factory=list)
+            output_text.append(merge_data(False, False, " zones/fillS/lay: " + zone.fillSegments.layer))
+
+            for coord in zone.fillSegments.coordinates:
+                output_text.append(merge_data(False, False, " zones/fillS/cor: " + coord))
 
         loop += 1
 

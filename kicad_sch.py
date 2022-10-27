@@ -13,6 +13,8 @@ from kiutils.libraries import LibTable
 
 from debug_print import *
 from user_display_schematic import *
+from user_display_libtable import *
+from user_display_symbol import *
 
 
 # ==================================================================================================================
@@ -33,6 +35,8 @@ def process_kicad_sch(fdir, fname, fext):
 
     symbol_lib_table = LibTable().from_file(lib_table_filename)
     schematic = Schematic().from_file(filename)
+
+    print_schematic(fname, schematic, True)
 
     # Now ask user what they want to do and keep doing it till they quit (via cancel if "x")
     choice = None

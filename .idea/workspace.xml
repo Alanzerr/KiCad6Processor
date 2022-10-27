@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can now print the print a footprint!">
-      <change afterPath="$PROJECT_DIR$/user_display_board.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user_display_dru.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user_display_footprint.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user_display_schematic.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user_display_symbol.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user_display_wks.py" afterDir="false" />
+    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Added structure to support printing all elements, albeit can only print footprints!">
+      <change afterPath="$PROJECT_DIR$/user_display_libtable.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kicad_dru.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_dru.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kicad_mod.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_mod.py" afterDir="false" />
@@ -16,6 +11,12 @@
       <change beforePath="$PROJECT_DIR$/kicad_sym.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_sym.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kicad_wks.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_wks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user_display.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_display_board.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_display_dru.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_dru.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_display_footprint.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_footprint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_display_schematic.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_schematic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_display_symbol.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_symbol.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_display_wks.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_wks.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666460617292</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Added structure to support printing all elements, albeit can only print footprints!">
+      <created>1666552053943</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1666552053943</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -209,7 +217,8 @@
     <MESSAGE value="Can now input all file types!" />
     <MESSAGE value="Re-structured so that each file type allows the selection of a task (althought most currently have none beyond saving the input file). PCB has an example of adding options albeit none of them actually do anything." />
     <MESSAGE value="Can now print the print a footprint!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Can now print the print a footprint!" />
+    <MESSAGE value="Added structure to support printing all elements, albeit can only print footprints!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added structure to support printing all elements, albeit can only print footprints!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -221,7 +230,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/user_display.py</url>
-          <line>176</line>
+          <line>172</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -231,13 +240,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/kicad_mod.py</url>
-          <line>47</line>
+          <line>46</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/kicad_dru.py</url>
           <line>8</line>
           <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/Lib/site-packages/kiutils/items/common.py</url>
+          <line>81</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -13,7 +13,7 @@ from user_display import *
 
 # ==================================================================================================================
 def print_board(boardname, board, printout=False):
-    output_text: list[str] = ["Board name is " + boardname, "Board is " + board]
+    output_text: list[str] = ["Board name is " + boardname, "\nBoard is " + str(board)]
 
     if printout:
         textbox("Details for Board " + boardname, "Board", output_text, False)

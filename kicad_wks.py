@@ -29,6 +29,8 @@ def process_kicad_wks(fdir, fname, fext):
 
     worksheet = WorkSheet().from_file(filename)
 
+    print_worksheet(fname, worksheet, True)
+
     # Now ask user what they want to do and keep doing it till they quit (via cancel if "x")
     choice = None
 

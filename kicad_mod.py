@@ -27,6 +27,8 @@ def process_kicad_mod(fdir, fname, fext):
 
     footprint = Footprint().from_file(filename)
 
+    print_footprint(fname, footprint, True)
+
     # Now ask user what they want to do and keep doing it till they quit (via cancel if "x")
     choice = list
 

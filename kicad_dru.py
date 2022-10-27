@@ -31,6 +31,8 @@ def process_kicad_dru(fdir, fname, fext):
 
     designrules = DesignRules().from_file(filename)
 
+    print_designrules(fname, designrules, True)
+
     # Now ask user what they want to do and keep doing it till they quit (via cancel if "x")
     choice = None
 

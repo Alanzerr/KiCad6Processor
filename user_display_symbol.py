@@ -12,8 +12,8 @@ from user_display import *
 
 
 # ==================================================================================================================
-def print_schematic(symbolname, symbol, printout=False):
-    output_text: list[str] = ["Symbol name is " + symbolname, "Symbol is " + symbol]
+def print_symbol(symbolname, symbol, printout=False):
+    output_text: list[str] = ["Symbol name is " + symbolname, "\nSymbol is " + str(symbol)]
 
     if printout:
         textbox("Details for Symbol " + symbolname, "Symbol", output_text, False)

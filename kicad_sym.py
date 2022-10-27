@@ -29,6 +29,8 @@ def process_kicad_sym(fdir, fname, fext):
 
     symbollib = SymbolLib().from_file(filename)
 
+    print_symbol(fname, symbollib, True)
+
     # Now ask user what they want to do and keep doing it till they quit (via cancel if "x")
     choice = None
 

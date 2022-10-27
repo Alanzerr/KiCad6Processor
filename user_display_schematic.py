@@ -13,7 +13,7 @@ from user_display import *
 
 # ==================================================================================================================
 def print_schematic(schematicname, schematic, printout=False):
-    output_text: list[str] = ["Schematic name is " + schematicname, "Schematic is " + schematic]
+    output_text: list[str] = ["Schematic name is " + schematicname, "\nSchematic is " + str(schematic)]
 
     if printout:
         textbox("Details for Schematic " + schematicname, "Schematic", output_text, False)

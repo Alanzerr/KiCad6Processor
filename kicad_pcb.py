@@ -13,7 +13,8 @@ from kiutils.board import Board
 from kiutils.libraries import LibTable
 
 from debug_print import *
-# from user_display_board import *
+from user_display_board import *
+from user_display_libtable import *
 from user_display_footprint import *
 
 from kiutils.footprint import *
@@ -57,6 +58,8 @@ def process_kicad_pcb(fdir, fname, fext):
 
     pcb_lib_table = LibTable().from_file(lib_table_filename)
     board = Board().from_file(filename)
+
+    print_board(fname, board, True)
 
     # Now ask user what they want to do and keep doing it till they quit (via cancel if "x")
     choice = None
