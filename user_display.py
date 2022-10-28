@@ -170,3 +170,28 @@ def merge_data(optional, newline, prefix, data):
 
     else:
         return "\n" + prefix + str(type(data))
+
+
+# ==================================================================================================================
+def print_effects(prefix, effects, printout=False):
+    output_text: list[str] = []
+
+    if not (effects.font is None):
+        output_text.append(merge_data(False, False, " " + prefix + "fnt/fa: ", effects.font.face))
+        output_text.append(merge_data(False, False, " " + prefix + "fnt/he: ", effects.font.height))
+        output_text.append(merge_data(False, False, " " + prefix + "fnt/wi: ", effects.font.width))
+        output_text.append(merge_data(True,  False, "*" + prefix + "fnt/th: ", effects.font.thickness))
+        output_text.append(merge_data(False, False, " " + prefix + "fnt/bo: ", effects.font.bold))
+        output_text.append(merge_data(False, False, " " + prefix + "fnt/it: ", effects.font.italic))
+        output_text.append(merge_data(True,  False, "*" + prefix + "fnt/lS: ", effects.font.lineSpacing))
+
+    if not (effects.justify is None):
+        output_text.append(merge_data(True,  False, "*" + prefix + "jst/ho: ", effects.justify.horizontally))
+        output_text.append(merge_data(True,  False, "*" + prefix + "jst/ve: ", effects.justify.vertically))
+        output_text.append(merge_data(False, False, " " + prefix + "jst/mi: ", effects.justify.mirror))
+
+    if printout:
+        textbox("Details for Effects ", output_text, False)
+        return None
+    else:
+        return output_text
