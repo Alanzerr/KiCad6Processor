@@ -7,6 +7,7 @@
 #  ===================================================================
 
 # from easygui import *
+import easygui_qt as easy
 # Could use tkinter however whilst it will be prettier, it's much more complex!
 # import tkinter as tk
 # import os
@@ -34,6 +35,13 @@ from kicad_mod import *
 from kicad_sym import *
 from kicad_wks import *
 from kicad_dru import *
+
+# ====== Experimental Code ==================================================================================
+
+#easy.show_message("\nHello\nGoodbye","Test")
+
+
+# ====== Experimental Code ==================================================================================
 
 # Import the file to be processed - only shows KiCad files.
 Input_Filename = fileopenbox(msg="Open file",

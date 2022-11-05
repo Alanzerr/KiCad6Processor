@@ -8,12 +8,11 @@
 
 import os
 
-from kiutils.schematic import Schematic
 from kiutils.libraries import LibTable
+from kiutils.schematic import Schematic
 
 from debug_print import *
 from user_display_schematic import *
-from user_display_libtable import *
 from user_display_symbol import *
 
 

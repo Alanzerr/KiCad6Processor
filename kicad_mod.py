@@ -8,6 +8,8 @@
 
 import os
 
+from kiutils.footprint import *
+
 from debug_print import *
 from user_display_footprint import *
 
@@ -44,7 +46,7 @@ def process_kicad_mod(fdir, fname, fext):
             case "Task 1":
                 debug_print("User selected %s." % choice)
 
-                print_footprint(fname, footprint, True)
+                print_footprint("Module", fname, footprint)
 
                 footprint.to_file(new_filename)
 

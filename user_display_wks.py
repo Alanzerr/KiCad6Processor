@@ -19,88 +19,88 @@ def print_objects(objects, printout=False):
 
     for object in objects:
         if isinstance(object, Line):
-            output_text.append(merge_data(False, False, " wks/Line/name    : ", object.name))
-            output_text.append(merge_data(False, False, " wks/Line/start   : ", object.start))
-            output_text.append(merge_data(False, False, " wks/Line/end     : ", object.end))
-            output_text.append(merge_data(True,  False, "*wks/Line/option  : ", object.option))
-            output_text.append(merge_data(True,  False, "*wks/Line/linewidt: ", object.lineWidth))
-            output_text.append(merge_data(True,  False, "*wks/Line/repeat  : ", object.repeat))
-            output_text.append(merge_data(True,  False, "*wks/Line/incrx   : ", object.incrx))
-            output_text.append(merge_data(True,  False, "*wks/Line/incry   : ", object.incry))
-            output_text.append(merge_data(True,  False, "*wks/Line/comment : ", object.comment))
+            output_text.extend(print_data("wks/Line/name    : ", object.name))
+            output_text.extend(print_data("wks/Line/start   : ", object.start))
+            output_text.extend(print_data("wks/Line/end     : ", object.end))
+            output_text.extend(print_data("wks/Line/option  : ", object.option, True))
+            output_text.extend(print_data("wks/Line/linewidt: ", object.lineWidth, True))
+            output_text.extend(print_data("wks/Line/repeat  : ", object.repeat, True))
+            output_text.extend(print_data("wks/Line/incrx   : ", object.incrx, True))
+            output_text.extend(print_data("wks/Line/incry   : ", object.incry, True))
+            output_text.extend(print_data("wks/Line/comment : ", object.comment, True))
 
         elif isinstance(object, Rect):
-            output_text.append(merge_data(False, False, " wks/Rect/name    : ", object.name))
-            output_text.append(merge_data(False, False, " wks/Rect/start   : ", object.start))
-            output_text.append(merge_data(False, False, " wks/Rect/end     : ", object.end))
-            output_text.append(merge_data(True,  False, "*wks/Rect/option  : ", object.option))
-            output_text.append(merge_data(True,  False, "*wks/Rect/lineWidt: ", object.lineWidth))
-            output_text.append(merge_data(True,  False, "*wks/Rect/repeat  : ", object.repeat))
-            output_text.append(merge_data(True,  False, "*wks/Rect/incrx   : ", object.incrx))
-            output_text.append(merge_data(True,  False, "*wks/Rect/incry   : ", object.incry))
-            output_text.append(merge_data(True,  False, "*wks/Rect/comment : ", object.comment))
+            output_text.extend(print_data("wks/Rect/name    : ", object.name))
+            output_text.extend(print_data("wks/Rect/start   : ", object.start))
+            output_text.extend(print_data("wks/Rect/end     : ", object.end))
+            output_text.extend(print_data("wks/Rect/option  : ", object.option, True))
+            output_text.extend(print_data("wks/Rect/lineWidt: ", object.lineWidth, True))
+            output_text.extend(print_data("wks/Rect/repeat  : ", object.repeat, True))
+            output_text.extend(print_data("wks/Rect/incrx   : ", object.incrx, True))
+            output_text.extend(print_data("wks/Rect/incry   : ", object.incry, True))
+            output_text.extend(print_data("wks/Rect/comment : ", object.comment, True))
 
         elif isinstance(object, Polygon):
-            output_text.append(merge_data(False, False, " wks/Poly/name    : ", object.name))
-            output_text.append(merge_data(False, False, " wks/Rect/position: ", object.position))
-            output_text.append(merge_data(True,  False, "*wks/Rect/option  : ", object.option))
-            output_text.append(merge_data(True,  False, "*wks/Rect/rotate  : ", object.rotate))
+            output_text.extend(print_data("wks/Poly/name    : ", object.name))
+            output_text.extend(print_data("wks/Rect/position: ", object.position))
+            output_text.extend(print_data("wks/Rect/option  : ", object.option, True))
+            output_text.extend(print_data("wks/Rect/rotate  : ", object.rotate, True))
 
             for coord in object.coordinates:
-                output_text.append(merge_data(False, False, " wks/Rect/name    : ", coord))
+                output_text.extend(print_data("wks/Rect/name    : ", coord))
 
-            output_text.append(merge_data(True,  False, "*wks/Rect/repeat  : ", object.repeat))
-            output_text.append(merge_data(True,  False, "*wks/Rect/incrx   : ", object.incrx))
-            output_text.append(merge_data(True,  False, "*wks/Rect/incry   : ", object.incry))
-            output_text.append(merge_data(True,  False, "*wks/Rect/comment : ", object.comment))
+            output_text.extend(print_data("wks/Rect/repeat  : ", object.repeat, True))
+            output_text.extend(print_data("wks/Rect/incrx   : ", object.incrx, True))
+            output_text.extend(print_data("wks/Rect/incry   : ", object.incry, True))
+            output_text.extend(print_data("wks/Rect/comment : ", object.comment, True))
 
         elif isinstance(object, Bitmap):
-            output_text.append(merge_data(False, False, " wks/Bmap/name    : ", object.name))
-            output_text.append(merge_data(False, False, " wks/Bmap/position: ", object.position))
-            output_text.append(merge_data(True,  False, "*wks/Bmap/option  : ", object.option))
-            output_text.append(merge_data(False, False, " wks/Bmap/scale   : ", object.scale))
-            output_text.append(merge_data(True,  False, "*wks/Bmap/repeat  : ", object.repeat))
-            output_text.append(merge_data(True,  False, "*wks/Bmap/incrx   : ", object.incrx))
-            output_text.append(merge_data(True,  False, "*wks/Bmap/incry   : ", object.incry))
-            output_text.append(merge_data(True,  False, "*wks/Bmap/comment : ", object.comment))
+            output_text.extend(print_data("wks/Bmap/name    : ", object.name))
+            output_text.extend(print_data("wks/Bmap/position: ", object.position))
+            output_text.extend(print_data("wks/Bmap/option  : ", object.option, True))
+            output_text.extend(print_data("wks/Bmap/scale   : ", object.scale))
+            output_text.extend(print_data("wks/Bmap/repeat  : ", object.repeat, True))
+            output_text.extend(print_data("wks/Bmap/incrx   : ", object.incrx, True))
+            output_text.extend(print_data("wks/Bmap/incry   : ", object.incry, True))
+            output_text.extend(print_data("wks/Bmap/comment : ", object.comment, True))
 
             for data in object.pngdata:
-                output_text.append(merge_data(False, False, " wks/Bmap/pngdata : ", data))
+                output_text.extend(print_data("wks/Bmap/pngdata : ", data))
 
         elif isinstance(object, TbText):
-            output_text.append(merge_data(False, False, " wks/Text/text    : ", object.text))
-            output_text.append(merge_data(False, False, " wks/Text/name    : ", object.name))
-            output_text.append(merge_data(False, False, " wks/Text/position: ", object.position))
-            output_text.append(merge_data(True,  False, "*wks/Text/option  : ", object.option))
-            output_text.append(merge_data(True,  False, "*wks/Text/rotate  : ", object.rotate))
+            output_text.extend(print_data("wks/Text/text    : ", object.text))
+            output_text.extend(print_data("wks/Text/name    : ", object.name))
+            output_text.extend(print_data("wks/Text/position: ", object.position))
+            output_text.extend(print_data("wks/Text/option  : ", object.option, True))
+            output_text.extend(print_data("wks/Text/rotate  : ", object.rotate, True))
 
-            output_text.append(merge_data(True,  False, "*wks/Text/font/lwi: ", object.font.linewidth))
+            output_text.extend(print_data("wks/Text/font/lwi: ", object.font.linewidth, True))
 
             if not (object.font.size is None):
-                output_text.append(merge_data(False, False, " wks/Text/font/wid: ", object.font.size.width))
-                output_text.append(merge_data(False, False, " wks/Text/font/hei: ", object.font.size.height))
+                output_text.extend(print_data("wks/Text/font/wid: ", object.font.size.width))
+                output_text.extend(print_data("wks/Text/font/hei: ", object.font.size.height))
 
-            output_text.append(merge_data(False, False, " wks/Text/font/bld: ", object.font.bold))
-            output_text.append(merge_data(False, False, " wks/Text/font/ita: ", object.font.italic))
+            output_text.extend(print_data("wks/Text/font/bld: ", object.font.bold))
+            output_text.extend(print_data("wks/Text/font/ita: ", object.font.italic))
 
             if not (object.justify is None):
-                output_text.append(merge_data(True,  False, "*wks/Text/jst/hor : ", object.justify.horizontally))
-                output_text.append(merge_data(True,  False, "*wks/Text/jst/ver : ", object.justify.vertically))
-                output_text.append(merge_data(False, False, " wks/Text/jst/mir : ", object.justify.mirror))
+                output_text.extend(print_data("wks/Text/jst/hor : ", object.justify.horizontally, True))
+                output_text.extend(print_data("wks/Text/jst/ver : ", object.justify.vertically, True))
+                output_text.extend(print_data("wks/Text/jst/mir : ", object.justify.mirror))
 
-            output_text.append(merge_data(True,  False, "*wks/Text/maxlen  : ", object.maxlen))
-            output_text.append(merge_data(True,  False, "*wks/Text/maxheigh: ", object.maxheight))
-            output_text.append(merge_data(True,  False, "*wks/Text/repeat  : ", object.repeat))
-            output_text.append(merge_data(True,  False, "*wks/Text/incrx   : ", object.incrx))
-            output_text.append(merge_data(True,  False, "*wks/Text/incry   : ", object.incry))
-            output_text.append(merge_data(True,  False, "*wks/Text/inclabel: ", object.incrlabel))
-            output_text.append(merge_data(True,  False, "*wks/Text/comment : ", object.comment))
+            output_text.extend(print_data("wks/Text/maxlen  : ", object.maxlen, True))
+            output_text.extend(print_data("wks/Text/maxheigh: ", object.maxheight, True))
+            output_text.extend(print_data("wks/Text/repeat  : ", object.repeat, True))
+            output_text.extend(print_data("wks/Text/incrx   : ", object.incrx, True))
+            output_text.extend(print_data("wks/Text/incry   : ", object.incry, True))
+            output_text.extend(print_data("wks/Text/inclabel: ", object.incrlabel, True))
+            output_text.extend(print_data("wks/Text/comment : ", object.comment, True))
 
         loop += 1
 
     if printout:
         textbox("Details for Objects ", output_text, False)
-        return None
+        return ""
     else:
         if loop == 0:
             return ""
@@ -110,22 +110,22 @@ def print_objects(objects, printout=False):
 
 # ==================================================================================================================
 def print_worksheet(wksname, wks, printout=False):
-    output_text: list[str] = [merge_data(False, False, " wks/version      : ", wks.version),
-                              merge_data(False, False, " wks/generator    : ", wks.generator),
-                              merge_data(False, False, " wks/setup/txtsize: ", wks.setup.textSize),
-                              merge_data(False, False, " wks/setup/linewid: ", wks.setup.lineWidth),
-                              merge_data(False, False, " wks/setup/tlinewd: ", wks.setup.textLineWidth),
-                              merge_data(False, False, " wks/setup/lmargin: ", wks.setup.leftMargin),
-                              merge_data(False, False, " wks/setup/rmargin: ", wks.setup.rightMargin),
-                              merge_data(False, False, " wks/setup/tmargin: ", wks.setup.topMargin),
-                              merge_data(False, False, " wks/setup/bmargin: ", wks.setup.bottomMargin)]
+    output_text: list[str] = [print_data("wks/version      : ", wks.version),
+                              print_data("wks/generator    : ", wks.generator),
+                              print_data("wks/setup/txtsize: ", wks.setup.textSize),
+                              print_data("wks/setup/linewid: ", wks.setup.lineWidth),
+                              print_data("wks/setup/tlinewd: ", wks.setup.textLineWidth),
+                              print_data("wks/setup/lmargin: ", wks.setup.leftMargin),
+                              print_data("wks/setup/rmargin: ", wks.setup.rightMargin),
+                              print_data("wks/setup/tmargin: ", wks.setup.topMargin),
+                              print_data("wks/setup/bmargin: ", wks.setup.bottomMargin)]
 
     output_text.extend(print_objects(wks.drawingObjects))
 
-    output_text.append(merge_data(False, False, " wks/filepath     : ", wks.filePath))
+    output_text.extend(print_data("wks/filepath     : ", wks.filePath))
 
     if printout:
         textbox("Details for Worksheet " + wksname, "Worksheet", output_text, False)
-        return None
+        return ""
     else:
         return output_text

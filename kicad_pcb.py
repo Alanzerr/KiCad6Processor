@@ -10,14 +10,12 @@ import os
 from datetime import datetime
 
 from kiutils.board import Board
+from kiutils.footprint import *
 from kiutils.libraries import LibTable
 
 from debug_print import *
 from user_display_board import *
-from user_display_libtable import *
 from user_display_footprint import *
-
-from kiutils.footprint import *
 
 
 # ==================================================================================================================
@@ -102,7 +100,7 @@ def process_kicad_pcb(fdir, fname, fext):
                 # set the basic attributes
                 footprint = init_footprint(footprintname)
 
-                print_footprint(footprintname, footprint, True)
+                print_footprint("Module", footprintname, footprint)
 
                 modfilename = fdir + sub_folder + "\\" + footprintname + ".kicad_mod"
                 footprint.to_file(modfilename)
