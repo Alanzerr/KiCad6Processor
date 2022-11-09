@@ -8,8 +8,6 @@
 import string
 
 from easygui import *
-from easygui_qt import *
-# import tkinter as tk
 # import os
 
 # from kiutils.footprint import *
@@ -56,8 +54,7 @@ def user_selection(msg, selection):
 
     else:
         # There are thing to select!
-        display_msg = "What " + msg + " related task do you want to perform? \n\r \n\rNOTE: Select \"Cancel\" to quit (" \
-                                      "without saving)."
+        display_msg = "What " + msg + " related task do you want to perform? \n\r \n\rNOTE: Select \"Cancel\" to quit (without saving)."
         display_title = msg + " action(s)"
 
         display_selection = selection.copy()
@@ -68,8 +65,6 @@ def user_selection(msg, selection):
             display_selection[position] = "Task " + str(position + 1) + ": " + entry
             position += 1
 
-        display_selection.append("Task " + str(position + 1) + ": Exit")
-
         choice = choicebox(display_msg, display_title, display_selection)
 
         # if choice is None then selected cancel (which is effectively quit)
@@ -77,10 +72,6 @@ def user_selection(msg, selection):
             # Do nothing.
             return "Quit"
 
-        # Last entry
-        elif choice[5:choice.find(":")] == str(len(display_selection)):
-            # Finished selecting tasks.
-            return "Exit"
         else:
             # Return User selection
             return choice[0:choice.find(":")]

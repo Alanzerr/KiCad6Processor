@@ -7,9 +7,6 @@
 #  ===================================================================
 
 # from easygui import *
-import easygui_qt as easy
-# Could use tkinter however whilst it will be prettier, it's much more complex!
-# import tkinter as tk
 # import os
 
 # from debug_print import *
@@ -36,68 +33,73 @@ from kicad_sym import *
 from kicad_wks import *
 from kicad_dru import *
 
-# ====== Experimental Code ==================================================================================
-
-#easy.show_message("\nHello\nGoodbye","Test")
+experimental = False
 
 
-# ====== Experimental Code ==================================================================================
+if not (experimental):
+    # Import the file to be processed - only shows KiCad files.
+    Input_Filename = fileopenbox(msg="Open file",
+                                 title="KiCad Input File",
+                                 filetypes=[["*.kicad_pcb", "KiCad Board file"],
+                                            ["*.kicad_sch", "KiCad Schematic file"],
+                                            ["*.kicad_mod", "KiCad Footprint file"],
+                                            ["*.kicad_sym", "KiCad Symbol file"],
+                                            ["*.kicad_wks", "KiCad Worksheet file"],
+                                            ["*.kicad_dru", "KiCad Design Rules file"]],
+                                 multiple=False)
 
-# Import the file to be processed - only shows KiCad files.
-Input_Filename = fileopenbox(msg="Open file",
-                             title="KiCad Input File",
-                             filetypes=[["*.kicad_pcb", "KiCad Board file"],
-                                        ["*.kicad_sch", "KiCad Schematic file"],
-                                        ["*.kicad_mod", "KiCad Footprint file"],
-                                        ["*.kicad_sym", "KiCad Symbol file"],
-                                        ["*.kicad_wks", "KiCad Worksheet file"],
-                                        ["*.kicad_dru", "KiCad Design Rules file"]],
-                             multiple=False)
+    # Input_filename is none if "cancel is selected"!
+    if Input_Filename is None:
+        msgbox(msg="No KiCad Input file was selected!",
+               title="Open file",
+               ok_button="Program will now close")
+    # Got a file so split it into bits.
+    else:
+        # Direction is to the last "/"
+        # Filename is from the last "/" to the last "."
+        # Extension is from the last "." to the end of the string
 
-# Input_filename is none if "cancel is selected"!
-if Input_Filename is None:
-    msgbox(msg="No KiCad Input file was selected!",
-           title="Open file",
-           ok_button="Program will now close")
-# Got a file so split it into bits.
+        debug_print("Full Input Filename is |%s|." % Input_Filename)
+
+        Input_Directory = Input_Filename[0:Input_Filename.rfind("\\") + 1]
+        Input_Filename_Extension = Input_Filename[Input_Filename.rfind("."):len(Input_Filename)]
+
+        debug_print("Input Directory is \"%s\"." % Input_Directory)
+        debug_print("Input Filename Extensions is \"%s\"." % Input_Filename_Extension)
+
+        Input_Filename = Input_Filename[Input_Filename.rfind("\\") + 1:Input_Filename.rfind(".")]
+        debug_print("Input Filename is \"%s\"." % Input_Filename)
+
+        # Process it based on its extension/type.
+        match Input_Filename_Extension:
+            case ".kicad_pcb":
+                process_kicad_pcb(Input_Directory, Input_Filename, Input_Filename_Extension)
+
+            case ".kicad_sch":
+                process_kicad_sch(Input_Directory, Input_Filename, Input_Filename_Extension)
+
+            case ".kicad_mod":
+                process_kicad_mod(Input_Directory, Input_Filename, Input_Filename_Extension)
+
+            case ".kicad_sym":
+                process_kicad_sym(Input_Directory, Input_Filename, Input_Filename_Extension)
+
+            case ".kicad_wks":
+                process_kicad_wks(Input_Directory, Input_Filename, Input_Filename_Extension)
+
+            case ".kicad_dru":
+                process_kicad_dru(Input_Directory, Input_Filename, Input_Filename_Extension)
+
+            # Just in case the user selects a non-KiCad file
+            case other:
+                msgbox(msg="KiCad Input file extension was not recognised!",
+                       title="Open file",
+                       ok_button="Program will now close")
+
 else:
-    # Direction is to the last "/"
-    # Filename is from the last "/" to the last "."
-    # Extension is from the last "." to the end of the string
+    # ====== Experimental Code ==================================================================================
 
-    debug_print("Full Input Filename is |%s|." % Input_Filename)
+    debug_print("Experimental")
 
-    Input_Directory = Input_Filename[0:Input_Filename.rfind("\\") + 1]
-    Input_Filename_Extension = Input_Filename[Input_Filename.rfind("."):len(Input_Filename)]
+    # ====== Experimental Code ==================================================================================
 
-    debug_print("Input Directory is \"%s\"." % Input_Directory)
-    debug_print("Input Filename Extensions is \"%s\"." % Input_Filename_Extension)
-
-    Input_Filename = Input_Filename[Input_Filename.rfind("\\") + 1:Input_Filename.rfind(".")]
-    debug_print("Input Filename is \"%s\"." % Input_Filename)
-
-    # Process it based on its extension/type.
-    match Input_Filename_Extension:
-        case ".kicad_pcb":
-            process_kicad_pcb(Input_Directory, Input_Filename, Input_Filename_Extension)
-
-        case ".kicad_sch":
-            process_kicad_sch(Input_Directory, Input_Filename, Input_Filename_Extension)
-
-        case ".kicad_mod":
-            process_kicad_mod(Input_Directory, Input_Filename, Input_Filename_Extension)
-
-        case ".kicad_sym":
-            process_kicad_sym(Input_Directory, Input_Filename, Input_Filename_Extension)
-
-        case ".kicad_wks":
-            process_kicad_wks(Input_Directory, Input_Filename, Input_Filename_Extension)
-
-        case ".kicad_dru":
-            process_kicad_dru(Input_Directory, Input_Filename, Input_Filename_Extension)
-
-        # Just in case the user selects a non-KiCad file
-        case other:
-            msgbox(msg="KiCad Input file extension was not recognised!",
-                   title="Open file",
-                   ok_button="Program will now close")

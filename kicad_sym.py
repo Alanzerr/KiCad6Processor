@@ -29,8 +29,6 @@ def process_kicad_sym(fdir, fname, fext):
 
     symbollib = SymbolLib().from_file(filename)
 
-    print_symbols(fname, symbollib, True)
-
     # Now ask user what they want to do and keep doing it till they quit (via cancel if "x")
     choice = None
 
@@ -38,7 +36,8 @@ def process_kicad_sym(fdir, fname, fext):
         msg = "Symbol(s)"
 
         choices = list()
-        choices.append("TestBed")  # Task 1
+        choices.append("Print Contents of Symbol(s)")  # Task 1
+        choices.append("Save Modified Symbol(s)")      # Task 2
 
         choice = user_selection(msg, choices)
 
@@ -46,19 +45,17 @@ def process_kicad_sym(fdir, fname, fext):
             case "Task 1":
                 debug_print("User selected %s." % choice)
 
-                for item in SymbolLib:
-                    print(f"{item}\"")
+                print_symbols(fname, symbollib, True)
+
+            case "Task 2":
+                debug_print("User selected %s." % choice)
 
                 symbollib.to_file(new_filename)
 
-                msgbox(
-                    msg="KiCad Input file " + filename + " has been processed.\n\r \n\rProcessed file is " + new_filename + ".",
-                    title="KiCad Symbol file",
-                    ok_button="Exit function")
+                msgbox(msg="KiCad Input file " + filename + " has been processed.\n\r \n\rProcessed file is " + new_filename + ".",
+                       title="KiCad Symbol file",
+                       ok_button="Exit function")
 
             case "Quit":
                 # User has selected cancel so nothing to do
                 debug_print("User selected Quit.")
-
-            case "Exit":
-                debug_print("User selected Exit.")

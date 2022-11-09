@@ -29,8 +29,6 @@ def process_kicad_mod(fdir, fname, fext):
 
     footprint = Footprint().from_file(filename)
 
-    print_footprint(fname, footprint, True)
-
     # Now ask user what they want to do and keep doing it till they quit (via cancel if "x")
     choice = list
 
@@ -39,6 +37,7 @@ def process_kicad_mod(fdir, fname, fext):
 
         choices = list()
         choices.append("Print Contents of Footprint")    # Task 1
+        choices.append("Save Modified Footprint")        # Task 2
 
         choice = user_selection(msg, choices)
 
@@ -46,18 +45,17 @@ def process_kicad_mod(fdir, fname, fext):
             case "Task 1":
                 debug_print("User selected %s." % choice)
 
-                print_footprint("Module", fname, footprint)
+                print_footprint(fname, footprint, True)
+
+            case "Task 2":
+                debug_print("User selected %s." % choice)
 
                 footprint.to_file(new_filename)
 
-                msgbox(msg="KiCad Input file " + filename + " has been processed.\n\r \n\rProcessed file is "
-                           + new_filename + ".",
+                msgbox(msg="KiCad Input file " + filename + " has been processed.\n\r \n\rProcessed file is " + new_filename + ".",
                        title="KiCad Footprint file",
                        ok_button="Exit function")
 
             case "Quit":
                 # User has selected cancel so nothing to do
                 debug_print("User selected Quit.")
-
-            case "Exit":
-                debug_print("User selected Exit.")

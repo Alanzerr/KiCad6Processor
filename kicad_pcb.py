@@ -15,6 +15,7 @@ from kiutils.libraries import LibTable
 
 from debug_print import *
 from user_display_board import *
+from user_display_libtable import *
 from user_display_footprint import *
 
 
@@ -57,8 +58,6 @@ def process_kicad_pcb(fdir, fname, fext):
     pcb_lib_table = LibTable().from_file(lib_table_filename)
     board = Board().from_file(filename)
 
-    print_board(fname, board, True)
-
     # Now ask user what they want to do and keep doing it till they quit (via cancel if "x")
     choice = None
 
@@ -66,8 +65,10 @@ def process_kicad_pcb(fdir, fname, fext):
         msg = "PCB"
 
         choices: list[str] = list()
-        choices.append("TestBed")    # Task 1
-        choices.append("Generate Footprint from Board")    # Task 2
+        choices.append("Print Contents of Board")          # Task 1
+        choices.append("Print Contents of Board Library")  # Task 2
+        choices.append("Generate Footprint from Board")    # Task 3
+        choices.append("Save Modified Board + Library")    # Task 4
 
         choice = user_selection(msg, choices)
 
@@ -75,25 +76,14 @@ def process_kicad_pcb(fdir, fname, fext):
             case "Task 1":
                 debug_print("User selected %s." % choice)
 
-                print("Version is %s" % board.version)
-                print("Generator is %s" % board.generator)
-
-                for net in board.nets:
-                    print(f"Net-name is \"{net.name}\" and number is \"{net.number}\"")
-
-                for layer in board.layers:
-                    print(f"Layer-name is \"{layer.name}\" and username is \"{layer.userName}\"")
-
-                board.to_file(new_filename)
-                pcb_lib_table.to_file(new_lib_table_filename)
-
-                msgbox(msg="KiCad Input file " + filename
-                           + " (and its library table) have been processed.\n\r \n\rProcessed files are "
-                           + new_filename + " and " + new_lib_table_filename + ".",
-                       title="KiCad PCB file (and Library Table)",
-                       ok_button="Exit function")
+                print_board(fname, board, True)
 
             case "Task 2":
+                debug_print("User selected %s." % choice)
+
+                print_libtable(fname, pcb_lib_table, True)
+
+            case "Task 3":
                 # Get name for new footprint
                 footprintname = user_input()
 
@@ -111,10 +101,17 @@ def process_kicad_pcb(fdir, fname, fext):
                        title="KiCad Footprint file)",
                        ok_button="Exit function")
 
+            case "Task 4":
+                debug_print("User selected %s." % choice)
+
+                board.to_file(new_filename)
+                pcb_lib_table.to_file(new_lib_table_filename)
+
+                msgbox(msg="KiCad Input file " + filename + " (and its library table) have been processed.\n\r \n\rProcessed files are "
+                           + new_filename + " and " + new_lib_table_filename + ".",
+                       title="KiCad PCB file (and Library Table)",
+                       ok_button="Exit function")
+
             case "Quit":
                 # User has selected cancel so nothing to do
                 debug_print("User selected Quit.")
-
-            case "Exit":
-                # User has selected cancel so nothing to do
-                debug_print("User selected Exit.")

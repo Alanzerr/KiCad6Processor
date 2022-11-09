@@ -27,8 +27,6 @@ def process_kicad_wks(fdir, fname, fext):
 
     worksheet = WorkSheet().from_file(filename)
 
-    print_worksheet(fname, worksheet, True)
-
     # Now ask user what they want to do and keep doing it till they quit (via cancel if "x")
     choice = None
 
@@ -36,7 +34,8 @@ def process_kicad_wks(fdir, fname, fext):
         msg = "Worksheet"
 
         choices = list()
-        choices.append("TestBed")    # Task 1
+        choices.append("Print Contents of WorkSheet")    # Task 1
+        choices.append("Save Modified WorkSheet")        # Task 2
 
         choice = user_selection(msg, choices)
 
@@ -44,25 +43,17 @@ def process_kicad_wks(fdir, fname, fext):
             case "Task 1":
                 debug_print("User selected %s." % choice)
 
-                print("Version   \"%s.\"" % worksheet.version)
-                print("Generator \"%s.\"" % worksheet.generator)
-                print("Setup     \"%s.\"" % worksheet.setup)
+                print_worksheet(fname, worksheet, True)
 
-                for item in worksheet.drawingObjects:
-                    print("Object    \"%s.\"" % item)
-
-                print("Filepath  \"%s.\"" % worksheet.filePath)
+            case "Task 2":
+                debug_print("User selected %s." % choice)
 
                 worksheet.to_file(new_filename)
 
-                msgbox(
-                    msg="KiCad Input file " + filename + " has been processed.\n\r \n\rProcessed file is " + new_filename + ".",
-                    title="KiCad Worksheet file",
-                    ok_button="Exit function")
+                msgbox(msg="KiCad Input file " + filename + " has been processed.\n\r \n\rProcessed file is " + new_filename + ".",
+                       title="KiCad Worksheet file",
+                       ok_button="Exit function")
 
             case "Quit":
                 # User has selected cancel so nothing to do
                 debug_print("User selected Quit.")
-
-            case "Exit":
-                debug_print("User selected Exit.")

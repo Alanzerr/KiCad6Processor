@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can print everything except board, and schematics">
+    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can print everything - about to change GUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test.Folder/DASADSTL.kicad_pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kicad_dru.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_dru.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kicad_mod.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_mod.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kicad_pcb.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_pcb.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kicad_sch.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_sch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kicad_sym.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_sym.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kicad_wks.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_wks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user_display.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_display_board.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_board.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_display_dru.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_dru.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_display_footprint.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_footprint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_display_libtable.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_libtable.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_display_schematic.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_schematic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_display_symbol.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_symbol.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_display_wks.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_wks.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +35,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2F7dL8SOS6xN9vCljbx7X8lnMH0" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -53,7 +47,7 @@
   &quot;keyToString&quot;: {
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Alan/PycharmProjects/pythonProject&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -212,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666973236116</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Can print everything - about to change GUI">
+      <created>1667679276137</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1667679276137</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -234,7 +235,8 @@
     <MESSAGE value="Added structure to support printing all elements, albeit can only print footprints!" />
     <MESSAGE value="Can print everything except board, schematics and symbols" />
     <MESSAGE value="Can print everything except board, and schematics" />
-    <option name="LAST_COMMIT_MESSAGE" value="Can print everything except board, and schematics" />
+    <MESSAGE value="Can print everything - about to change GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Can print everything - about to change GUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -251,17 +253,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/user_display.py</url>
-          <line>679</line>
+          <line>677</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/user_display.py</url>
-          <line>684</line>
+          <line>682</line>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/user_display.py</url>
-          <line>668</line>
+          <line>666</line>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
       </breakpoints>
