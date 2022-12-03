@@ -8,16 +8,16 @@
 
 import os
 
-from kiutils.dru import Constraint
+# from kiutils.dru import Constraint
 from kiutils.dru import DesignRules
-from kiutils.dru import Rule
+# from kiutils.dru import Rule
 
 from debug_print import *
 from user_display_dru import *
 
 
 # ==================================================================================================================
-def process_kicad_dru(fdir, fname, fext):
+def process_kicad_dru(fdir, fname, fext, odir):
     filename = fdir + fname + fext
 
     # Create new sub-folder (if it does not exist  for the output

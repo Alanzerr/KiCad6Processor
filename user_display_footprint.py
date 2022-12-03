@@ -41,7 +41,7 @@ def print_pads(pads, printout=False):
         output_text.extend(print_data("pad/locked       : ", pad.locked))
         output_text.extend(print_data("pad/size         : ", pad.size, True))
 
-        if not(pad.drill is None):
+        if pad.drill is not None:
             output_text.extend(print_data("pad/drill/oval   : ", pad.drill.oval, True))
             output_text.extend(print_data("pad/drill/dia    : ", pad.drill.diameter, True))
             output_text.extend(print_data("pad/drill/width  : ", pad.drill.width, True))
@@ -65,7 +65,7 @@ def print_pads(pads, printout=False):
             output_text.extend(print_data("pad/chamfer " + format(loop2, ' 4d') + " : ", chamfer))
             loop2 += 1
 
-        if not (pad.net is None):
+        if pad.net is not None:
             output_text.extend(print_data("pad/net/number   : ", pad.net.number))
             output_text.extend(print_data("pad/net/name     : ", pad.net.name))
 
@@ -81,15 +81,16 @@ def print_pads(pads, printout=False):
         output_text.extend(print_data("pad/thermalWidth : ", pad.thermalWidth, True))
         output_text.extend(print_data("pad/thermalGap   : ", pad.thermalGap, True))
 
-        if not (pad.customPadOptions is None):
+        if pad.customPadOptions is not None:
             output_text.extend(print_data("pad/custPad/clear : ", pad.customPadOptions.clearance, True))
             output_text.extend(print_data("pad/custPad/anchor: ", pad.customPadOptions.anchor, True))
 
-        loop2 = 1
+        if pad.customPadPrimitives is not None:
+            loop2 = 1
 
-        for customPadPrimitive in pad.customPadPrimitives:
-            output_text.extend(print_data("pad/Prims   " + format(loop2, ' 4d') + " : ", customPadPrimitive))
-            loop2 += 1
+            for customPadPrimitive in pad.customPadPrimitives:
+                output_text.extend(print_data("pad/Prims   " + format(loop2, ' 4d') + " : ", customPadPrimitive))
+                loop2 += 1
 
         loop += 1
 

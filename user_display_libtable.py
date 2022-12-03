@@ -13,7 +13,9 @@ from user_display import *
 
 # ==================================================================================================================
 def print_libtable(libtablename, libtable, printout=False):
-    output_text: list[str] = [print_data("libtbl/type      : ", libtable.type)]
+    output_text = list()
+
+    output_text.extend(print_data("libtbl/type      : ", libtable.type))
 
     for lib in libtable.libs:
         output_text.extend(print_data("libtbl/Lib/name  : ", lib.name))

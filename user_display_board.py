@@ -320,10 +320,10 @@ def print_dimensions(dimensions, printout=False):
         output_text.extend(print_data("Brd/Dim/orient   : ", dimension.orientation, True))
         output_text.extend(print_data("Brd/Dim/leaderlen: ", dimension.leaderLength, True))
 
-        if not (dimension.grText is None):
+        if dimension.grText is not None:
             output_text.extend(print_gr_text("DItem", dimension.grText))
 
-        if not (dimension.format is None):
+        if dimension.format is not None:
             output_text.extend(print_data("Brd/Dim/frm/pre  : ", dimension.format.prefix, True))
             output_text.extend(print_data("Brd/Dim/frm/suf  : ", dimension.format.suffix, True))
             output_text.extend(print_data("Brd/Dim/frm/units: ", dimension.format.units))
@@ -374,7 +374,7 @@ def print_targets(targets, printout=False):
 def print_plotsettings(plotsettings, printout=False):
     output_text: list[str] = []
 
-    if not (plotsettings is None):
+    if plotsettings is not None:
         output_text.extend(print_data("Brd/Plot/layersel: ", plotsettings.layerSelection))
         output_text.extend(print_data("Brd/Plot/disAper : ", plotsettings.disableApertMacros))
         output_text.extend(print_data("Brd/Plot/GerExt  : ", plotsettings.useGerberExtensions))
@@ -419,7 +419,7 @@ def print_stackup(stackup, printout=False):
     output_text: list[str] = []
 
     # Stackup in SetupData
-    if not (stackup is None):
+    if stackup is not None:
 
         # Layers in Stackup
         for layer in stackup.layers:
@@ -500,15 +500,17 @@ def print_board(boardname, board, printout=False):
     output_text: list[str] = [print_data("Brd/version      : ", board.version),
                               print_data("Brd/generator    : ", board.generator),
                               print_data("Brd/general/thick: ", board.general.thickness),
-                              print_data("Brd/paper        : ", board.paper),
-                              print_data("Brd/titleB/title : ", board.titleBlock.title),
-                              print_data("Brd/titleB/date  : ", board.titleBlock.date),
-                              print_data("Brd/titleB/rev   : ", board.titleBlock.revision),
-                              print_data("Brd/titleB/compan: ", board.titleBlock.company)]
+                              print_data("Brd/paper        : ", board.paper)]
 
-    for key, value in board.titleBlock.comments.items():
-        output_text.extend(print_data("Brd/titleB/comVal: ", value))
-        output_text.extend(print_data("Brd/titleB/comKey: ", key))
+    if board.titleBlock is not None:
+        output_text.extend(print_data("Brd/titleB/title : ", board.titleBlock.title))
+        output_text.extend(print_data("Brd/titleB/date  : ", board.titleBlock.date))
+        output_text.extend(print_data("Brd/titleB/rev   : ", board.titleBlock.revision))
+        output_text.extend(print_data("Brd/titleB/compan: ", board.titleBlock.company))
+
+        for key, value in board.titleBlock.comments.items():
+            output_text.extend(print_data("Brd/titleB/comVal: ", value))
+            output_text.extend(print_data("Brd/titleB/comKey: ", key))
 
     # Layers list in board
     for layer in board.layers:

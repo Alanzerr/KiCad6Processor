@@ -316,11 +316,11 @@ def print_sheets(sheets, printout=False):
         output_text.extend(print_data("sym/TB/sht/fill  : ", sheet.fill))
         output_text.extend(print_data("sym/TB/sht/uuid  : ", sheet.uuid))
 
-        if not (sheet.sheetName is None):
+        if sheet.sheetName is not None:
             output_text.extend(print_data("sym/TB/shtNam/val: ", sheet.sheetName.value))
             output_text.extend(print_data("sym/TB/shtNam/key: ", sheet.sheetName.key))
 
-        if not (sheet.fileName is None):
+        if sheet.fileName is not None:
             output_text.extend(print_data("sym/TB/shtfNm/val: ", sheet.fileName.value))
             output_text.extend(print_data("sym/TB/shtfNm/key: ", sheet.fileName.key))
 
@@ -396,7 +396,7 @@ def print_schematic(schematicname, schematic, printout=False):
                               print_data("sym/uuid         : ", schematic.uuid, True),
                               print_data("sym/paper        : ", schematic.paper)]
 
-    if not (schematic.titleBlock is None):
+    if schematic.titleBlock is not None:
         output_text.extend(print_data("sym/TB/title     : ", schematic.titleBlock.title, True))
 
         output_text.extend(print_data("sym/TB/date      : ", schematic.titleBlock.date, True))

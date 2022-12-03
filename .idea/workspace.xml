@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can print everything - about to change GUI">
+    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can now output a kiCad file and update the library to access the ouput - orientation of pads and models are still messed up.">
+      <change afterPath="$PROJECT_DIR$/footprint_generator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kicad_pcb_tasks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kicad_dru.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_dru.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kicad_mod.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_mod.py" afterDir="false" />
@@ -11,6 +13,11 @@
       <change beforePath="$PROJECT_DIR$/kicad_wks.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_wks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user_display.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_display_board.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_display_footprint.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_footprint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_display_libtable.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_libtable.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_display_schematic.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_schematic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_display_wks.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_wks.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +42,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2F7dL8SOS6xN9vCljbx7X8lnMH0" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -52,6 +59,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Alan\PycharmProjects\pythonProject" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Alan\PycharmProjects\pythonProject" />
     </key>
   </component>
@@ -213,7 +223,21 @@
       <option name="project" value="LOCAL" />
       <updated>1667679276137</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="GUI Updates to input files, allow user to inspect and then save (or not).">
+      <created>1668023971106</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1668023971106</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Updated to ignore KiCAD files.">
+      <created>1668024084358</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1668024084358</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -236,7 +260,10 @@
     <MESSAGE value="Can print everything except board, schematics and symbols" />
     <MESSAGE value="Can print everything except board, and schematics" />
     <MESSAGE value="Can print everything - about to change GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Can print everything - about to change GUI" />
+    <MESSAGE value="GUI Updates to input files, allow user to inspect and then save (or not)." />
+    <MESSAGE value="Updated to ignore KiCAD files." />
+    <MESSAGE value="Can now output a kiCad file and update the library to access the ouput - orientation of pads and models are still messed up." />
+    <option name="LAST_COMMIT_MESSAGE" value="Can now output a kiCad file and update the library to access the ouput - orientation of pads and models are still messed up." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -253,18 +280,53 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/user_display.py</url>
-          <line>677</line>
+          <line>667</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/user_display.py</url>
-          <line>682</line>
-          <option name="timeStamp" value="55" />
+          <line>656</line>
+          <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/user_display.py</url>
-          <line>666</line>
-          <option name="timeStamp" value="57" />
+          <url>file://$PROJECT_DIR$/kicad_pcb.py</url>
+          <line>21</line>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/kicad_pcb.py</url>
+          <line>8</line>
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/footprint_generator.py</url>
+          <line>386</line>
+          <option name="timeStamp" value="95" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/kicad_pcb_tasks.py</url>
+          <line>171</line>
+          <option name="timeStamp" value="126" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/footprint_generator.py</url>
+          <line>1232</line>
+          <option name="timeStamp" value="128" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/footprint_generator.py</url>
+          <line>1235</line>
+          <option name="timeStamp" value="131" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/footprint_generator.py</url>
+          <line>1234</line>
+          <option name="timeStamp" value="132" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/footprint_generator.py</url>
+          <line>1221</line>
+          <option name="timeStamp" value="133" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

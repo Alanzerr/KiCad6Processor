@@ -15,7 +15,7 @@ from user_display_symbol import *
 
 
 # ==================================================================================================================
-def process_kicad_sym(fdir, fname, fext):
+def process_kicad_sym(fdir, fname, fext, odir):
     filename = fdir + fname + fext
 
     # Create new sub-folder (if it does not exist  for the output

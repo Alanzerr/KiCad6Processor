@@ -19,15 +19,12 @@ from kiutils.wks import *
 
 
 # ==================================================================================================================
-def user_input():
+def user_input(name):
+
     reply: str = enterbox(msg="Enter the name of the footprint to be created",
                           title="KiCad Footprint Creator",
-                          default="Default",
+                          default=name,
                           strip=True)
-
-    # If user presses cancel, then we set the reply to "Default" which is the same as pressing OK with no text!
-    if reply is None:
-        reply = "Default"
 
     return reply
 
@@ -125,26 +122,26 @@ def print_data(prefix: string, data, optional = False, newline = False):
     elif isinstance(data, Position):
         if newline:
             if data.angle is None:
-                return newprefix + str(data.X) + "," + str(data.Y) + " 0 " +  str(data.unlocked)
+                return newprefix + str(round(data.X, 6)) + "," + str(round(data.Y, 6)) + " 0.0 " +  str(data.unlocked)
             else:
-                return newprefix + str(data.X) + "," + str(data.Y) + " " + str(data.angle) + " " + str(data.unlocked)
+                return newprefix + str(round(data.X, 6)) + "," + str(round(data.Y, 6)) + " " + str(data.angle) + " " + str(data.unlocked)
         else:
             if data.angle is None:
-                return "\n" + newprefix + str(data.X) + "," + str(data.Y) + " 0 " + str(data.unlocked)
+                return "\n" + newprefix + str(round(data.X, 6)) + "," + str(round(data.Y, 6)) + " 0 " + str(data.unlocked)
             else:
-                return "\n" + newprefix + str(data.X) + "," + str(data.Y) + " " + str(data.angle) + " " + str(data.unlocked)
+                return "\n" + newprefix + str(round(data.X, 6)) + "," + str(round(data.Y, 6)) + " " + str(data.angle) + " " + str(data.unlocked)
 
     elif isinstance(data, Coordinate):
         if newline:
-            return newprefix + str(data.X) + "," + str(data.Y) + "," + str(data.Z)
+            return newprefix + str(round(data.X, 6)) + "," + str(round(data.Y, 6)) + "," + str(round(data.Z, 6))
         else:
-            return "\n" + newprefix + str(data.X) + "," + str(data.Y) + "," + str(data.Z)
+            return "\n" + newprefix + str(round(data.X, 6)) + "," + str(round(data.Y, 6)) + "," + str(round(data.Z, 6))
 
     elif isinstance(data, WksPosition):
         if newline:
-            return newprefix + str(data.X) + "/" + str(data.Y) + " " + str(data.corner)
+            return newprefix + str(round(data.X, 6)) + "/" + str(round(data.Y, 6)) + " " + str(data.corner)
         else:
-            return "\n" + newprefix + str(data.X) + "/" + str(data.Y) + " " + str(data.corner)
+            return "\n" + newprefix + str(round(data.X, 6)) + "/" + str(round(data.Y, 6)) + " " + str(data.corner)
 
     elif isinstance(data, TextSize):
         if newline:
@@ -176,8 +173,8 @@ def print_data(prefix: string, data, optional = False, newline = False):
 def print_effects(prefix, effects, printout=False):
     output_text: list[str] = []
 
-    if not (effects is None):
-        if not (effects.font is None):
+    if effects is not None:
+        if effects.font is not None:
             output_text.extend(print_data(prefix + "/fnt/fa: ", effects.font.face))
             output_text.extend(print_data(prefix + "/fnt/he: ", effects.font.height))
             output_text.extend(print_data(prefix + "/fnt/wi: ", effects.font.width))
@@ -186,7 +183,7 @@ def print_effects(prefix, effects, printout=False):
             output_text.extend(print_data(prefix + "/fnt/it: ", effects.font.italic))
             output_text.extend(print_data(prefix + "/fnt/lS: ", effects.font.lineSpacing, True))
 
-        if not (effects.justify is None):
+        if effects.justify is not None:
             output_text.extend(print_data(prefix + "/jst/ho: ", effects.justify.horizontally, True))
             output_text.extend(print_data(prefix + "/jst/ve: ", effects.justify.vertically, True))
             output_text.extend(print_data(prefix + "/jst/mi: ", effects.justify.mirror))
@@ -202,7 +199,7 @@ def print_effects(prefix, effects, printout=False):
 def print_stroke(prefix, stroke, printout=False):
     output_text: list[str] = []
 
-    if not (stroke is None):
+    if stroke is not None:
         output_text.extend(print_data(prefix + "/str/wi: ", stroke.width))
         output_text.extend(print_data(prefix + "/str/ty: ", stroke.type))
         output_text.extend(print_data(prefix + "/str/co: ", stroke.color))
@@ -520,14 +517,14 @@ def print_zones(prefix, zones, printout=False):
         output_text.extend(print_data(prefix[0] + "Item/minThick   : ", zone.minThickness))
         output_text.extend(print_data(prefix[0] + "Item/fillAreaThi: ", zone.filledAreasThickness))
 
-        if not (zone.keepoutSettings is None):
+        if zone.keepoutSettings is not None:
             output_text.extend(print_data(prefix[0] + "Item/keep/tracks: ", zone.keepoutSettings.tracks))
             output_text.extend(print_data(prefix[0] + "Item/keep/vias  : ", zone.keepoutSettings.vias))
             output_text.extend(print_data(prefix[0] + "Item/keep/pads  : ", zone.keepoutSettings.pads))
             output_text.extend(print_data(prefix[0] + "Item/keep/cprpur: ", zone.keepoutSettings.copperpour))
             output_text.extend(print_data(prefix[0] + "Item/keep/footpr: ", zone.keepoutSettings.footprints))
 
-        if not (zone.fillSettings is None):
+        if zone.fillSettings is not None:
             output_text.extend(print_data(prefix[0] + "Item/fill/yes   : ", zone.fillSettings.yes))
             output_text.extend(print_data(prefix[0] + "Item/fill/mode  : ", zone.fillSettings.mode))
             output_text.extend(print_data(prefix[0] + "Item/fill/thergp: ", zone.fillSettings.thermalGap))
@@ -566,7 +563,7 @@ def print_zones(prefix, zones, printout=False):
 
                 looper += 1
 
-        if not (zone.fillSegments is None):
+        if zone.fillSegments is not None:
             output_text.extend(print_data(prefix[0] + "Item/fillS/lay: ", zone.fillSegments.layer))
 
             for coord in zone.fillSegments.coordinates:
@@ -655,7 +652,7 @@ def print_symbol(symbols, printout=False):
 def print_property(prefix, propertie, printout=False):
     output_text: list[str] = []
 
-    if not (propertie is None):
+    if propertie is not None:
         if isinstance(propertie, Property):
             output_text.extend(print_data(prefix + "/pr/key: ", propertie.key))
             output_text.extend(print_data(prefix + "/pr/val: ", propertie.value))
@@ -673,7 +670,6 @@ def print_property(prefix, propertie, printout=False):
         #        output_text.extend(print_data(prefix + "/pr/val: ", value))
 
         else:
-            print("-----> Error in property! <-----")
             for key, value in propertie.item():
                 output_text.extend(print_data(prefix + "/prop/key: ", key))
                 output_text.extend(print_data(prefix + "/prop/val: ", value))

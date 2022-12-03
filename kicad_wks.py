@@ -13,7 +13,7 @@ from user_display_wks import *
 
 
 # ==================================================================================================================
-def process_kicad_wks(fdir, fname, fext):
+def process_kicad_wks(fdir, fname, fext, odir):
     filename = fdir + fname + fext
 
     # Create new sub-folder (if it does not exist  for the output

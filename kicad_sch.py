@@ -18,7 +18,7 @@ from user_display_symbol import *
 
 
 # ==================================================================================================================
-def process_kicad_sch(fdir, fname, fext):
+def process_kicad_sch(fdir, fname, fext, odir):
     filename = fdir + fname + fext
     lib_table_filename = fdir + "sym-lib-table"
 

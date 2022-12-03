@@ -76,14 +76,14 @@ def print_objects(objects, printout=False):
 
             output_text.extend(print_data("wks/Text/font/lwi: ", object.font.linewidth, True))
 
-            if not (object.font.size is None):
+            if object.font.size is not None:
                 output_text.extend(print_data("wks/Text/font/wid: ", object.font.size.width))
                 output_text.extend(print_data("wks/Text/font/hei: ", object.font.size.height))
 
             output_text.extend(print_data("wks/Text/font/bld: ", object.font.bold))
             output_text.extend(print_data("wks/Text/font/ita: ", object.font.italic))
 
-            if not (object.justify is None):
+            if object.justify is not None:
                 output_text.extend(print_data("wks/Text/jst/hor : ", object.justify.horizontally, True))
                 output_text.extend(print_data("wks/Text/jst/ver : ", object.justify.vertically, True))
                 output_text.extend(print_data("wks/Text/jst/mir : ", object.justify.mirror))
