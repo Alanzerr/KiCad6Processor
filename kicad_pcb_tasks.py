@@ -142,7 +142,7 @@ def pcb_task3(filename, board, odir):
                                                   ["*.stp",  "KiCad 3D Board file"]],
                                      multiple  = False)
 
-            # This should get the model of the orginal board in approximately the right place.
+            # This should get the model of the original board in approximately the right place.
             if board_file is not None:
                 if flip:
                     new_model = Model(path  = board_file,
@@ -166,7 +166,6 @@ def pcb_task3(filename, board, odir):
                                       rotate= Coordinate(X = 0.0,
                                                          Y = 0.0,
                                                          Z = 0.0))
-
 
                 footprint.models.append(new_model)
 

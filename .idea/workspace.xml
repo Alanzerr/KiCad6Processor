@@ -1,23 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can now output a kiCad file and update the library to access the ouput - orientation of pads and models are still messed up.">
-      <change afterPath="$PROJECT_DIR$/footprint_generator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kicad_pcb_tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kicad_dru.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_dru.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kicad_mod.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_mod.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kicad_pcb.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_pcb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kicad_sch.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_sch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kicad_sym.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_sym.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kicad_wks.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_wks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_display.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_display_board.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_board.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_display_footprint.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_footprint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_display_libtable.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_libtable.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_display_schematic.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_schematic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_display_wks.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_wks.py" afterDir="false" />
+    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can &#10;1. output a kiCad file, &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;&#10;Can't &#10;1. draw silkscreen for connectors&#10;2. generate the symbol">
+      <change beforePath="$PROJECT_DIR$/kicad_pcb_tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_pcb_tasks.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,7 +222,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668024084358</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Can &#10;1. output a kiCad file, &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;&#10;Can't &#10;1. draw silkscreen for connectors&#10;2. generate the symbol">
+      <created>1670090234579</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1670090234579</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -263,7 +255,8 @@
     <MESSAGE value="GUI Updates to input files, allow user to inspect and then save (or not)." />
     <MESSAGE value="Updated to ignore KiCAD files." />
     <MESSAGE value="Can now output a kiCad file and update the library to access the ouput - orientation of pads and models are still messed up." />
-    <option name="LAST_COMMIT_MESSAGE" value="Can now output a kiCad file and update the library to access the ouput - orientation of pads and models are still messed up." />
+    <MESSAGE value="Can &#10;1. output a kiCad file, &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;&#10;Can't &#10;1. draw silkscreen for connectors&#10;2. generate the symbol" />
+    <option name="LAST_COMMIT_MESSAGE" value="Can &#10;1. output a kiCad file, &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;&#10;Can't &#10;1. draw silkscreen for connectors&#10;2. generate the symbol" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
