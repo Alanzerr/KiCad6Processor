@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can &#10;1. output a kiCad file, &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;&#10;Can't &#10;1. draw silkscreen for connectors&#10;2. generate the symbol">
-      <change beforePath="$PROJECT_DIR$/kicad_pcb_tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_pcb_tasks.py" afterDir="false" />
-    </list>
+    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can &#10;1. output a kiCad file, &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;&#10;Can't &#10;1. draw silkscreen for connectors&#10;2. generate the symbol" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -229,7 +227,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670090234579</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Can &#10;1. output a kiCad file, &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;&#10;Can't &#10;1. draw silkscreen for connectors&#10;2. generate the symbol">
+      <created>1670090843843</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1670090843843</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
