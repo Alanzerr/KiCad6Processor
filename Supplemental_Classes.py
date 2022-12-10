@@ -39,6 +39,7 @@ class Coordinate2D:
 @dataclass
 class Component:
     pads                       = []
+    graphicitems               = []
     models                     = []
 
 

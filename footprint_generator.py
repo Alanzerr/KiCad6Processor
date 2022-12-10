@@ -7,16 +7,17 @@
 #  ===================================================================
 
 import os
-import math
+# import math
 # import datetime
 
 # from kiutils.board import *
 from kiutils.libraries import *
 
 # from debug_print import *
-# from user_display_libtable import *
-from user_display_footprint import *
-from Supplemental_Classes import *
+from user_display_libtable import *
+# from user_display_footprint import *
+# from Supplemental_Classes import *
+from Data_Mover import *
 
 
 # ==================================================================================================================
@@ -79,11 +80,7 @@ def find_centroid(gr_items):
                                    angle    = 0.0,
                                    unlocked = True)  # Just ignore this.
 
-    loop = 1
-
     for gitem in gr_items:
-        radius = 0.0
-
         top_right   = Position(X        = 0.0,
                                Y        = 0.0,
                                angle    = 0.0,
@@ -106,8 +103,6 @@ def find_centroid(gr_items):
                                        angle    = 0.0,
                                        unlocked = True)  # Can ignore as this does not affect the footprint size
 
-            print("Text    " + str(loop) + " - " + str(bottom_left) + "/" + str(top_right))
-
         elif isinstance(gitem, GrTextBox):
             if gitem.layer == "Edge.Cuts":
                 bottom_left = Position(X        = 0.0,
@@ -119,8 +114,6 @@ def find_centroid(gr_items):
                                        Y        = 0.0,
                                        angle    = 0.0,
                                        unlocked = True)  # Can ignore as this does not affect the footprint size
-
-            print("TextBox " + str(loop) + " - " + str(bottom_left) + "/" + str(top_right))
 
         elif isinstance(gitem, GrLine):
             if gitem.layer == "Edge.Cuts":
@@ -141,8 +134,6 @@ def find_centroid(gr_items):
                 bottom_left.unlocked = True
                 top_right.unlocked   = False
 
-                print("Line    " + str(loop) + " - " + str(bottom_left) + "/" + str(top_right))
-
         elif isinstance(gitem, GrRect):
             if gitem.layer == "Edge.Cuts":
                 if gitem.start.X > gitem.end.X:
@@ -162,8 +153,6 @@ def find_centroid(gr_items):
                 bottom_left.unlocked = True
                 top_right.unlocked   = False
 
-                print("Rect    " + str(loop) + " - " + str(bottom_left) + "/" + str(top_right))
-
         elif isinstance(gitem, GrCircle):
             if gitem.layer == "Edge.Cuts":
                 # use Pythagoras to determine the radius
@@ -179,8 +168,6 @@ def find_centroid(gr_items):
                 top_right.X          = gitem.center.X + radius
                 top_right.Y          = gitem.center.Y + radius
                 top_right.unlocked   = False
-
-            print("Circle  " + str(loop) + " - " + str(bottom_left) + "/" + str(top_right) + " === " + str(radius) + " - " + str(gitem.center) + "/" + str(gitem.end))
 
         elif isinstance(gitem, GrArc):
             if gitem.layer == "Edge.Cuts":
@@ -206,8 +193,6 @@ def find_centroid(gr_items):
                 top_right.X          = circle.center.X + circle.radius
                 top_right.Y          = circle.center.Y + circle.radius
                 top_right.unlocked   = False
-
-                print("Arc    " + str(loop) + " - " + str(bottom_left) + "/" + str(top_right))
 
         elif isinstance(gitem, GrPoly):
             if gitem.layer == "Edge.Cuts":
@@ -235,8 +220,6 @@ def find_centroid(gr_items):
                     elif coord.Y < bottom_left.Y:
                         bottom_left.Y = coord.Y
 
-                print("Poly   " + str(loop) + " - " + str(bottom_left) + "/" + str(top_right))
-
         elif isinstance(gitem, GrCurve):
             if gitem.layer == "Edge.Cuts":
                 # Documentation on this is poor and apparently not supported in KiCAD 6
@@ -249,10 +232,6 @@ def find_centroid(gr_items):
                                        Y        = 0.0,
                                        angle    = 0.0,
                                        unlocked =True)  # Can ignore as this does not affect the footprint size
-
-                print("Curve  " + str(loop) + " - " + str(bottom_left) + "/" + str(top_right))
-
-        loop += 1
 
         if not top_right.unlocked:
             if extends_top_right.unlocked:
@@ -276,60 +255,10 @@ def find_centroid(gr_items):
                 if bottom_left.Y < extends_bottom_left.Y:
                     extends_bottom_left.Y = bottom_left.Y
 
-    print("---> " + str(extends_bottom_left) + "/" + str(extends_top_right))
-
     centroid.X = extends_bottom_left.X + ((extends_top_right.X - extends_bottom_left.X) / 2)
     centroid.Y = extends_bottom_left.Y + ((extends_top_right.Y - extends_bottom_left.Y) / 2)
 
-    print("===> " + str(centroid))
-
     return centroid
-
-
-# ==================================================================================================================
-# (Simple) Offset the point
-def pt_soff(position, centroid_offset):
-    pos = Position(X        = position.X - centroid_offset.X,
-                   Y        = position.Y - centroid_offset.Y,
-                   angle    = position.angle,
-                   unlocked = position.unlocked)
-    return pos
-
-
-# ==================================================================================================================
-# Returns the multiplication factor base on the value of flip
-def flipped(flip):
-    if flip:
-        return -1
-    else:
-        return 1
-
-
-# ==================================================================================================================
-# Offset the point, but based on a vector!
-# TODO: Could improve this - see https://stackoverflow.com/questions/55948254/scale-contours-up-grow-outward
-# This is not a perfect approach as for a rectangle, it grows more in the long direction than in the short.
-def pt_coff(position, centroid_offset, layer):
-    match layer:
-        case "F.CrtYd":
-            offset = 2.54  # This is set to 0.1" or 2.54 mm. Can't find anything to say that use of mm is wrong.
-        case "F.SilkS":
-            offset = 1.5  # This is set to 0.1" or 2.54 mm. Can't find anything to say that use of mm is wrong.
-        case _:
-            offset = 0.001  # non-zero to make maths work
-
-    # calculate the new position based on the centroid offset
-    orig_pos = pt_soff(position, centroid_offset)
-
-    # calculate the distance based on the pos x and Y and Pythagoras
-    distance = math.sqrt((orig_pos.X ** 2) + (orig_pos.Y ** 2))
-
-    # determine the new x,y
-    new_pos = Position(X        = ((offset / distance) * orig_pos.X) + orig_pos.X,
-                       Y        = ((offset / distance) * orig_pos.Y) + orig_pos.Y,
-                       angle    = position.angle,
-                       unlocked = position.unlocked)
-    return new_pos
 
 
 # ==================================================================================================================
@@ -350,18 +279,18 @@ def create_outline(gr_items, offset, flip):
                     gitem.width = 0.1
 
                 # Fab Layer
-                new_pos = Position(X=pt_soff(gitem.position, offset).X,
-                                   Y=pt_soff(gitem.position, offset).Y * flipped(flip),
-                                   angle=gitem.position.angle,
-                                   unlocked=gitem.position.unlocked)
+                new_pos = Position(X        = pt_soff(gitem.position, offset).X,
+                                   Y        = pt_soff(gitem.position, offset).Y * flipped(flip),
+                                   angle    = gitem.position.angle,
+                                   unlocked = gitem.position.unlocked)
 
-                fitem_fab = FpText(type="user",
-                                   text=gitem.text,
-                                   position=new_pos,
-                                   hide=False,
-                                   layer="F.Fab",
-                                   effects=gitem.effects,
-                                   tstamp=gitem.tstamp)
+                fitem_fab = FpText(type     = "user",
+                                   text     = gitem.text,
+                                   position = new_pos,
+                                   hide     = False,
+                                   layer    = "F.Fab",
+                                   effects  = gitem.effects,
+                                   tstamp   = gitem.tstamp)
 
         elif isinstance(gitem, GrTextBox):
             if gitem.layer == "Edge.Cuts":
@@ -372,35 +301,35 @@ def create_outline(gr_items, offset, flip):
                     pt.unlocked = True
 
                 # Fab Layer
-                new_start = Position(X=pt_soff(gitem.start, offset).X,
-                                     Y=pt_soff(gitem.start, offset).Y * flipped(flip),
-                                     angle=gitem.start.angle,
-                                     unlocked=gitem.start.unlocked)
+                new_start = Position(X        = pt_soff(gitem.start, offset).X,
+                                     Y        = pt_soff(gitem.start, offset).Y * flipped(flip),
+                                     angle    = gitem.start.angle,
+                                     unlocked = gitem.start.unlocked)
 
-                new_end = Position(X=pt_soff(gitem.end, offset).X,
-                                   Y=pt_soff(gitem.end, offset).Y * flipped(flip),
-                                   angle=gitem.end.angle,
-                                   unlocked=gitem.end.unlocked)
+                new_end = Position(X        = pt_soff(gitem.end, offset).X,
+                                   Y        = pt_soff(gitem.end, offset).Y * flipped(flip),
+                                   angle    = gitem.end.angle,
+                                   unlocked = gitem.end.unlocked)
 
                 new_pts = list()
 
                 for pts in gitem.pts:
-                    new_pts.append(Position(X=pt_soff(pts, offset).X,
-                                            Y=pt_soff(pts, offset).Y * flipped(flip),
-                                            angle=pts.angle,
-                                            unlocked=pts.unlocked))
+                    new_pts.append(Position(X        = pt_soff(pts, offset).X,
+                                            Y        = pt_soff(pts, offset).Y * flipped(flip),
+                                            angle    = pts.angle,
+                                            unlocked = pts.unlocked))
 
-                fitem_fab = FpTextBox(locked=False,  # Would like to lock this but does not appear to be supported in KiCad
-                                      text=gitem.text,
-                                      start=new_start,
-                                      end=new_end,
-                                      pts=new_pts,
-                                      angle=gitem.angle,
-                                      layer="F.Fab",
-                                      tstamp=gitem.tstamp,
-                                      effects=gitem.effects,
-                                      stroke=gitem.stroke,
-                                      renderCache=gitem.renderCache)
+                fitem_fab = FpTextBox(locked      = False,  # Would like to lock this but does not appear to be supported in KiCad
+                                      text        = gitem.text,
+                                      start       = new_start,
+                                      end         = new_end,
+                                      pts         = new_pts,
+                                      angle       = gitem.angle,
+                                      layer       = "F.Fab",
+                                      tstamp      = gitem.tstamp,
+                                      effects     =  gitem.effects,
+                                      stroke      = gitem.stroke,
+                                      renderCache = gitem.renderCache)
 
         elif isinstance(gitem, GrLine):
             if gitem.layer == "Edge.Cuts":
@@ -411,61 +340,61 @@ def create_outline(gr_items, offset, flip):
                     gitem.width = 0.1
 
                 # Fab Layer
-                new_start_1 = Position(X=pt_soff(gitem.start, offset).X,
-                                       Y=pt_soff(gitem.start, offset).Y * flipped(flip),
-                                       angle=gitem.start.angle,
-                                       unlocked=gitem.start.unlocked)
+                new_start_1 = Position(X        = pt_soff(gitem.start, offset).X,
+                                       Y        = pt_soff(gitem.start, offset).Y * flipped(flip),
+                                       angle    = gitem.start.angle,
+                                       unlocked = gitem.start.unlocked)
 
-                new_end_1 = Position(X=pt_soff(gitem.end, offset).X,
-                                     Y=pt_soff(gitem.end, offset).Y * flipped(flip),
-                                     angle=gitem.end.angle,
-                                     unlocked=gitem.end.unlocked)
+                new_end_1 = Position(X        = pt_soff(gitem.end, offset).X,
+                                     Y        = pt_soff(gitem.end, offset).Y * flipped(flip),
+                                     angle    = gitem.end.angle,
+                                     unlocked = gitem.end.unlocked)
 
                 # Silkscreen Layer
-                new_start_2 = Position(X=pt_coff(gitem.start, offset, "F.SilkS").X,
-                                       Y=pt_coff(gitem.start, offset, "F.SilkS").Y * flipped(flip),
-                                       angle=gitem.start.angle,
-                                       unlocked=gitem.start.unlocked)
+                new_start_2 = Position(X        = pt_coff(gitem.start, offset, "F.SilkS").X,
+                                       Y        = pt_coff(gitem.start, offset, "F.SilkS").Y * flipped(flip),
+                                       angle    = gitem.start.angle,
+                                       unlocked = gitem.start.unlocked)
 
-                new_end_2 = Position(X=pt_coff(gitem.end, offset, "F.SilkS").X,
-                                     Y=pt_coff(gitem.end, offset, "F.SilkS").Y * flipped(flip),
-                                     angle=gitem.end.angle,
-                                     unlocked=gitem.end.unlocked)
+                new_end_2 = Position(X        = pt_coff(gitem.end, offset, "F.SilkS").X,
+                                     Y        = pt_coff(gitem.end, offset, "F.SilkS").Y * flipped(flip),
+                                     angle    = gitem.end.angle,
+                                     unlocked = gitem.end.unlocked)
 
                 # Courtyard Layer
-                new_start_3 = Position(X=pt_coff(gitem.start, offset, "F.CrtYd").X,
-                                       Y=pt_coff(gitem.start, offset, "F.CrtYd").Y * flipped(flip),
-                                       angle=gitem.start.angle,
-                                       unlocked=gitem.start.unlocked)
+                new_start_3 = Position(X        = pt_coff(gitem.start, offset, "F.CrtYd").X,
+                                       Y        = pt_coff(gitem.start, offset, "F.CrtYd").Y * flipped(flip),
+                                       angle    = gitem.start.angle,
+                                       unlocked = gitem.start.unlocked)
 
-                new_end_3 = Position(X=pt_coff(gitem.end, offset, "F.CrtYd").X,
-                                     Y=pt_coff(gitem.end, offset, "F.CrtYd").Y * flipped(flip),
-                                     angle=gitem.end.angle,
-                                     unlocked=gitem.end.unlocked)
+                new_end_3 = Position(X        = pt_coff(gitem.end, offset, "F.CrtYd").X,
+                                     Y        = pt_coff(gitem.end, offset, "F.CrtYd").Y * flipped(flip),
+                                     angle    = gitem.end.angle,
+                                     unlocked = gitem.end.unlocked)
 
-                fitem_fab = FpLine(start=new_start_1,
-                                   end=new_end_1,
-                                   layer="F.Fab",
-                                   width=gitem.width,
-                                   stroke=None,
-                                   locked=True,
-                                   tstamp=gitem.tstamp)
+                fitem_fab = FpLine(start  = new_start_1,
+                                   end    = new_end_1,
+                                   layer  = "F.Fab",
+                                   width  = gitem.width,
+                                   stroke = None,
+                                   locked = True,
+                                   tstamp = gitem.tstamp)
 
-                fitem_silk = FpLine(start=new_start_2,
-                                    end=new_end_2,
-                                    layer="F.SilkS",
-                                    width=0.1,
-                                    stroke=None,
-                                    locked=True,
-                                    tstamp=gitem.tstamp)
+                fitem_silk = FpLine(start  = new_start_2,
+                                    end    = new_end_2,
+                                    layer  = "F.SilkS",
+                                    width  = 0.1,
+                                    stroke = None,
+                                    locked = True,
+                                    tstamp = gitem.tstamp)
 
-                fitem_cyard = FpLine(start=new_start_3,
-                                     end=new_end_3,
-                                     layer="F.CrtYd",
-                                     width=0.05,
-                                     stroke=None,
-                                     locked=True,
-                                     tstamp=gitem.tstamp)
+                fitem_cyard = FpLine(start  = new_start_3,
+                                     end    = new_end_3,
+                                     layer  = "F.CrtYd",
+                                     width  = 0.05,
+                                     stroke = None,
+                                     locked = True,
+                                     tstamp = gitem.tstamp)
 
         elif isinstance(gitem, GrRect):
             if gitem.layer == "Edge.Cuts":
@@ -476,63 +405,63 @@ def create_outline(gr_items, offset, flip):
                     gitem.width = 0.1
 
                 # Fab Layer
-                new_start_1 = Position(X=pt_soff(gitem.start, offset).X,
-                                       Y=pt_soff(gitem.start, offset).Y * flipped(flip),
-                                       angle=gitem.start.angle,
-                                       unlocked=gitem.start.unlocked)
+                new_start_1 = Position(X        = pt_soff(gitem.start, offset).X,
+                                       Y        = pt_soff(gitem.start, offset).Y * flipped(flip),
+                                       angle    = gitem.start.angle,
+                                       unlocked = gitem.start.unlocked)
 
-                new_end_1 = Position(X=pt_soff(gitem.end, offset).X,
-                                     Y=pt_soff(gitem.end, offset).Y * flipped(flip),
-                                     angle=gitem.end.angle,
-                                     unlocked=gitem.end.unlocked)
+                new_end_1 = Position(X        = pt_soff(gitem.end, offset).X,
+                                     Y        = pt_soff(gitem.end, offset).Y * flipped(flip),
+                                     angle    = gitem.end.angle,
+                                     unlocked = gitem.end.unlocked)
                 # Silkscreen Layer
-                new_start_2 = Position(X=pt_coff(gitem.start, offset, "F.SilkS").X,
-                                       Y=pt_coff(gitem.start, offset, "F.SilkS").Y * flipped(flip),
-                                       angle=gitem.start.angle,
-                                       unlocked=gitem.start.unlocked)
+                new_start_2 = Position(X        = pt_coff(gitem.start, offset, "F.SilkS").X,
+                                       Y        = pt_coff(gitem.start, offset, "F.SilkS").Y * flipped(flip),
+                                       angle    = gitem.start.angle,
+                                       unlocked = gitem.start.unlocked)
 
-                new_end_2 = Position(X=pt_coff(gitem.end, offset, "F.SilkS").X,
-                                     Y=pt_coff(gitem.end, offset, "F.SilkS").Y * flipped(flip),
-                                     angle=gitem.end.angle,
-                                     unlocked=gitem.end.unlocked)
+                new_end_2 = Position(X        = pt_coff(gitem.end, offset, "F.SilkS").X,
+                                     Y        = pt_coff(gitem.end, offset, "F.SilkS").Y * flipped(flip),
+                                     angle    = gitem.end.angle,
+                                     unlocked = gitem.end.unlocked)
 
                 # Courtyard Layer
-                new_start_3 = Position(X=pt_coff(gitem.start, offset, "F.CrtYd").X,
-                                       Y=pt_coff(gitem.start, offset, "F.CrtYd").Y * flipped(flip),
-                                       angle=gitem.start.angle,
-                                       unlocked=gitem.start.unlocked)
+                new_start_3 = Position(X        = pt_coff(gitem.start, offset, "F.CrtYd").X,
+                                       Y        = pt_coff(gitem.start, offset, "F.CrtYd").Y * flipped(flip),
+                                       angle    = gitem.start.angle,
+                                       unlocked = gitem.start.unlocked)
 
-                new_end_3 = Position(X=pt_coff(gitem.end, offset, "F.CrtYd").X,
-                                     Y=pt_coff(gitem.end, offset, "F.CrtYd").Y * flipped(flip),
-                                     angle=gitem.end.angle,
-                                     unlocked=gitem.end.unlocked)
+                new_end_3 = Position(X        = pt_coff(gitem.end, offset, "F.CrtYd").X,
+                                     Y        = pt_coff(gitem.end, offset, "F.CrtYd").Y * flipped(flip),
+                                     angle    = gitem.end.angle,
+                                     unlocked = gitem.end.unlocked)
 
-                fitem_fab = FpRect(start=new_start_1,
-                                   end=new_end_1,
-                                   layer="F.Fab",
-                                   width=gitem.width,
-                                   stroke=None,
-                                   fill=gitem.fill,
-                                   locked=False,  # Would like to lock this but does not appear to be supported in KiCad,
-                                   tstamp=gitem.tstamp)
+                fitem_fab = FpRect(start  = new_start_1,
+                                   end    = new_end_1,
+                                   layer  = "F.Fab",
+                                   width  = gitem.width,
+                                   stroke = None,
+                                   fill   = gitem.fill,
+                                   locked = False,  # Would like to lock this but does not appear to be supported in KiCad,
+                                   tstamp = gitem.tstamp)
 
-                fitem_silk = FpRect(start=new_start_2,
-                                    end=new_end_2,
-                                    layer="F.SilkS",
-                                    width=0.1,
-                                    stroke=None,
-                                    fill=gitem.fill,
-                                    locked=False,  # Would like to lock this but does not appear to be supported in KiCad,
-                                    tstamp=gitem.tstamp)
+                fitem_silk = FpRect(start  = new_start_2,
+                                    end    = new_end_2,
+                                    layer  = "F.SilkS",
+                                    width  = 0.1,
+                                    stroke = None,
+                                    fill   = gitem.fill,
+                                    locked = False,  # Would like to lock this but does not appear to be supported in KiCad,
+                                    tstamp = gitem.tstamp)
 
-                fitem_cyard = FpRect(start=new_start_3,
-                                     end=new_end_3,
-                                     layer="F.CrtYd",
-                                     width=0.05,
-                                     stroke=None,
-                                     fill=gitem.fill,
-                                     locked=False,  # Would like to lock this but does not appear to be supported in KiCad,
-                                     tstamp=gitem.tstamp)
+                fitem_cyard = FpRect(start  = new_start_3,
+                                     end    = new_end_3,
+                                     layer  = "F.CrtYd",
+                                     width  = 0.05,
+                                     stroke = None,
+                                     fill   = gitem.fill,
+                                     locked = False,  # Would like to lock this but does not appear to be supported in KiCad,
+                                     tstamp = gitem.tstamp)
 
         elif isinstance(gitem, GrCircle):
             if gitem.layer == "Edge.Cuts":
@@ -543,64 +472,64 @@ def create_outline(gr_items, offset, flip):
                     gitem.width = 0.1
 
                 # Fab Layer
-                new_center_1 = Position(X=pt_soff(gitem.center, offset).X,
-                                        Y=pt_soff(gitem.center, offset).Y * flipped(flip),
-                                        angle=gitem.center.angle,
-                                        unlocked=gitem.center.unlocked)
+                new_center_1 = Position(X        = pt_soff(gitem.center, offset).X,
+                                        Y        = pt_soff(gitem.center, offset).Y * flipped(flip),
+                                        angle    = gitem.center.angle,
+                                        unlocked = gitem.center.unlocked)
 
-                new_end_1 = Position(X=pt_soff(gitem.end, offset).X,
-                                     Y=pt_soff(gitem.end, offset).Y * flipped(flip),
-                                     angle=gitem.end.angle,
-                                     unlocked=gitem.end.unlocked)
+                new_end_1 = Position(X        = pt_soff(gitem.end, offset).X,
+                                     Y        = pt_soff(gitem.end, offset).Y * flipped(flip),
+                                     angle    = gitem.end.angle,
+                                     unlocked = gitem.end.unlocked)
 
                 # Silkscreen Layer
-                new_center_2 = Position(X=pt_soff(gitem.center, offset).X,
-                                        Y=pt_soff(gitem.center, offset).Y * flipped(flip),
-                                        angle=gitem.center.angle,
-                                        unlocked=gitem.center.unlocked)
+                new_center_2 = Position(X        = pt_soff(gitem.center, offset).X,
+                                        Y        = pt_soff(gitem.center, offset).Y * flipped(flip),
+                                        angle    = gitem.center.angle,
+                                        unlocked = gitem.center.unlocked)
 
-                new_end_2 = Position(X=pt_coff(gitem.end, offset, "F.SilkS").X,
-                                     Y=pt_coff(gitem.end, offset, "F.SilkS").Y * flipped(flip),
-                                     angle=gitem.end.angle,
-                                     unlocked=gitem.end.unlocked)
+                new_end_2 = Position(X        = pt_coff(gitem.end, offset, "F.SilkS").X,
+                                     Y        = pt_coff(gitem.end, offset, "F.SilkS").Y * flipped(flip),
+                                     angle    = gitem.end.angle,
+                                     unlocked = gitem.end.unlocked)
 
                 # Courtyard Layer
-                new_center_3 = Position(X=pt_soff(gitem.center, offset).X,
-                                        Y=pt_soff(gitem.center, offset).Y * flipped(flip),
-                                        angle=gitem.center.angle,
-                                        unlocked=gitem.center.unlocked)
+                new_center_3 = Position(X       = pt_soff(gitem.center, offset).X,
+                                        Y       = pt_soff(gitem.center, offset).Y * flipped(flip),
+                                        angle   = gitem.center.angle,
+                                        unlocked= gitem.center.unlocked)
 
-                new_end_3 = Position(X=pt_coff(gitem.end, offset, "F.CrtYd").X,
-                                     Y=pt_coff(gitem.end, offset, "F.CrtYd").Y * flipped(flip),
-                                     angle=gitem.end.angle,
-                                     unlocked=gitem.end.unlocked)
+                new_end_3 = Position(X        = pt_coff(gitem.end, offset, "F.CrtYd").X,
+                                     Y        = pt_coff(gitem.end, offset, "F.CrtYd").Y * flipped(flip),
+                                     angle    = gitem.end.angle,
+                                     unlocked = gitem.end.unlocked)
 
-                fitem_fab = FpCircle(center=new_center_1,
-                                     end=new_end_1,
-                                     layer="F.Fab",
-                                     width=gitem.width,
-                                     stroke=None,
-                                     fill=gitem.fill,
-                                     locked=False,  # Would like to lock this but does not appear to be supported in KiCad
-                                     tstamp=gitem.tstamp)
+                fitem_fab = FpCircle(center = new_center_1,
+                                     end    = new_end_1,
+                                     layer  = "F.Fab",
+                                     width  = gitem.width,
+                                     stroke = None,
+                                     fill   = gitem.fill,
+                                     locked = False,  # Would like to lock this but does not appear to be supported in KiCad
+                                     tstamp = gitem.tstamp)
 
-                fitem_silk = FpCircle(center=new_center_2,
-                                      end=new_end_2,
-                                      layer="F.SilkS",
-                                      width=0.1,
-                                      stroke=None,
-                                      fill=gitem.fill,
-                                      locked=False,  # Would like to lock this but does not appear to be supported in KiCad
-                                      tstamp=gitem.tstamp)
+                fitem_silk = FpCircle(center = new_center_2,
+                                      end    = new_end_2,
+                                      layer  = "F.SilkS",
+                                      width  = 0.1,
+                                      stroke = None,
+                                      fill   = gitem.fill,
+                                      locked = False,  # Would like to lock this but does not appear to be supported in KiCad
+                                      tstamp = gitem.tstamp)
 
-                fitem_cyard = FpCircle(center=new_center_3,
-                                       end=new_end_3,
-                                       layer="F.CrtYd",
-                                       width=0.05,
-                                       stroke=None,
-                                       fill=gitem.fill,
-                                       locked=False,  # Would like to lock this but does not appear to be supported in KiCad
-                                       tstamp=gitem.tstamp)
+                fitem_cyard = FpCircle(center = new_center_3,
+                                       end    = new_end_3,
+                                       layer  = "F.CrtYd",
+                                       width  = 0.05,
+                                       stroke = None,
+                                       fill   = gitem.fill,
+                                       locked = False,  # Would like to lock this but does not appear to be supported in KiCad
+                                       tstamp = gitem.tstamp)
 
         elif isinstance(gitem, GrArc):
             if gitem.layer == "Edge.Cuts":
@@ -624,79 +553,79 @@ def create_outline(gr_items, offset, flip):
                     gitem.width = 0.1
 
                 # Fab Layer
-                new_start_1 = Position(X=pt_soff(start, offset).X,
-                                       Y=pt_soff(start, offset).Y * flipped(flip),
-                                       angle=start.angle,
-                                       unlocked=start.unlocked)
+                new_start_1 = Position(X        = pt_soff(start, offset).X,
+                                       Y        = pt_soff(start, offset).Y * flipped(flip),
+                                       angle    = start.angle,
+                                       unlocked = start.unlocked)
 
-                new_mid_1 = Position(X=pt_soff(middle, offset).X,
-                                     Y=pt_soff(middle, offset).Y * flipped(flip),
-                                     angle=middle.angle,
-                                     unlocked=middle.unlocked)
+                new_mid_1 = Position(X        = pt_soff(middle, offset).X,
+                                     Y        = pt_soff(middle, offset).Y * flipped(flip),
+                                     angle    = middle.angle,
+                                     unlocked = middle.unlocked)
 
-                new_end_1 = Position(X=pt_soff(end, offset).X,
-                                     Y=pt_soff(end, offset).Y * flipped(flip),
-                                     angle=end.angle,
-                                     unlocked=end.unlocked)
+                new_end_1 = Position(X        = pt_soff(end, offset).X,
+                                     Y        = pt_soff(end, offset).Y * flipped(flip),
+                                     angle    = end.angle,
+                                     unlocked = end.unlocked)
 
                 # Silkscreen Layer
-                new_start_2 = Position(X=pt_coff(start, offset, "F.SilkS").X,
-                                       Y=pt_coff(start, offset, "F.SilkS").Y * flipped(flip),
-                                       angle=start.angle,
-                                       unlocked=start.unlocked)
+                new_start_2 = Position(X        = pt_coff(start, offset, "F.SilkS").X,
+                                       Y        = pt_coff(start, offset, "F.SilkS").Y * flipped(flip),
+                                       angle    = start.angle,
+                                       unlocked = start.unlocked)
 
-                new_mid_2 = Position(X=pt_coff(middle, offset, "F.SilkS").X,
-                                     Y=pt_coff(middle, offset, "F.SilkS").Y * flipped(flip),
-                                     angle=middle.angle,
-                                     unlocked=middle.unlocked)
+                new_mid_2 = Position(X        = pt_coff(middle, offset, "F.SilkS").X,
+                                     Y        = pt_coff(middle, offset, "F.SilkS").Y * flipped(flip),
+                                     angle    = middle.angle,
+                                     unlocked = middle.unlocked)
 
-                new_end_2 = Position(X=pt_coff(end, offset, "F.SilkS").X,
-                                     Y=pt_coff(end, offset, "F.SilkS").Y * flipped(flip),
-                                     angle=end.angle,
-                                     unlocked=end.unlocked)
+                new_end_2 = Position(X        = pt_coff(end, offset, "F.SilkS").X,
+                                     Y        = pt_coff(end, offset, "F.SilkS").Y * flipped(flip),
+                                     angle    = end.angle,
+                                     unlocked = end.unlocked)
 
                 # Courtyard Layer
-                new_start_3 = Position(X=pt_coff(start, offset, "F.CrtYd").X,
-                                       Y=pt_coff(start, offset, "F.CrtYd").Y * flipped(flip),
-                                       angle=start.angle,
-                                       unlocked=start.unlocked)
+                new_start_3 = Position(X        = pt_coff(start, offset, "F.CrtYd").X,
+                                       Y        = pt_coff(start, offset, "F.CrtYd").Y * flipped(flip),
+                                       angle    = start.angle,
+                                       unlocked = start.unlocked)
 
-                new_mid_3 = Position(X=pt_coff(middle, offset, "F.CrtYd").X,
-                                     Y=pt_coff(middle, offset, "F.CrtYd").Y * flipped(flip),
-                                     angle=middle.angle,
-                                     unlocked=middle.unlocked)
+                new_mid_3 = Position(X        = pt_coff(middle, offset, "F.CrtYd").X,
+                                     Y        = pt_coff(middle, offset, "F.CrtYd").Y * flipped(flip),
+                                     angle    = middle.angle,
+                                     unlocked = middle.unlocked)
 
-                new_end_3 = Position(X=pt_coff(end, offset, "F.CrtYd").X,
-                                     Y=pt_coff(end, offset, "F.CrtYd").Y * flipped(flip),
-                                     angle=end.angle,
-                                     unlocked=end.unlocked)
+                new_end_3 = Position(X        = pt_coff(end, offset, "F.CrtYd").X,
+                                     Y        = pt_coff(end, offset, "F.CrtYd").Y * flipped(flip),
+                                     angle    = end.angle,
+                                     unlocked = end.unlocked)
 
-                fitem_fab = FpArc(start=new_start_1,
-                                  mid=new_mid_1,
-                                  end=new_end_1,
-                                  layer="F.Fab",
-                                  width=gitem.width,
-                                  stroke=None,
-                                  locked=False,  # Would like to lock this but does not appear to be supported in KiCad
-                                  tstamp=gitem.tstamp)
+                fitem_fab = FpArc(start  = new_start_1,
+                                  mid    = new_mid_1,
+                                  end    = new_end_1,
+                                  layer  = "F.Fab",
+                                  width  = gitem.width,
+                                  stroke = None,
+                                  locked = False,  # Would like to lock this but does not appear to be supported in KiCad
+                                  tstamp = gitem.tstamp)
 
-                fitem_silk = FpArc(start=new_start_2,
-                                   mid=new_mid_2,
-                                   end=new_end_2,
-                                   layer="F.SilkS",
-                                   width=0.1,
-                                   stroke=None,
-                                   locked=False,  # Would like to lock this but does not appear to be supported in KiCad
-                                   tstamp=gitem.tstamp)
+                fitem_silk = FpArc(start  = new_start_2,
+                                   mid    = new_mid_2,
+                                   end    = new_end_2,
+                                   layer  = "F.SilkS",
+                                   width  = 0.1,
+                                   stroke = None,
+                                   locked = False,  # Would like to lock this but does not appear to be supported in KiCad
+                                   tstamp = gitem.tstamp)
 
-                fitem_cyard = FpArc(start=new_start_3,
-                                    mid=new_mid_3,
-                                    end=new_end_3,
-                                    layer="F.CrtYd",
-                                    width=0.05,
-                                    stroke=None,
-                                    locked=False,  # Would like to lock this but does not appear to be supported in KiCad
-                                    tstamp=gitem.tstamp)
+                fitem_cyard = FpArc(start  = new_start_3,
+                                    mid    = new_mid_3,
+                                    end    = new_end_3,
+                                    layer  = "F.CrtYd",
+                                    width  = 0.05,
+                                    stroke = None,
+                                    locked = False,  # Would like to lock this but does not appear to be supported in KiCad
+                                    tstamp = gitem.tstamp)
 
         elif isinstance(gitem, GrPoly):
             if gitem.layer == "Edge.Cuts":
@@ -712,44 +641,44 @@ def create_outline(gr_items, offset, flip):
                 new_coords_3 = list()
 
                 for coord in gitem.coordinates:
-                    new_coords_1.append(Position(X=pt_soff(coord, offset).X,
-                                                 Y=pt_soff(coord, offset).Y * flipped(flip),
-                                                 angle=coord.angle,
-                                                 unlocked=coord.unlocked))
+                    new_coords_1.append(Position(X        = pt_soff(coord, offset).X,
+                                                 Y        = pt_soff(coord, offset).Y * flipped(flip),
+                                                 angle    = coord.angle,
+                                                 unlocked = coord.unlocked))
 
-                    new_coords_2.append(Position(X=pt_coff(coord, offset, "F.SilkS").X,
-                                                 Y=pt_coff(coord, offset, "F.SilkS").Y * flipped(flip),
-                                                 angle=coord.angle,
-                                                 unlocked=coord.unlocked))
+                    new_coords_2.append(Position(X        = pt_coff(coord, offset, "F.SilkS").X,
+                                                 Y        = pt_coff(coord, offset, "F.SilkS").Y * flipped(flip),
+                                                 angle    = coord.angle,
+                                                 unlocked = coord.unlocked))
 
-                    new_coords_3.append(Position(X=pt_coff(coord, offset, "F.CrtYd").X,
-                                                 Y=pt_coff(coord, offset, "F.CrtYd").Y * flipped(flip),
-                                                 angle=coord.angle,
-                                                 unlocked=coord.unlocked))
+                    new_coords_3.append(Position(X        = pt_coff(coord, offset, "F.CrtYd").X,
+                                                 Y        = pt_coff(coord, offset, "F.CrtYd").Y * flipped(flip),
+                                                 angle    = coord.angle,
+                                                 unlocked = coord.unlocked))
 
-                fitem_fab = FpPoly(layer="F.Fab",
-                                   coordinates=new_coords_1,
-                                   width=gitem.width,
-                                   stroke=None,
-                                   fill=gitem.fill,
-                                   locked=False,  # Would like to lock this but does not appear to be supported in KiCad
-                                   tstamp=gitem.tstamp)
+                fitem_fab = FpPoly(layer       = "F.Fab",
+                                   coordinates = new_coords_1,
+                                   width       = gitem.width,
+                                   stroke      = None,
+                                   fill        = gitem.fill,
+                                   locked      = False,  # Would like to lock this but does not appear to be supported in KiCad
+                                   tstamp      = gitem.tstamp)
 
-                fitem_silk = FpPoly(layer="F.SilkS",
-                                    coordinates=new_coords_2,
-                                    width=0.1,
-                                    stroke=None,
-                                    fill=gitem.fill,
-                                    locked=False,  # Would like to lock this but does not appear to be supported in KiCad
-                                    tstamp=gitem.tstamp)
+                fitem_silk = FpPoly(layer       = "F.SilkS",
+                                    coordinates = new_coords_2,
+                                    width       = 0.1,
+                                    stroke      = None,
+                                    fill        = gitem.fill,
+                                    locked      = False,  # Would like to lock this but does not appear to be supported in KiCad
+                                    tstamp      = gitem.tstamp)
 
-                fitem_cyard = FpPoly(layer="F.CrtYd",
-                                     coordinates=new_coords_3,
-                                     width=0.05,
-                                     stroke=None,
-                                     fill=gitem.fill,
-                                     locked=False,  # Would like to lock this but does not appear to be supported in KiCad
-                                     tstamp=gitem.tstamp)
+                fitem_cyard = FpPoly(layer       = "F.CrtYd",
+                                     coordinates = new_coords_3,
+                                     width       = 0.05,
+                                     stroke      = None,
+                                     fill        = gitem.fill,
+                                     locked      = False,  # Would like to lock this but does not appear to be supported in KiCad
+                                     tstamp      = gitem.tstamp)
 
         elif isinstance(gitem, GrCurve):
             if gitem.layer == "Edge.Cuts":
@@ -765,41 +694,41 @@ def create_outline(gr_items, offset, flip):
                 new_coords_3 = list()
 
                 for coord in gitem.coordinates:
-                    new_coords_1.append(Position(X=pt_soff(coord, offset).X,
-                                                 Y=pt_soff(coord, offset).Y * flipped(flip),
-                                                 angle=coord.angle,
-                                                 unlocked=coord.unlocked))
+                    new_coords_1.append(Position(X        = pt_soff(coord, offset).X,
+                                                 Y        = pt_soff(coord, offset).Y * flipped(flip),
+                                                 angle    = coord.angle,
+                                                 unlocked = coord.unlocked))
 
-                    new_coords_2.append(Position(X=pt_coff(coord, offset, "F.SilkS").X,
-                                                 Y=pt_coff(coord, offset, "F.SilkS").Y * flipped(flip),
-                                                 angle=coord.angle,
-                                                 unlocked=coord.unlocked))
+                    new_coords_2.append(Position(X        = pt_coff(coord, offset, "F.SilkS").X,
+                                                 Y        = pt_coff(coord, offset, "F.SilkS").Y * flipped(flip),
+                                                 angle    = coord.angle,
+                                                 unlocked = coord.unlocked))
 
-                    new_coords_3.append(Position(X=pt_coff(coord, offset, "F.CrtYd").X,
-                                                 Y=pt_coff(coord, offset, "F.CrtYd").Y * flipped(flip),
-                                                 angle=coord.angle,
-                                                 unlocked=coord.unlocked))
+                    new_coords_3.append(Position(X        = pt_coff(coord, offset, "F.CrtYd").X,
+                                                 Y        = pt_coff(coord, offset, "F.CrtYd").Y * flipped(flip),
+                                                 angle    = coord.angle,
+                                                 unlocked = coord.unlocked))
 
-                fitem_fab = FpCurve(coordinates=new_coords_1,
-                                    layer="F.Fab",
-                                    width=gitem.width,
-                                    stroke=None,
-                                    locked=False,  # Would like to lock this but does not appear to be supported in KiCad
-                                    tstamp=gitem.tstamp)
+                fitem_fab = FpCurve(coordinates = new_coords_1,
+                                    layer       = "F.Fab",
+                                    width       = gitem.width,
+                                    stroke      = None,
+                                    locked      = False,  # Would like to lock this but does not appear to be supported in KiCad
+                                    tstamp      = gitem.tstamp)
 
-                fitem_silk = FpCurve(coordinates=new_coords_2,
-                                     layer="F.SilkS",
-                                     width=0.1,
-                                     stroke=None,
-                                     locked=False,  # Would like to lock this but does not appear to be supported in KiCad
-                                     tstamp=gitem.tstamp)
+                fitem_silk = FpCurve(coordinates = new_coords_2,
+                                     layer       = "F.SilkS",
+                                     width       = 0.1,
+                                     stroke      = None,
+                                     locked      = False,  # Would like to lock this but does not appear to be supported in KiCad
+                                     tstamp      = gitem.tstamp)
 
-                fitem_cyard = FpCurve(coordinates=new_coords_3,
-                                      layer="F.CrtYd",
-                                      width=0.05,
-                                      stroke=None,
-                                      locked=False,  # Would like to lock this but does not appear to be supported in KiCad
-                                      tstamp=gitem.tstamp)
+                fitem_cyard = FpCurve(coordinates = new_coords_3,
+                                      layer       = "F.CrtYd",
+                                      width       = 0.05,
+                                      stroke      = None,
+                                      locked      = False,  # Would like to lock this but does not appear to be supported in KiCad
+                                      tstamp      = gitem.tstamp)
 
         if fitem_fab is not None:
             # add footprint outline
@@ -1017,6 +946,7 @@ def add_component_data(footprints, menu_data, centroid_offset, board_flip):
 
                 # now add the footprints for the components select
                 component_data.pads.extend(add_footprint_pads(footprint, aux_data))
+                component_data.graphicitems.extend(add_footprint_silkscreen(footprint, aux_data))
                 component_data.models.extend(add_footprint_models(footprint, aux_data))
 
     return component_data
@@ -1034,122 +964,20 @@ def add_footprint_pads(footprint, aux_data):
         if aux_data.board_flip:  # Flip so leave as is
             new_layers = pad.layers
         else:                    # No flip so swap layers
-            new_layers = list()
+            new_layers = []
 
             for layer in pad.layers:
                 if layer.find("F.") == 0:
                     new_layers.append(layer.replace("F.", "B."))
                 elif layer.find("B.") == 0:
                     new_layers.append(layer.replace("B.", "F."))
-            else:
-                new_layers.append(layer)
-
-        # update position based on having moved the centroid to 0,0
-        position = pt_soff(footprint.position, aux_data.centroid_offset)
-
-        center_position = Position()
-        new_position    = Position()
-        delta           = Position()
-        final_pos       = Position()
-
-        # Deal with rotation and offset on pad
-        match footprint.position.angle:
-            case 90.0:
-                new_position.X = (position.X + aux_data.center.Y)
-                new_position.Y = (position.Y - aux_data.center.X)
-
-                if aux_data.board_flip:
-                    center_position.X = (position.X + aux_data.center.Y)
-                    center_position.Y = (position.Y - aux_data.center.X) * flipped(aux_data.board_flip)
                 else:
-                    center_position.X = (position.X + aux_data.center.Y)
-                    center_position.Y = (position.Y - aux_data.center.X)
-
-                delta.X = pad.position.X - aux_data.center.X
-                delta.Y = pad.position.Y - aux_data.center.Y
-
-                if aux_data.board_flip:
-                    final_pos.X     = (new_position.X + delta.Y)
-                    final_pos.Y     = (new_position.Y - delta.X) * flipped(aux_data.board_flip)
-                    final_pos.angle = position.angle
-                else:
-                    final_pos.X     = (new_position.X + delta.Y)
-                    final_pos.Y     = (new_position.Y - delta.X)
-                    final_pos.angle = position.angle
-
-            case -90.0:
-                new_position.X = (position.X - aux_data.center.Y)
-                new_position.Y = (position.Y + aux_data.center.X)
-
-                if aux_data.board_flip:
-                    center_position.X = (position.X - aux_data.center.Y)
-                    center_position.Y = (position.Y + aux_data.center.X) * flipped(aux_data.board_flip)
-                else:
-                    center_position.X = (position.X - aux_data.center.Y)
-                    center_position.Y = (position.Y + aux_data.center.X)
-
-                delta.X = pad.position.X - aux_data.center.X
-                delta.Y = pad.position.Y - aux_data.center.Y
-
-                if aux_data.board_flip:
-                    final_pos.X     = (new_position.X - delta.Y)
-                    final_pos.Y     = (new_position.Y + delta.X) * flipped(aux_data.board_flip)
-                    final_pos.angle = position.angle
-                else:
-                    final_pos.X     = (new_position.X - delta.Y)
-                    final_pos.Y     = (new_position.Y + delta.X)
-                    final_pos.angle = position.angle
-
-            case 180.0:
-                new_position.X = (position.X - aux_data.center.X)
-                new_position.Y = (position.Y - aux_data.center.Y)
-
-                if aux_data.board_flip:
-                    center_position.X = (position.X - aux_data.center.X)
-                    center_position.Y = (position.Y - aux_data.center.Y) * flipped(aux_data.board_flip)
-                else:
-                    center_position.X = (position.X - aux_data.center.X)
-                    center_position.Y = (position.Y - aux_data.center.Y)
-
-                delta.X = pad.position.X - aux_data.center.X
-                delta.Y = pad.position.Y - aux_data.center.Y
-
-                if aux_data.board_flip:
-                    final_pos.X     = (new_position.X - delta.X)
-                    final_pos.Y     = (new_position.Y - delta.Y) * flipped(aux_data.board_flip)
-                    final_pos.angle = position.angle
-                else:
-                    final_pos.X     = (new_position.X - delta.X)
-                    final_pos.Y     = (new_position.Y - delta.Y)
-                    final_pos.angle = position.angle
-
-            case _:  # angle is 0.0
-                new_position.X = (position.X + aux_data.center.X)
-                new_position.Y = (position.Y + aux_data.center.Y)
-
-                if aux_data.board_flip:
-                    center_position.X = (position.X + aux_data.center.X)
-                    center_position.Y = (position.Y + aux_data.center.Y) * flipped(aux_data.board_flip)
-                else:
-                    center_position.X = (position.X + aux_data.center.X)
-                    center_position.Y = (position.Y + aux_data.center.Y)
-
-                delta.X = pad.position.X - aux_data.center.X
-                delta.Y = pad.position.Y - aux_data.center.Y
-
-                if aux_data.board_flip:
-                    final_pos.X     = (new_position.X + delta.X)
-                    final_pos.Y     = (new_position.Y + delta.Y) * flipped(aux_data.board_flip)
-                    final_pos.angle = position.angle
-                else:
-                    final_pos.X     = (new_position.X + delta.X)
-                    final_pos.Y     = (new_position.Y + delta.Y)
-                    final_pos.angle = position.angle
+                    new_layers.append(layer)
 
         modified_pads.append(Pad(number                 = new_number,
                                  type                   = pad.type,
                                  shape                  = pad.shape,
-                                 position               = final_pos,
+                                 position               = new_coordinate_position(footprint.position, pad.position, aux_data),
                                  locked                 = True,
                                  size                   = pad.size,
                                  drill                  = pad.drill,
@@ -1211,15 +1039,173 @@ def add_footprint_pads(footprint, aux_data):
 
 
 # ==================================================================================================================
+# now add the footprint data for the components select
+def add_footprint_silkscreen(footprint, aux_data):
+    modified_items = list()
+
+    for gitem in footprint.graphicItems:
+        # if isinstance(gitem, FpText):
+        #     if (gitem.layer == "F.SilkS") or (gitem.layer == "B.SilkS"):
+        #         # Nothing to do here.
+        #         print("Text    ")
+
+        # elif isinstance(gitem, FpTextBox):
+        #     if (gitem.layer == "F.SilkS") or (gitem.layer == "B.SilkS"):
+        #         # Nothing to do here.
+        #         print("TextBox ")
+
+        if isinstance(gitem, FpLine):
+            if (gitem.layer == "F.SilkS") or (gitem.layer == "B.SilkS"):
+                if gitem.width < 0.1:
+                    gitem. width = 0.1
+
+                # Silkscreen Layer
+                modified_items.append(FpLine(start   = new_coordinate_position(footprint.position, gitem.start, aux_data),
+                                             end     = new_coordinate_position(footprint.position, gitem.end,   aux_data),
+                                             layer   = "F.SilkS",
+                                             width   = gitem. width,
+                                             stroke  = None,
+                                             locked  = True,
+                                             tstamp  = gitem.tstamp))
+
+                # print("Line    ")
+
+        elif isinstance(gitem, FpRect):
+            if (gitem.layer == "F.SilkS") or (gitem.layer == "B.SilkS"):
+                if gitem.width < 0.1:
+                    gitem.width = 0.1
+
+                modified_items.append(FpRect(start  = new_coordinate_position(footprint.position, gitem.start, aux_data),
+                                             end    = new_coordinate_position(footprint.position, gitem.end,   aux_data),
+                                             layer  = "F.SilkS",
+                                             width  = gitem.width,
+                                             stroke = None,
+                                             fill   = gitem.fill,
+                                             locked = False,  # Would like to lock this but does not appear to be supported in KiCad,
+                                             tstamp = gitem.tstamp))
+                # print("Rect    ")
+
+        elif isinstance(gitem, FpCircle):
+            if (gitem.layer == "F.SilkS") or (gitem.layer == "B.SilkS"):
+                if gitem.width < 0.1:
+                    gitem.width = 0.1
+
+                modified_items.append(FpCircle(center = new_coordinate_position(footprint.position, gitem.center, aux_data),
+                                               end    = new_coordinate_position(footprint.position, gitem.end, aux_data),
+                                               layer  = "F.SilkS",
+                                               width  = gitem.width,
+                                               stroke = None,
+                                               fill   = gitem.fill,
+                                               locked = False,  # Would like to lock this but does not appear to be supported in KiCad
+                                               tstamp = gitem.tstamp))
+                # print("Circle  ")
+
+        elif isinstance(gitem, FpArc):
+            if (gitem.layer == "F.SilkS") or (gitem.layer == "B.SilkS"):
+                # There is an issue with arc when flipped. The arc is drawing clockwise so a normal arc becomes an inverse arc!
+                # Therefor need to swap start and end.
+                if aux_data.board_flip:  # flip
+                    start = gitem.end
+                    middle = gitem.mid
+                    end = gitem.start
+
+                else:  # no flip
+                    start = gitem.start
+                    middle = gitem.mid
+                    end = gitem.end
+
+                if gitem.width < 0.1:
+                    gitem.width = 0.1
+
+                new_start = Position(X        = pt_soff(start, aux_data.centroid_offset).X,
+                                     Y        = pt_soff(start, aux_data.centroid_offset).Y * flipped(aux_data.board_flip),
+                                     angle    = start.angle,
+                                     unlocked = start.unlocked)
+
+                new_mid   = Position(X        = pt_soff(middle, aux_data.centroid_offset).X,
+                                     Y        = pt_soff(middle, aux_data.centroid_offset).Y * flipped(aux_data.board_flip),
+                                     angle    = middle.angle,
+                                     unlocked = middle.unlocked)
+
+                new_end   = Position(X        = pt_soff(end, aux_data.centroid_offset).X,
+                                     Y        = pt_soff(end, aux_data.centroid_offset).Y * flipped(aux_data.board_flip),
+                                     angle    = end.angle,
+                                     unlocked = end.unlocked)
+
+                modified_items.append(FpArc(start  = new_coordinate_position(footprint.position, start,  aux_data),
+                                            mid    = new_coordinate_position(footprint.position, middle, aux_data),
+                                            end    = new_coordinate_position(footprint.position, end,    aux_data),
+                                            layer  = "F.SilkS",
+                                            width  = gitem.width,
+                                            stroke = None,
+                                            locked = False,  # Would like to lock this but does not appear to be supported in KiCad
+                                            tstamp = gitem.tstamp))
+                # print("Arc    ")
+
+        elif isinstance(gitem, FpPoly):
+            if (gitem.layer == "F.SilkS") or (gitem.layer == "B.SilkS"):
+                if gitem.width < 0.1:
+                    gitem.width = 0.1
+
+                # Fab, Silkscreen and Courtyard Layers
+                new_coords = list()
+
+                for coord in gitem.coordinates:
+                    new_coords.append(new_coordinate_position(footprint.position, coord, aux_data))
+
+                modified_items.append(FpPoly(layer       = "F.SilkS",
+                                             coordinates = new_coords,
+                                             width       = gitem.width,
+                                             stroke      = None,
+                                             fill        = gitem.fill,
+                                             locked      = False,  # Would like to lock this but does not appear to be supported in KiCad
+                                             tstamp      = gitem.tstamp))
+                # print("Poly   ")
+
+        elif isinstance(gitem, FpCurve):
+            if (gitem.layer == "F.SilkS") or (gitem.layer == "B.SilkS"):
+                if gitem.width < 0.1:
+                    gitem.width = 0.1
+
+                new_coords = list()
+
+                for coord in gitem.coordinates:
+                    new_coords.append(new_coordinate_position(footprint.position, coord, aux_data))
+
+                modified_items.append(FpCurve(coordinates = new_coords,
+                                              layer       = "F.SilkS",
+                                              width       = gitem.width,
+                                              stroke      = None,
+                                              locked      = False,  # Would like to lock this but does not appear to be supported in KiCad
+                                              tstamp      = gitem.tstamp))
+                # print("Curve  ")
+
+        # =========================================================================================
+        # Debug code - draws a pad at the center
+        # pos1 = new_coordinate_position(footprint.position, aux_data.center, aux_data)
+        #
+        # modified_items.append(FpCircle(center = Position(X = pos1.X,
+        #                                                  Y = pos1.Y),
+        #                                end    = Position(X = pos1.X + 0.254,
+        #                                                  Y = pos1.Y + 0.254),
+        #                                layer  = "F.SilkS",
+        #                                width  = 0.1,
+        #                                stroke = None,
+        #                                fill   = None,
+        #                                locked = False,  # Would like to lock this but does not appear to be supported in KiCad
+        #                                tstamp = gitem.tstamp))
+        # =========================================================================================
+
+    return modified_items
+
+
+# ==================================================================================================================
 # now add the models for the components select
 def add_footprint_models(footprint, aux_data):
     modified_models = list()
 
     for model in footprint.models:
         new_path = model.path
-
-        # update position based on having moved the centroid to 0,0
-        position = pt_soff(footprint.position, aux_data.centroid_offset)
 
         # We should look for the pointer to KiCAD library then Substitute "PinHeader" with "PinSocket" and vice-versa.
         # This will not work going forward without change!
@@ -1234,71 +1220,10 @@ def add_footprint_models(footprint, aux_data):
                 new_path = new_path.replace("_Vertical_SMD_Pin1Right", "_Vertical_SMD_Pin1Left")
             elif new_path.find("_Vertical_SMD_Pin1Left.") >= 0:
                 new_path = new_path.replace("_Vertical_SMD_Pin1Left", "_Vertical_SMD_Pin1Right")
+
         # TODO: else:
         # TODO:     # Not one of the libraries we can handle so need to copy file to the "Shapes_3D" directory.
 
-        # Deal with rotation and offset on pad
-        match footprint.position.angle:
-            case 90.0:
-                if aux_data.board_flip:
-                    new_rotation = model.rotate.Z - 90
-                else:
-                    new_rotation = model.rotate.Z + 90
-
-                new_model = Model(path   = new_path,
-                                  pos    = Coordinate(X =  position.X,                                       # + model.pos.Y * flip.X),
-                                                      Y = (position.Y * flipped(aux_data.board_flip)) * -1,  # - model.pos.X * flip.Y),
-                                                      Z =  model.pos.Z),
-                                  scale  = model.scale,
-                                  rotate = Coordinate(X = model.rotate.X,
-                                                      Y = model.rotate.Y,
-                                                      Z = new_rotation))  # footprint.position.angle)
-
-            case 180.0:
-                if aux_data.board_flip:
-                    new_rotation = model.rotate.Z + 0
-                else:
-                    new_rotation = model.rotate.Z + 0
-
-                new_model = Model(path   = new_path,
-                                  pos    = Coordinate(X =  position.X,                                       # + model.pos.Y * flip.X),
-                                                      Y = (position.Y * flipped(aux_data.board_flip)) * -1,  # - model.pos.X * flip.Y),
-                                                      Z =  model.pos.Z),
-                                  scale  = model.scale,
-                                  rotate = Coordinate(X = model.rotate.X,
-                                                      Y = model.rotate.Y,
-                                                      Z = new_rotation))  # footprint.position.angle)
-
-            case -90.0:
-                if aux_data.board_flip:
-                    new_rotation = model.rotate.Z + 90
-                else:
-                    new_rotation = model.rotate.Z - 90
-
-                new_model = Model(path   = new_path,
-                                  pos    = Coordinate(X =  position.X,                                       # + model.pos.Y * flip.X),
-                                                      Y = (position.Y * flipped(aux_data.board_flip)) * -1,  # - model.pos.X * flip.Y),
-                                                      Z =  model.pos.Z),
-                                  scale  = model.scale,
-                                  rotate = Coordinate(X = model.rotate.X,
-                                                      Y = model.rotate.Y,
-                                                      Z = new_rotation))  # footprint.position.angle)
-
-            case _:  # angle is 0.0
-                if aux_data.board_flip:
-                    new_rotation = model.rotate.Z + 180
-                else:
-                    new_rotation = model.rotate.Z + 180
-
-                new_model = Model(path   = new_path,
-                                  pos    = Coordinate(X =  position.X,                                       # + model.pos.Y * flip.X),
-                                                      Y = (position.Y * flipped(aux_data.board_flip)) * -1,  # - model.pos.X * flip.Y),
-                                                      Z =  model.pos.Z),
-                                  scale  = model.scale,
-                                  rotate = Coordinate(X = model.rotate.X,
-                                                      Y = model.rotate.Y,
-                                                      Z = new_rotation))  # footprint.position.angle)
-
-        modified_models.append(new_model)
+        modified_models.append(new_model_position(footprint.position, model, new_path, aux_data.centroid_offset, aux_data.board_flip))
 
     return modified_models

@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can &#10;1. output a kiCad file, &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;&#10;Can't &#10;1. draw silkscreen for connectors&#10;2. generate the symbol" />
+    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can &#10;1. output a kiCad file, &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;&#10;Can't &#10;1. draw silkscreen for connectors&#10;2. generate the symbol">
+      <change afterPath="$PROJECT_DIR$/Data_Mover.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Supplemental_Classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Supplemental_Classes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/footprint_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/footprint_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kicad_pcb_tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_pcb_tasks.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -234,7 +241,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670090843843</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Can &#10;1. output a kiCad file, &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;&#10;Can't &#10;1. draw silkscreen for connectors&#10;2. generate the symbol">
+      <created>1670350220930</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1670350220930</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -298,33 +312,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/footprint_generator.py</url>
-          <line>386</line>
+          <line>315</line>
           <option name="timeStamp" value="95" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/kicad_pcb_tasks.py</url>
-          <line>171</line>
+          <line>175</line>
           <option name="timeStamp" value="126" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/footprint_generator.py</url>
-          <line>1232</line>
-          <option name="timeStamp" value="128" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/footprint_generator.py</url>
-          <line>1235</line>
-          <option name="timeStamp" value="131" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/footprint_generator.py</url>
-          <line>1234</line>
-          <option name="timeStamp" value="132" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/footprint_generator.py</url>
-          <line>1221</line>
-          <option name="timeStamp" value="133" />
+          <line>966</line>
+          <option name="timeStamp" value="134" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

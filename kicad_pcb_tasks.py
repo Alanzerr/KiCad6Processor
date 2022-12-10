@@ -9,6 +9,7 @@
 # import os
 # import math
 # import datetime
+# from Supplemental_Classes import *
 from footprint_generator import *
 
 # from kiutils.board import *
@@ -74,7 +75,7 @@ def pcb_task3(filename, board, odir):
         else:
             savedirectory = odir
 
-        data_input = open(os.getcwd() + "\\" + "MyGen.kicad_input", "w")
+        data_input = open(os.getcwd() + "\\" + "MyGen_" + boardname + ".kicad_input", "w")
         data_input.write(filename + "\n")
         data_input.write(odir)
         data_input.close()
@@ -130,8 +131,11 @@ def pcb_task3(filename, board, odir):
             # Now figure out the required parameters related to the selected components
             user_selected_components.component_data = add_component_data(board.footprints, user_selected_components.menu_data, centroid, flip)
 
-            footprint.pads   = user_selected_components.component_data.pads
-            footprint.models = user_selected_components.component_data.models
+            footprint.pads         = user_selected_components.component_data.pads
+            footprint.models       = user_selected_components.component_data.models
+
+            # need to extend the graphics items as we're created the outline previously.
+            footprint.graphicItems.extend(user_selected_components.component_data.graphicitems)
 
             # So we have the original data converted, just need to add the model of the original board.
             # Import the file to be processed - only shows KiCad files.
