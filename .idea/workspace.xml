@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can &#10;1. output a kiCad file, &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;&#10;Can't &#10;1. draw silkscreen for connectors&#10;2. generate the symbol">
-      <change afterPath="$PROJECT_DIR$/Data_Mover.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can &#10;1. output a kiCad file &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;5. draw silkscreen for connectors&#10;&#10;Can't &#10;1. generate the symbol&#10;2. copy required 3D data to new library&#10;3. optimised center&#10;4. optimised grow function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Mover.py" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Mover.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Supplemental_Classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Supplemental_Classes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug_print.py" beforeDir="false" afterPath="$PROJECT_DIR$/debug_print.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/footprint_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/footprint_generator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kicad_pcb_tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_pcb_tasks.py" afterDir="false" />
     </list>
@@ -248,7 +248,28 @@
       <option name="project" value="LOCAL" />
       <updated>1670350220930</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Can &#10;1. output a kiCad file &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;5. draw silkscreen for connectors&#10;&#10;Can't &#10;1. generate the symbol&#10;2. copy required 3D data to new library&#10;3. optimised center&#10;4. optimised grow function">
+      <created>1670682076281</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1670682076281</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Can &#10;1. output a kiCad file &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;5. draw silkscreen for connectors&#10;&#10;Can't &#10;1. generate the symbol&#10;2. copy required 3D data to new library&#10;3. optimised center&#10;4. optimised grow function">
+      <created>1670682168171</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1670682168171</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Can &#10;1. output a kiCad file &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;5. draw silkscreen for connectors&#10;&#10;Can't &#10;1. generate the symbol&#10;2. copy required 3D data to new library&#10;3. optimised center&#10;4. optimised grow function">
+      <created>1670682176269</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1670682176269</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -275,7 +296,8 @@
     <MESSAGE value="Updated to ignore KiCAD files." />
     <MESSAGE value="Can now output a kiCad file and update the library to access the ouput - orientation of pads and models are still messed up." />
     <MESSAGE value="Can &#10;1. output a kiCad file, &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;&#10;Can't &#10;1. draw silkscreen for connectors&#10;2. generate the symbol" />
-    <option name="LAST_COMMIT_MESSAGE" value="Can &#10;1. output a kiCad file, &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;&#10;Can't &#10;1. draw silkscreen for connectors&#10;2. generate the symbol" />
+    <MESSAGE value="Can &#10;1. output a kiCad file &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;5. draw silkscreen for connectors&#10;&#10;Can't &#10;1. generate the symbol&#10;2. copy required 3D data to new library&#10;3. optimised center&#10;4. optimised grow function" />
+    <option name="LAST_COMMIT_MESSAGE" value="Can &#10;1. output a kiCad file &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;5. draw silkscreen for connectors&#10;&#10;Can't &#10;1. generate the symbol&#10;2. copy required 3D data to new library&#10;3. optimised center&#10;4. optimised grow function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -311,19 +333,74 @@
           <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/footprint_generator.py</url>
-          <line>315</line>
-          <option name="timeStamp" value="95" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/kicad_pcb_tasks.py</url>
-          <line>175</line>
+          <line>202</line>
           <option name="timeStamp" value="126" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/footprint_generator.py</url>
-          <line>966</line>
+          <line>586</line>
           <option name="timeStamp" value="134" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Data_Mover.py</url>
+          <line>589</line>
+          <option name="timeStamp" value="135" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Data_Mover.py</url>
+          <line>668</line>
+          <option name="timeStamp" value="140" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Data_Mover.py</url>
+          <line>600</line>
+          <option name="timeStamp" value="143" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Data_Mover.py</url>
+          <line>593</line>
+          <option name="timeStamp" value="144" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/footprint_generator.py</url>
+          <line>460</line>
+          <option name="timeStamp" value="146" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/footprint_generator.py</url>
+          <line>445</line>
+          <option name="timeStamp" value="147" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/kicad_pcb_tasks.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="148" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/kicad_pcb_tasks.py</url>
+          <line>103</line>
+          <option name="timeStamp" value="149" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/kicad_pcb_tasks.py</url>
+          <line>87</line>
+          <option name="timeStamp" value="150" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/kicad_pcb_tasks.py</url>
+          <line>90</line>
+          <option name="timeStamp" value="151" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/kicad_pcb_tasks.py</url>
+          <line>100</line>
+          <option name="timeStamp" value="153" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/kicad_pcb_tasks.py</url>
+          <line>95</line>
+          <option name="timeStamp" value="154" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -337,7 +414,11 @@
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="string" />
+        <watch expression="outline" />
       </configuration>
+      <inline-watch fileUrl="file://$PROJECT_DIR$/Data_Mover.py" line="600">
+        <watch expression="start" language="Python" />
+      </inline-watch>
     </watches-manager>
   </component>
 </project>

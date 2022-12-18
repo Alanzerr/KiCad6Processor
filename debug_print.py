@@ -2,7 +2,7 @@
 #  Source File Name : debug_print.py
 #  Purpose          : Simple way to selectively print stuff.
 #  Author           : Alan Milne
-#  #
+#
 #  This is copyright (C) 2022 to Alan Milne
 #  ===================================================================
 

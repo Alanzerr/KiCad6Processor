@@ -40,15 +40,19 @@ def pcb_task2(user_choice, filename, pcb_lib_table):
 
 # ==================================================================================================================
 def pcb_task3(filename, board, odir):
-    # analyse the file name and get the board name
-    boardname = filename[0:filename.find(".kicad_pcb")]
+    # analyse the input directory, file name and get the board name
+    idir = filename[0:filename.rfind("\\")]
 
+    boardname = filename[0:filename.find(".kicad_pcb")]
     boardname = boardname[boardname.rfind("\\") + 1:len(boardname)]
 
     user_selected_components = Components()
 
-    # Get name for new footprint
-    footprintname = user_input(boardname)
+    if boardname is None:
+        # Get name for new footprint
+        footprintname = user_input(boardname)
+    else:
+        footprintname = boardname
 
     # Returns None is user cancels input selection.
     if footprintname is not None:
@@ -81,10 +85,25 @@ def pcb_task3(filename, board, odir):
         data_input.close()
 
         # Want to determine the offset so that we can draw the outline centered on 0,0
-        centroid = find_centroid(board.graphicalItems)
+        outline_data = find_centroid(board.graphicalItems)
 
         # copy board outline to footprint outline
-        footprint.graphicItems = create_outline(board.graphicalItems, centroid, flip)
+        outline = create_outline(board.graphicalItems, outline_data, flip)
+
+        # Prep the data before we use it
+        graphicsdata = list()
+
+        for item in outline.board_edge:
+            graphicsdata.append(item)
+
+        # We want the non-edge data on another layer so change it and then add it
+        # This is not exactly useful in most cases but could all drill holes and slots to be easily added (by hand)
+        for item in outline.non_board_edge:
+            item.layer = "Margin"
+
+            graphicsdata.append(item)
+
+        footprint.graphicItems = graphicsdata
 
         # And add the text primitives - need to add these here as create_outline initialises footprint.graphicItems!
         myfont = Font(thickness=0.15)
@@ -129,7 +148,7 @@ def pcb_task3(filename, board, odir):
             manage_lib_dir(savedirectory)
 
             # Now figure out the required parameters related to the selected components
-            user_selected_components.component_data = add_component_data(board.footprints, user_selected_components.menu_data, centroid, flip)
+            user_selected_components.component_data = add_component_data(board.footprints, user_selected_components.menu_data, outline_data.centroid, flip)
 
             footprint.pads         = user_selected_components.component_data.pads
             footprint.models       = user_selected_components.component_data.models
@@ -138,13 +157,21 @@ def pcb_task3(filename, board, odir):
             footprint.graphicItems.extend(user_selected_components.component_data.graphicitems)
 
             # So we have the original data converted, just need to add the model of the original board.
-            # Import the file to be processed - only shows KiCad files.
-            board_file = fileopenbox(msg       = "Open file",
-                                     title     = "KiCad 3D Model File",
-                                     default   = odir + "\\*.*",
-                                     filetypes = [["*.step", "KiCad 3D Board file"],
-                                                  ["*.stp",  "KiCad 3D Board file"]],
-                                     multiple  = False)
+            # first look to see if we can fine the step file as KiCad puts it in a known default position
+            if path.exists(idir + "\\" + boardname + ".step"):
+                board_file = idir + "\\" + boardname + ".step"
+
+            elif path.exists(idir + "\\" + boardname + ".stp"):
+                board_file = idir + "\\" + boardname + ".stp"
+
+            else:
+                # Import the file to be processed - only shows KiCad files.
+                board_file = fileopenbox(msg       = "Open file",
+                                         title     = "KiCad 3D Model File",
+                                         default   = odir + "\\*.*",
+                                         filetypes = [["*.step", "KiCad 3D Board file"],
+                                                      ["*.stp",  "KiCad 3D Board file"]],
+                                         multiple  = False)
 
             # This should get the model of the original board in approximately the right place.
             if board_file is not None:
