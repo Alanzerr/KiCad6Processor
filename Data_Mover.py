@@ -8,10 +8,15 @@
 
 # import os
 import math
+
+from kiutils.items.common import Font, Justify
+
 # import datetime
 
 # from kiutils.board import *
 # from kiutils.libraries import *
+
+from footprint_generator import *
 
 from debug_print import *
 # from user_display_libtable import *
@@ -286,27 +291,27 @@ def pt_soff(position, centroid_offset):
 # Offset the point, but based on a vector!
 # TODO: Could improve this - see https://stackoverflow.com/questions/55948254/scale-contours-up-grow-outward
 # This is not a perfect approach as for a rectangle, it grows more in the long direction than in the short.
-def pt_coff(position, centroid_offset, layer):
-    match layer:
-        case "F.CrtYd":
-            offset = 2.54  # This is set to 0.1" or 2.54 mm. Can't find anything to say that use of mm is wrong.
-        case "F.SilkS":
-            offset = 1.5  # This is set to 0.1" or 2.54 mm. Can't find anything to say that use of mm is wrong.
-        case _:
-            offset = 0.001  # non-zero to make maths work
-
-    # calculate the new position based on the centroid offset
-    orig_pos = pt_soff(position, centroid_offset)
-
-    # calculate the distance based on the pos x and Y and Pythagoras
-    distance = round(math.sqrt((orig_pos.X ** 2) + (orig_pos.Y ** 2)), 6)
-
-    # determine the new x,y
-    new_pos = Position(X        = ((offset / distance) * orig_pos.X) + orig_pos.X,
-                       Y        = ((offset / distance) * orig_pos.Y) + orig_pos.Y,
-                       angle    = position.angle,
-                       unlocked = position.unlocked)
-    return new_pos
+# apm def pt_coff(position, centroid_offset, layer):
+# apm     match layer:
+# apm         case "F.CrtYd":
+# apm             offset = 2.54  # This is set to 0.1" or 2.54 mm. Can't find anything to say that use of mm is wrong.
+# apm         case "F.SilkS":
+# apm             offset = 1.5  # This is set to 0.1" or 2.54 mm. Can't find anything to say that use of mm is wrong.
+# apm         case _:
+# apm             offset = 0.001  # non-zero to make maths work
+# apm
+# apm     # calculate the new position based on the centroid offset
+# apm     orig_pos = pt_soff(position, centroid_offset)
+# apm
+# apm     # calculate the distance based on the pos x and Y and Pythagoras
+# apm     distance = round(math.sqrt((orig_pos.X ** 2) + (orig_pos.Y ** 2)), 6)
+# apm
+# apm     # determine the new x,y
+# apm     new_pos = Position(X        = ((offset / distance) * orig_pos.X) + orig_pos.X,
+# apm                        Y        = ((offset / distance) * orig_pos.Y) + orig_pos.Y,
+# apm                        angle    = position.angle,
+# apm                        unlocked = position.unlocked)
+# apm     return new_pos
 
 
 # ==================================================================================================================
@@ -458,15 +463,94 @@ def draw_line(gitem, x1, y1, x2, y2, offset, flip, layer):
 
 
 # ==================================================================================================================
+def get_angle(x, y):
+    return round((math.atan2(y, x) / math.pi * 180), 6)
+
+
+# ==================================================================================================================
+# Converts a kicad angle (-180 -> 0 -> 180 to 0 -> 360)
+def non_kicad_angle(angle):
+    if angle >= 0:
+        new_angle = angle
+        # print(">0n " + str(angle) + " " + str(new_angle))
+    else:
+        new_angle = 180 + (180 + angle)
+        # print("<0n " + str(angle) + " " + str(new_angle))
+
+    return round(new_angle, 0)
+
+
+# ==================================================================================================================
+# Determine rotation
+def get_rotation(angle1, angle2, angle3):
+    direction = False
+
+    print("Miss " + str(angle1) + " " + str(angle2)  + " " + str(angle3) + " " + str(direction))
+
+    a1 = non_kicad_angle(angle1)
+    a2 = non_kicad_angle(angle2)
+    a3 = non_kicad_angle(angle3)
+
+    if (a3 > a2) and (a2 > a1):
+        direction = True
+
+    elif (a3 > a2) and (a2 > (a1 - 360)):  # a2/a1 crosses thru 0
+        direction = True
+
+    elif (a3 > (a1 - 360)) and (a2 > a1):  # a3/a2 crosses thru 0
+        direction = True
+
+    print("Miss " + str(a1) + " " + str(a2) + " " + str(a3) + " " + str(direction))
+
+    return direction
+
+
+# ==================================================================================================================
+def get_x(step_size, no_of_steps, radius):
+    # Need to do this to avoid divide by 0 error.
+    if step_size == 0:
+        new_angle = round(math.cos(0) * radius, 6)
+
+    else:
+        new_angle = round(math.cos(2 * math.pi / step_size * no_of_steps) * radius, 6)
+
+    return new_angle
+
+
+# ==================================================================================================================
+def get_y(step_size, no_of_steps, radius):
+    # Need to do this to avoid divide by 0 error.
+    if step_size == 0:
+        new_angle = round(math.sin(0) * radius, 6)
+
+    else:
+        new_angle = round(math.sin(2 * math.pi / step_size * no_of_steps) * radius, 6)
+
+    return new_angle
+
+
+# ==================================================================================================================
+def get_distance(x, y):
+    return round(math.sqrt((x * x) + (y * y)), 6)
+
+
+# ==================================================================================================================
+def get_magnitude(x1, x2):
+    if x1 > x2:
+        mag = x1 - x2
+    else:
+        mag = x2 - x1
+
+    return mag
+
+
+# ==================================================================================================================
 # Flip the angle in the x-axis if the board is flipped
 def flip_angle(x, y, flip):
     if flip:
-        angle = round((math.atan2(0 - y, x) / math.pi * 180), 6)
+        angle = get_angle(x, 0 - y)
     else:
-        angle = round((math.atan2(y, x) / math.pi * 180), 6)
-
-    # angle1 = round(math.atan2(0 - y, x) / math.pi * 180), 6)
-    # angle2 = round(math.atan2(y, x) / math.pi * 180), 6)
+        angle = get_angle(x, y)
 
     # print("In " + str(angle1) + " " + str(angle2))
 
@@ -496,6 +580,24 @@ def flip_angle(x, y, flip):
                 # print("<0n " + str(angle) + " " + str(result))
 
     return result
+
+
+# ==================================================================================================================
+def kicad_debug(text, position, layer):
+    myfont    = Font(thickness=0.15)
+
+    myjustify = Justify()
+
+    myeffect  = Effects(font    = myfont,
+                        justify = myjustify)
+
+    item = FpText(type     ="user",
+                  text     = text,
+                  layer    = layer,
+                  effects  = myeffect,
+                  position = position)
+
+    return item
 
 
 # ==================================================================================================================
@@ -588,8 +690,8 @@ def vectorise_outline(gr_items, offset, flip):
 
                 # now calculate the points and draw the circle as line segments
                 for loop in range(0, number_of_points + 1):
-                    circle_array_x.append(round(gitem.center.X + (math.cos(2 * math.pi / number_of_points * loop) * radius), 6))
-                    circle_array_y.append(round(gitem.center.Y + (math.sin(2 * math.pi / number_of_points * loop) * radius), 6))
+                    circle_array_x.append(round(gitem.center.X + get_x(number_of_points, loop, radius), 6))
+                    circle_array_y.append(round(gitem.center.Y + get_y(number_of_points, loop, radius), 6))
 
                     if loop > 0:
                         vectoritems.append(draw_line(gitem, circle_array_x[loop - 1], circle_array_y[loop - 1], circle_array_x[loop], circle_array_y[loop],
@@ -629,8 +731,8 @@ def vectorise_outline(gr_items, offset, flip):
                 # now calculate the points and draw the circle as line segments to deal will all arc, we create the data for two circles, this allows the subsequent
                 # extraction of data not have to worry about running through the end of one circle
                 for loop in range(0, (2 * number_of_points) - 1):
-                    pttx  = round(circle.center.X +  (math.cos(2 * math.pi / number_of_points * loop) * circle.radius), 6)
-                    ptty  = round(circle.center.Y + ((math.sin(2 * math.pi / number_of_points * loop) * circle.radius) * flipped(flip)), 6)
+                    pttx  = round(circle.center.X +  get_x(number_of_points, loop, circle.radius), 6)
+                    ptty  = round(circle.center.Y + (get_y(number_of_points, loop, circle.radius) * flipped(flip)), 6)
                     angle = loop * (360/number_of_points)
 
                     circle_array.append(Position(X     = pttx,

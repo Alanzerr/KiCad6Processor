@@ -41,10 +41,10 @@ def pcb_task2(user_choice, filename, pcb_lib_table):
 # ==================================================================================================================
 def pcb_task3(filename, board, odir):
     # analyse the input directory, file name and get the board name
-    idir = filename[0:filename.rfind("\\")]
+    idir                     = filename[0:filename.rfind("\\")]
 
-    boardname = filename[0:filename.find(".kicad_pcb")]
-    boardname = boardname[boardname.rfind("\\") + 1:len(boardname)]
+    boardname                = filename[0:filename.find(".kicad_pcb")]
+    boardname                = boardname[boardname.rfind("\\") + 1:len(boardname)]
 
     user_selected_components = Components()
 
@@ -91,10 +91,16 @@ def pcb_task3(filename, board, odir):
         outline = create_outline(board.graphicalItems, outline_data, flip)
 
         # Prep the data before we use it
-        graphicsdata = list()
+        graphicsdata = []
 
-        for item in outline.board_edge:
-            graphicsdata.append(item)
+        # commented this out as a temporary measure.
+        # growdata1 = grow_items(outline.board_edge, 1.27, "F.SilkS")  # Outline
+        # growdata2 = grow_items(outline.board_edge, 2.54, "F.CrtYd")  # Courtyard
+
+        graphicsdata.extend(outline.board_edge)  # Outline
+        # commented this out as a temporary measure.
+        # graphicsdata.extend(growdata1)           # Silkscreen
+        # graphicsdata.extend(growdata2)           # Courtyard
 
         # We want the non-edge data on another layer so change it and then add it
         # This is not exactly useful in most cases but could all drill holes and slots to be easily added (by hand)

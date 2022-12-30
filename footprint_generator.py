@@ -5,8 +5,9 @@
 #  #
 #  This is copyright (C) 2022 to Alan Milne
 #  ===================================================================
-import os
 # import math
+import os
+import math
 # import datetime
 
 # from kiutils.board import *
@@ -100,20 +101,682 @@ def on_outline(item, outline_data):
 
 
 # ==================================================================================================================
+def grow_distance(item):
+    if isinstance(item, FpLine):
+        grow = 1
+    elif isinstance(item, FpArc):
+        grow = 0
+    else:  # FPCurve
+        grow = 0
+
+    return grow
+
+
+# ==================================================================================================================
+def normalisevec(x, y):
+    distance = numpy.sqrt((x * x) + (y * y))
+
+    if distance == 0:
+        print(str(x) + " " + str(y))
+        newx = 0
+        newy = 0
+
+    else:
+        newx = x / distance
+        newy = y / distance
+
+    return newx, newy
+
+
+# ==================================================================================================================
+def make_offset_poly(oldx, oldy, offset, outer_ccw = 1):
+    newx = []
+    newy = []
+
+    num_points = len(oldx)
+
+    for curr in range(num_points):
+        prevpt = (curr + num_points - 1) % num_points
+        nextpt = (curr + 1) % num_points
+
+        vnx =  oldx[nextpt] - oldx[curr]
+        vny =  oldy[nextpt] - oldy[curr]
+        vnnx, vnny = normalisevec(vnx, vny)
+        nnnx = vnny
+        nnny = -vnnx
+
+        vpx =  oldx[curr] - oldx[prevpt]
+        vpy =  oldy[curr] - oldy[prevpt]
+        vpnx, vpny = normalisevec(vpx, vpy)
+        npnx = vpny * outer_ccw
+        npny = -vpnx * outer_ccw
+
+        bisx = (nnnx + npnx) * outer_ccw
+        bisy = (nnny + npny) * outer_ccw
+
+        bisnx, bisny = normalisevec(bisx, bisy)
+        bislen = offset / numpy.sqrt((1 + nnnx * npnx + nnny * npny) / 2)
+
+        newx.append(oldx[curr] + bislen * bisnx)
+        newy.append(oldy[curr] + bislen * bisny)
+
+    return newx, newy
+
+
+# ==================================================================================================================
+def process_lines(loop, orig_last_item, last_item, current_item, next_item, orig_next_item, grow, layer):
+    print("=== Lines " + str(loop) + " =================================================================")
+    print("OLast   " + str(orig_last_item.start)    + " & " + str(orig_last_item.end))
+    print("Last    " + str(last_item.start)         + " & " + str(last_item.end))
+    print("Current " + str(current_item.start)      + " & " + str(current_item.end) + " Grow " + str(grow))
+    print("Next    " + str(next_item.start)         + " & " + str(next_item.end))
+    print("ONext   " + str(orig_next_item.start)    + " & " + str(orig_next_item.end))
+
+    x = [0, current_item.start.X, current_item.end.X]
+    y = [0, current_item.start.Y, current_item.end.Y]
+    newx, newy = make_offset_poly(x, y, grow)
+
+    print("Misc" + str(newx) + str(newy))
+
+    # we need to grow line length if they are connect to another line - otherwise just connect to the arcs (and curves)
+    if isinstance(current_item, FpLine):
+        # need to determine new line (and then worry about the end effect
+
+        new_start = Position()
+        new_end = Position()
+
+        if connecteditem(current_item.start, orig_last_item):  # Need to process that corner
+            if isinstance(last_item, FpLine):
+                # Todo:
+                print("Line to Line - Start")
+                new_start = current_item.start
+                new_end   = current_item.end
+
+            elif isinstance(last_item, FpArc):
+                # apm print("Line to Arc - Start")
+                if points_joined(current_item.start, orig_last_item.start):
+                    new_start = last_item.start
+
+                else:
+                    new_start = last_item.end
+
+                if points_joined(current_item.end, orig_next_item.start):
+                    new_end = next_item.start
+                else:
+                    new_end = next_item.end
+
+            elif isinstance(last_item, FpCurve):
+                # apm print("Line to Curve - Start")
+                # Todo: Not sure what to do here!
+                new_start = current_item.start
+                new_end   = current_item.end
+
+        else:  # connect to te orig_next_item
+            if isinstance(next_item, FpLine):
+                # Todo:
+                print("Line to Line - End")
+                new_start = current_item.start
+                new_end   = current_item.end
+
+            elif isinstance(next_item, FpArc):
+                # apm print("Line to Arc - End")
+                if points_joined(current_item.start, orig_next_item.start):
+                    new_start = next_item.start
+
+                else:  # connected to end
+                    new_start = next_item.end
+
+                if points_joined(current_item.end, orig_last_item.start):
+                    new_end = last_item.start
+
+                else:
+                    new_end = last_item.end
+
+            elif isinstance(next_item, FpCurve):
+                # Todo: Not sure what to do here!
+                # apm print("Line to Curve - End")
+                new_start = current_item.start
+                new_end   = current_item.end
+
+        new_item = FpLine(start  = new_start,
+                          end    = new_end,
+                          layer  = layer,
+                          width  = 0.12,
+                          stroke = None,
+                          locked = False,
+                          tstamp = current_item.tstamp)
+
+    elif isinstance(current_item, FpArc):
+        new_item = FpArc(start  = current_item.start,
+                         mid    = current_item.mid,
+                         end    = current_item.end,
+                         layer  = layer,
+                         width  = 0.12,
+                         stroke = None,
+                         locked = False,
+                         tstamp = current_item.tstamp)
+
+    else:
+        # Don't know what to do here for now
+        new_item = FpCurve(coordinates = current_item.coordinates,
+                           layer       = layer,
+                           width       = 0.12,
+                           stroke      = None,
+                           locked      = False,
+                           tstamp      = current_item.tstamp)
+
+    return new_item
+
+
+# ==================================================================================================================
+def process_curves(last_item, current_item, next_item, grow, layer):
+    # we need to grow line length if they are connect to another line - otherwise just move it
+    if isinstance(current_item, FpLine):
+        # just re-draw the line for now will gix it presently
+        new_item = FpLine(start  = current_item.start,
+                          end    = current_item.end,
+                          layer  = layer,
+                          width  = 0.12,
+                          stroke = None,
+                          locked = False,
+                          tstamp = current_item.tstamp)
+
+    elif isinstance(current_item, FpArc):
+        # apm print("=== Arcs ===================================================================")
+        # apm print("Last    " + str(last_item.start) + " & " + str(last_item.end))
+        # apm print("Current " + str(current_item.start) + " & " + str(current_item.end) + " Grow " + str(grow))
+        # apm print("Next    " + str(next_item.start) + " & " + str(next_item.end))
+
+        # center does not move but start/end points do
+        circle = calc_circle(current_item.start, current_item.mid, current_item.end)
+
+        startdist  = get_distance(current_item.start.X, current_item.start.Y)
+        middist    = get_distance(current_item.mid.X,   current_item.mid.Y)
+        enddist    = get_distance(current_item.end.X,   current_item.end.Y)
+        centerdist = get_distance(circle.center.X, circle.center.Y)
+
+        # apm print("Circle Info " + str(startdist) + " " + str(middist) + " " + str(enddist) + " " + str(centerdist))
+
+        # When we calculate the angles, I'm not going to mess around with complex angles to rounding to 0.
+        # This will introduce a small error but that's okay.
+        if (startdist > centerdist) and (middist > centerdist) and (enddist > centerdist):
+            start_angle  = non_kicad_angle(get_angle(current_item.start.X - circle.center.X, current_item.start.Y - circle.center.Y))
+            middle_angle = non_kicad_angle(get_angle(current_item.mid.X - circle.center.X,   current_item.mid.Y - circle.center.Y))
+            end_angle    = non_kicad_angle(get_angle(current_item.end.X - circle.center.X,   current_item.end.Y - circle.center.Y))
+
+            new_radius = circle.radius + grow
+            # apm print("Circle " + str(circle) + " " + str(new_radius))
+
+            # apm print("Outer Angles " + str(start_angle) + " " + str(middle_angle) + " " + str(end_angle))
+
+            newx = get_x(360, start_angle, new_radius)
+            newy = get_y(360, start_angle, new_radius)
+
+            # apm print("Start  " + str(newx) + " " + str(newy))
+
+            new_start  = Position(X        = circle.center.X + newx,
+                                  Y        = circle.center.Y + newy,
+                                  angle    = current_item.start.angle,
+                                  unlocked = current_item.start.unlocked)
+
+            newx = get_x(360, middle_angle, new_radius)
+            newy = get_y(360, middle_angle, new_radius)
+
+            # apm print("Middle " + str(newx) + " " + str(newy))
+
+            new_middle = Position(X        = circle.center.X + newx,
+                                  Y        = circle.center.Y + newy,
+                                  angle    = current_item.start.angle,
+                                  unlocked = current_item.start.unlocked)
+
+            newx = get_x(360, end_angle, new_radius)
+            newy = get_y(360, end_angle, new_radius)
+
+            # apm print("End    " + str(newx) + " " + str(newy))
+
+            new_end    = Position(X        = circle.center.X + newx,
+                                  Y        = circle.center.Y + newy,
+                                  angle    = current_item.start.angle,
+                                  unlocked = current_item.start.unlocked)
+
+            new_item = FpArc(start  = new_start,
+                             mid    = new_middle,
+                             end    = new_end,
+                             layer  = layer,
+                             width  = 0.12,
+                             stroke = None,
+                             locked = False,
+                             tstamp = current_item.tstamp)
+        else:
+            # This is an inner arc, so we shrink rather than grow, and We only need to shrink if there is enough radius to do so.
+            if circle.radius > grow:
+                start_angle  = non_kicad_angle(get_angle(current_item.start.X - circle.center.X, current_item.start.Y - circle.center.Y))
+                middle_angle = non_kicad_angle(get_angle(current_item.mid.X - circle.center.X, current_item.mid.Y - circle.center.Y))
+                end_angle    = non_kicad_angle(get_angle(current_item.end.X - circle.center.X, current_item.end.Y - circle.center.Y))
+
+                new_radius = circle.radius - grow
+                # apm print("Circle " + str(circle) + " " + str(new_radius))
+
+                # apm print("Inner Angles " + str(start_angle) + " " + str(middle_angle) + " " + str(end_angle))
+
+                new_start  = Position(X        = circle.center.X - get_x(360, start_angle, new_radius),
+                                      Y        = circle.center.Y - get_y(360, start_angle, new_radius),
+                                      angle    = current_item.start.angle,
+                                      unlocked = current_item.start.unlocked)
+
+                new_middle = Position(X        = circle.center.X - get_x(360, middle_angle, new_radius),
+                                      Y        = circle.center.Y - get_y(360, middle_angle, new_radius),
+                                      angle    = current_item.start.angle,
+                                      unlocked = current_item.start.unlocked)
+
+                new_end    = Position(X        = circle.center.X - get_x(360, end_angle, new_radius),
+                                      Y        = circle.center.Y - get_y(360, end_angle, new_radius),
+                                      angle    = current_item.start.angle,
+                                      unlocked = current_item.start.unlocked)
+
+                new_item = FpArc(start  = new_start,
+                                 mid    = new_middle,
+                                 end    = new_end,
+                                 layer  = layer,
+                                 width  = 0.12,
+                                 stroke = None,
+                                 locked = False,
+                                 tstamp = current_item.tstamp)
+            else:
+                start_angle  = non_kicad_angle(get_angle(current_item.start.X - circle.center.X, current_item.start.Y - circle.center.Y))
+                middle_angle = non_kicad_angle(get_angle(current_item.mid.X - circle.center.X, current_item.mid.Y - circle.center.Y))
+                end_angle    = non_kicad_angle(get_angle(current_item.end.X - circle.center.X, current_item.end.Y - circle.center.Y))
+
+                new_radius = 0
+                # apm print("Circle " + str(circle) + " " + str(new_radius))
+
+                # apm print("Inner Angles " + str(start_angle) + " " + str(middle_angle) + " " + str(end_angle))
+
+                new_start  = Position(X        = circle.center.X,
+                                      Y        = circle.center.Y,
+                                      angle    = current_item.start.angle,
+                                      unlocked = current_item.start.unlocked)
+
+                new_middle = Position(X        = circle.center.X,
+                                      Y        = circle.center.Y,
+                                      angle    = current_item.start.angle,
+                                      unlocked = current_item.start.unlocked)
+
+                new_end    = Position(X        = circle.center.X,
+                                      Y        = circle.center.Y,
+                                      angle    = current_item.start.angle,
+                                      unlocked = current_item.start.unlocked)
+
+                new_item = FpArc(start  = new_start,
+                                 mid    = new_middle,
+                                 end    = new_end,
+                                 layer  = layer,
+                                 width  = 0.12,
+                                 stroke = None,
+                                 locked = False,
+                                 tstamp = current_item.tstamp)
+
+    else:
+        # apm print("=== Curves =================================================================")
+        # apm print("Last    " + str(last_item.start) + " & " + str(last_item.end))
+        # apm print("Current " + str(current_item.start) + " & " + str(current_item.end) + " Grow " + str(grow))
+        # apm print("Next    " + str(next_item.start) + " & " + str(next_item.end))
+
+        # Don't know what to do here for now
+        new_item = FpCurve(coordinates = current_item.coordinates,
+                           layer       = layer,
+                           width       = 0.12,
+                           stroke      = None,
+                           locked      = False,
+                           tstamp      = current_item.tstamp)
+
+    return new_item
+
+
+# ==================================================================================================================
+def printer(loop, lst, cur, nxt):
+    match loop:
+        case 14:
+            data = "TopR "
+        case 1:
+            data = "InR  "
+        case 2:
+            data = "IArc "
+        case 3:
+            data = "InB  "
+        case 4:
+            data = "IArc "
+        case 5:
+            data = "InL  "
+        case 6:
+            data = "TopL "
+        case 7:
+            data = "OArc "
+        case 8:
+            data = "Left "
+        case 9:
+            data = "OArc "
+        case 10:
+            data = "Bot  "
+        case 11:
+            data = "OArcO"
+        case 12:
+            data = "Right"
+        case 13:
+            data = "OArc "
+        case _:
+            data = "---"
+
+    print("============================================================================")
+    print("Loop = " + str(loop) + " " + data)
+    # apm print("Loop = " + str(loop) + " " + data + " (" + str(type(lst)) + "/" + str(type(cur)) + "/" + str(type(nxt)) + ")")
+    print("       " + str(round(lst.start.X, 3)) + "," + str(round(lst.start.Y, 3)) + " " +
+          str(round(lst.end.X, 3))   + "," + str(round(lst.end.Y, 3))   + " | " +
+          str(round(cur.start.X, 3)) + "," + str(round(cur.start.Y, 3)) + " " +
+          str(round(cur.end.X, 3))   + "," + str(round(cur.end.Y, 3))   + " | " +
+          str(round(nxt.start.X, 3)) + "," + str(round(nxt.start.Y, 3)) + " " +
+          str(round(nxt.end.X, 3))   + "," + str(round(nxt.end.Y, 3)))
+
+
+# ==================================================================================================================
+def print_items(items):
+    print("=== Outline data ====================================================")
+
+    for loop, item in enumerate(items):
+        print("Item " + str(loop + 1) + " " + str(item.start) + " " + str(item.end) + " " + str(type(item)))
+
+    print("=== Outline data ====================================================")
+
+
+# ==================================================================================================================
+# Get the start and end points for the graphic item
+def grow_items(items, grow, layer):
+    new_items = []
+
+    origx = []
+    origy = []
+
+    path = []
+
+    startx = Position()
+    starty = Position()
+
+    for loop, item in enumerate(items):
+        if loop == 0:
+            if connecteditem(item.start, items[1]):
+                if points_joined(item.start, items[1].start):
+                    # Need to remember the start so that we can close the shape
+                    startx = item.end.X
+                    starty = item.end.Y
+
+                    # Make start the first point
+                    origx.append(startx)
+                    origy.append(starty)
+                    path.append("LINE 1, Original End")
+
+                    # And add the connecting point
+                    origx.append(item.items[1].start.X)
+                    origy.append(item.items[1].start.Y)
+                    path.append("LINE 1, Start")
+
+                else:  # connected to items[loop].end:
+                    # Need to remember the start so that we can close the shape
+                    startx = item.start.X
+                    starty = item.start.Y
+
+                    # Make start the first point
+                    origx.append(startx)
+                    origy.append(starty)
+                    path.append("LINE 1, Original Start")
+
+                    # And add the connecting point
+                    origx.append(item.items[1].end.X)
+                    origy.append(item.items[1].end.Y)
+                    path.append("LINE 1, End")
+
+            else:  # connected to items[loop].end:
+                if points_joined(item.end, items[loop + 1].start):
+                    # Need to remember the start so that we can close the shape
+                    startx = item.start.X
+                    starty = item.start.Y
+
+                    # Make start the first point
+                    origx.append(startx)
+                    origy.append(starty)
+                    path.append("LINE 1, Original Start")
+
+                    # And add the connecting point
+                    origx.append(items[1].start.X)
+                    origy.append(items[1].start.Y)
+                    path.append("LINE 1, Start")
+
+                else:  # connected to items[loop].end:
+                    # Need to remember the start so that we can close the shape
+                    startx = item.end.X
+                    starty = item.end.Y
+
+                    # Make start the first point
+                    origx.append(startx)
+                    origy.append(starty)
+                    path.append("LINE 1, Original End")
+
+                    # And add the connecting point
+                    origx.append(items[1].end.X)
+                    origy.append(items[1].end.Y)
+                    path.append("LINE 1, End")
+
+        elif loop == (len(items) - 1):  # last point
+            # And add the starting point
+            # origx.append(startx)
+            # origy.append(starty)
+            # path.append("LINE 14, Original Start")
+            print("-")
+
+        else:  # intermediate points
+            if connecteditem(item.start, items[loop + 1]):
+                if points_joined(item.start, items[loop + 1].start):
+                    # Make start the first point
+                    origx.append(items[loop + 1].start.X)
+                    origy.append(items[loop + 1].start.Y)
+                    path.append("Line " + str(loop + 1) + " Start")
+
+                else:  # connected to items[loop].end:
+                    # Make end the first point
+                    origx.append(items[loop + 1].end.X)
+                    origy.append(items[loop + 1].end.Y)
+                    path.append("Line " + str(loop + 1) + " End")
+
+            else:  # connected to items[loop].end:
+                if points_joined(item.end, items[loop + 1].start):
+                    # Make start the first point
+                    origx.append(items[loop + 1].start.X)
+                    origy.append(items[loop + 1].start.Y)
+                    path.append("Line " + str(loop + 1) + " Start")
+
+                else:  # connected to items[loop].end:
+                    # Make start the first point
+                    origx.append(items[loop + 1].end.X)
+                    origy.append(items[loop + 1].end.Y)
+                    path.append("Line " + str(loop + 1) + " End")
+
+    # apm print(str(origx))
+    # apm print(str(origy))
+    # apm print(str(path))
+
+    # determine rotation
+    if get_rotation(get_angle(origx[0], origy[0]), get_angle(origx[1], origy[1]), get_angle(origx[2], origy[2])):
+        # clockwise
+        direction = -1
+    else:
+        # counter-clockwise
+        direction = 1
+
+    newx, newy = make_offset_poly(origx, origy, grow * direction)
+    print("Misc" + str(newx) + str(newy))
+
+    for loop, item in enumerate(items):
+        if loop == len(items) - 1:
+            print(str(round(newx[loop], 6)) + "," + str(round(newy[loop], 6)) + " " + str(round(newx[0], 6)) + str(round(newy[0], 6)))
+
+            new_start = Position(X        = round(newx[loop], 6),
+                                 Y        = round(newy[loop], 6),
+                                 angle    = None,
+                                 unlocked = False)
+
+            new_end =   Position(X        = round(newx[0], 6),
+                                 Y        = round(newy[0], 6),
+                                 angle    = None,
+                                 unlocked = False)
+
+            new_items.append(FpLine(start  = new_start,
+                                    end    = new_end,
+                                    layer  = layer,
+                                    width  = 0.12,
+                                    stroke = None,
+                                    locked = False,
+                                    tstamp = items[loop].tstamp))
+
+        else:
+            print(str(round(newx[loop], 6)) + "," + str(round(newy[loop], 6)) + " " + str(round(newx[loop + 1], 6)) + str(round(newy[loop + 1], 6)))
+
+            new_start = Position(X        = round(newx[loop], 6),
+                                 Y        = round(newy[loop], 6),
+                                 angle    = None,
+                                 unlocked = False)
+
+            new_end =   Position(X        = round(newx[loop + 1], 6),
+                                 Y        = round(newy[loop + 1], 6),
+                                 angle    = None,
+                                 unlocked = False)
+
+            new_items.append(FpLine(start  = new_start,
+                                    end    = new_end,
+                                    layer  = layer,
+                                    width  = 0.12,
+                                    stroke = None,
+                                    locked = False,
+                                    tstamp = items[loop].tstamp))
+
+    return new_items
+
+
+# ==================================================================================================================
+# Get the start and end points for the graphic item
+def grow_items2(items, grow, layer):
+    pass1_items = []
+    pass2_items = []
+
+    current_item = None
+
+    middle = Position()
+
+    # apm print_items(items)
+
+    # do a pass to fine arcs (and curves) grow them, this is important so that we can make lines join up with the arcs (and curves).
+    for loop, item in enumerate(items):
+        if loop == 0:
+            last_item      = items[len(items) - 1]
+            current_item   = item
+            next_item      = items[loop + 1]
+
+        elif loop == len(items) - 1:
+            last_item    = current_item
+            current_item = item
+            next_item    = items[0]
+
+        else:
+            last_item    = current_item
+            current_item = item
+            next_item    = items[loop + 1]
+
+        printer(loop + 1, last_item, current_item, next_item)
+
+        pass1_items.append(process_curves(last_item, current_item, next_item, grow, "Margin"))
+
+    # apm print_items(pass1_items)
+
+    # do a 2nd pass to do lines.
+    for loop, item in enumerate(pass1_items):
+        if loop == 0:
+            orig_last_item = items[len(items) - 1]
+            last_item      = pass1_items[len(pass1_items) - 1]
+            current_item   = item
+            next_item      = pass1_items[loop + 1]
+            orig_next_item = items[loop + 1]
+
+        elif loop == len(pass1_items) - 1:
+            orig_last_item = items[loop - 1]
+            last_item      = current_item
+            current_item   = item
+            next_item      = pass1_items[0]
+            orig_next_item = items[0]
+
+        else:
+            orig_last_item = items[loop - 1]
+            last_item      = current_item
+            current_item   = item
+            next_item      = pass1_items[loop + 1]
+            orig_next_item = items[loop + 1]
+
+        printer(loop + 1, last_item, current_item, next_item)
+
+        pass2_items.append(process_lines(loop + 1, orig_last_item, last_item, current_item, next_item, orig_next_item, grow, layer))
+
+        if isinstance(item, FpArc):
+            middle = item.mid
+
+        elif isinstance(item, FpLine):
+            middle = Position(X        = item.start.X - ((item.start.X - item.end.X) / 2),
+                              Y        = item.start.Y - ((item.start.Y - item.end.Y) / 2),
+                              angle    = None,
+                              unlocked = False)
+
+        pass2_items.append(kicad_debug(str(loop + 1), middle, "User.7"))
+
+        if isinstance(current_item, FpLine):
+            pass2_items.append(kicad_debug("S", current_item.start, "User.9"))
+            pass2_items.append(kicad_debug("E", current_item.end,   "User.9"))
+
+        elif isinstance(current_item, FpArc):
+            pass2_items.append(kicad_debug("S", current_item.start, "User.8"))
+            pass2_items.append(kicad_debug("E", current_item.end,   "User.8"))
+
+    # apm print_items(pass2_items)
+
+    return pass2_items
+
+
+# ==================================================================================================================
 # Get the start and end points for the graphic item
 def get_ends(item):
     ends: List() = []
 
-    if isinstance(item, FpLine) or isinstance(item, FpRect) or isinstance(item, FpArc) or \
-            isinstance(item, GrLine) or isinstance(item, GrRect) or isinstance(item, GrArc):
+    if isinstance(item, FpLine) or isinstance(item, FpArc) or isinstance(item, GrLine) or isinstance(item, GrArc):
         ends.append(item.start)
         ends.append(item.end)
 
-    elif isinstance(item, FpPoly) or isinstance(item, FpCurve) or isinstance(item, GrPoly) or isinstance(item, GrCurve):
+    elif isinstance(item, FpCurve) or isinstance(item, GrCurve):
         ends.append(item.coordinates[0])
         ends.append(item.coordinates[len(item.coordinates)])
 
     return ends
+
+
+# ==================================================================================================================
+def connecteditem(point, item):
+    status = False
+
+    # Don't need to worry abot text, textbox, polygon or circle - the later two causes they are closed shapes.
+
+    if isinstance(item, FpLine) or isinstance(item, FpArc):
+        if points_joined(point, item.start) or points_joined(point, item.end):
+            status = True
+
+    elif isinstance(item, FpCurve):
+        if points_joined(point, item.coordinates[0]) or points_joined(point, item.coordinates[len(item.coordinates) - 1]):
+            status = True
+
+    return status
 
 
 # ==================================================================================================================
@@ -122,7 +785,7 @@ def connected2outline(item, outline_points):
 
     # Don't need to worry abot text, textbox, polygon or circle - the later two causes they are closed shapes.
 
-    if isinstance(item, FpLine) or isinstance(item, FpRect) or isinstance(item, FpArc):
+    if isinstance(item, FpLine) or isinstance(item, FpArc):
         for point in outline_points:
             if item.start.X == point.X or item.start.Y == point.Y or item.end.X == point.X or item.end.Y == point.Y:
                 status = True
@@ -137,11 +800,45 @@ def connected2outline(item, outline_points):
 
 
 # ==================================================================================================================
+def points_joined(current_point, test_point):
+    status = False
+
+    if (test_point.X == current_point.X) and (test_point.Y == current_point.Y):
+        status = True
+
+    # apm print("====== " + str(status))
+
+    # apm print(str(test_point.X) + "," + str(test_point.Y) + " " + str(current_point.X) + "," + str(current_point.Y))
+    # apm print(str(round(test_point.X, 6)) + "," + str(round(test_point.Y, 6)) + " " + str(round(current_point.X, 6)) + "," + str(round(current_point.Y, 6)))
+    return status
+
+
+# ==================================================================================================================
+def startpoint(item, start):
+    startpos = Position()
+    endpos   = Position()
+
+    if isinstance(item, FpLine) or isinstance(item, FpArc):
+        startpos = item.start
+        endpos   = item.end
+
+    elif isinstance(item, FpCurve):
+        startpos = item.coordinates[0]
+        endpos   = item.coordinates[len(item.coordinates) - 1]
+
+    if start:
+        return startpos
+    else:
+        return endpos
+
+
+# ==================================================================================================================
 # Trawls through all the graphic items that are on EdgeCut on the board and copy them to f.fab on footprint
 def create_outline(gr_items, outline_data, flip):
-    outline_items:     List() = []
-    outline_points:    List() = []
-    non_outline_items: List() = []
+    outline_items:           List() = []
+    organised_outline_items: List() = []
+    outline_points:          List() = []
+    non_outline_items:       List() = []
 
     outline = OutlineData(board_edge     = list(),
                           non_board_edge = list())
@@ -202,8 +899,12 @@ def create_outline(gr_items, outline_data, flip):
                                    tstamp = gitem.tstamp)
 
                 if on_outline(fitem_fab, outline_data):
+                    # Rectangular outline so nothing else to do, but should move any spurious items to non-outline
+                    for item in outline_items:
+                        non_outline_items.append(item)
+
+                    outline_items = list()
                     outline_items.append(fitem_fab)
-                    outline_points.extend(get_ends(fitem_fab))
 
                 else:
                     non_outline_items.append(fitem_fab)
@@ -360,7 +1061,31 @@ def create_outline(gr_items, outline_data, flip):
 
                     outline_finished = False
 
-    outline.board_edge     = outline_items
+    # Now we know all the outline items so organise them so that they are is sequence - where we start is irrelevant.
+    # this is important so that we can grow the shape presently
+    end   = startpoint(outline_items[0], False)
+
+    organised_outline_items.append(outline_items[0])
+    outline_items.remove(outline_items[0])
+
+    while len(outline_items) > 0:
+        for item in outline_items:
+            test_start = startpoint(item, True)
+            test_end   = startpoint(item, False)
+
+            if points_joined(end, test_start):
+                # found a matching point
+                end = test_end
+                organised_outline_items.append(item)
+                outline_items.remove(item)
+
+            elif points_joined(end, test_end):
+                # found a matching point
+                end = test_start
+                organised_outline_items.append(item)
+                outline_items.remove(item)
+
+    outline.board_edge     = organised_outline_items
     outline.non_board_edge = non_outline_items
 
     return outline
