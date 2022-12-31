@@ -5,13 +5,15 @@
 #  #
 #  This is copyright (C) 2022 to Alan Milne
 #  ===================================================================
+
 # import math
 import os
-import math
+import numpy
 # import datetime
 
 # from kiutils.board import *
 from kiutils.libraries import *
+from kiutils.symbol import SymbolLib
 
 # from debug_print import *
 from user_display_libtable import *
@@ -496,8 +498,6 @@ def grow_items(items, grow, layer):
     origx = []
     origy = []
 
-    path = []
-
     startx = Position()
     starty = Position()
 
@@ -512,12 +512,10 @@ def grow_items(items, grow, layer):
                     # Make start the first point
                     origx.append(startx)
                     origy.append(starty)
-                    path.append("LINE 1, Original End")
 
                     # And add the connecting point
                     origx.append(item.items[1].start.X)
                     origy.append(item.items[1].start.Y)
-                    path.append("LINE 1, Start")
 
                 else:  # connected to items[loop].end:
                     # Need to remember the start so that we can close the shape
@@ -527,12 +525,10 @@ def grow_items(items, grow, layer):
                     # Make start the first point
                     origx.append(startx)
                     origy.append(starty)
-                    path.append("LINE 1, Original Start")
 
                     # And add the connecting point
                     origx.append(item.items[1].end.X)
                     origy.append(item.items[1].end.Y)
-                    path.append("LINE 1, End")
 
             else:  # connected to items[loop].end:
                 if points_joined(item.end, items[loop + 1].start):
@@ -543,12 +539,10 @@ def grow_items(items, grow, layer):
                     # Make start the first point
                     origx.append(startx)
                     origy.append(starty)
-                    path.append("LINE 1, Original Start")
 
                     # And add the connecting point
                     origx.append(items[1].start.X)
                     origy.append(items[1].start.Y)
-                    path.append("LINE 1, Start")
 
                 else:  # connected to items[loop].end:
                     # Need to remember the start so that we can close the shape
@@ -558,12 +552,10 @@ def grow_items(items, grow, layer):
                     # Make start the first point
                     origx.append(startx)
                     origy.append(starty)
-                    path.append("LINE 1, Original End")
 
                     # And add the connecting point
                     origx.append(items[1].end.X)
                     origy.append(items[1].end.Y)
-                    path.append("LINE 1, End")
 
         elif loop == (len(items) - 1):  # last point
             # And add the starting point
@@ -578,30 +570,22 @@ def grow_items(items, grow, layer):
                     # Make start the first point
                     origx.append(items[loop + 1].start.X)
                     origy.append(items[loop + 1].start.Y)
-                    path.append("Line " + str(loop + 1) + " Start")
 
                 else:  # connected to items[loop].end:
                     # Make end the first point
                     origx.append(items[loop + 1].end.X)
                     origy.append(items[loop + 1].end.Y)
-                    path.append("Line " + str(loop + 1) + " End")
 
             else:  # connected to items[loop].end:
                 if points_joined(item.end, items[loop + 1].start):
                     # Make start the first point
                     origx.append(items[loop + 1].start.X)
                     origy.append(items[loop + 1].start.Y)
-                    path.append("Line " + str(loop + 1) + " Start")
 
                 else:  # connected to items[loop].end:
                     # Make start the first point
                     origx.append(items[loop + 1].end.X)
                     origy.append(items[loop + 1].end.Y)
-                    path.append("Line " + str(loop + 1) + " End")
-
-    # apm print(str(origx))
-    # apm print(str(origy))
-    # apm print(str(path))
 
     # determine rotation
     if get_rotation(get_angle(origx[0], origy[0]), get_angle(origx[1], origy[1]), get_angle(origx[2], origy[2])):
@@ -1151,7 +1135,7 @@ def select_connectors(footprints, flip):
 
 # ==================================================================================================================
 # Need to check that output directories exist and if not create them.
-def manage_lib_dir(odir):
+def manage_layout_lib_dir(odir):
     # We need to create "MyGen.Pretty" so that we can save the footprint and then update the library,
     # but only if it does not exist. Also need to check for a "Shapes_3D" directory and create if necessary.
     # We also need to figure out what 3D files we need copy them if necessary to the "Shapes_3D" file.
@@ -1171,24 +1155,30 @@ def manage_lib_dir(odir):
     if path.exists(odir + "\\" + "fp-lib-table"):
         pcb_lib_table = LibTable().from_file(odir + "\\" + "fp-lib-table")
 
-        lib_found = False
+        lib_not_found = True
 
-        for lib in pcb_lib_table.libs:
+        for loop, lib in enumerate(pcb_lib_table.libs):
             if lib.name == "MyGen":
-                lib_found = True
+                # There is an issues here - if a project is copied, then "MyGen" will be found but will be invalid so need to address.
+                if lib.uri == odir + "MyGen.Pretty":
+                    # Found it
+                    lib_not_found = False
+                else:  # found something, but it's wrong so remove it - we'll add it later as if it was never existed.
+                    pcb_lib_table.libs.remove(lib)
 
     else:
         # Can't file the "fp-lib-table" so create an empty file!
         pcb_lib_table = LibTable(type="fp_lib_table")
-        lib_found = False
+        lib_not_found = True
 
     # "MyGen.Pretty" Not found so need to add it
-    if not lib_found:
+    if lib_not_found:
+        # add new Library
         new_lib = Library()
 
         new_lib.name        = "MyGen"
         new_lib.type        = "KiCad"
-        new_lib.uri         = odir + "\\" + "MyGen.Pretty"
+        new_lib.uri         = odir + "MyGen.Pretty"
         new_lib.options     = ""
         new_lib.description = ""
 
@@ -1201,7 +1191,7 @@ def manage_lib_dir(odir):
 # Need to calculate certain values about the selected footprint so that we can add pads, models, etc. correctly.
 def add_component_data(footprints, menu_data, centroid_offset, board_flip):
     component_data = Component()
-    aux_data = AuxData()
+    aux_data       = AuxData()
 
     aux_data.centroid_offset = centroid_offset
     aux_data.board_flip = board_flip
@@ -1236,6 +1226,7 @@ def add_component_data(footprints, menu_data, centroid_offset, board_flip):
 
             # found a selected component, so copy data
             if component_match:
+
                 # need to determine where the pads are to calculate the swap direction and (maybe) the center
                 top_right = Coordinate2D()
                 bottom_left = Coordinate2D()
@@ -1290,6 +1281,7 @@ def add_component_data(footprints, menu_data, centroid_offset, board_flip):
                         aux_data.longaxis_x = False
 
                 # now add the footprints for the components select
+                component_data.components.append(aux_data.id)
                 component_data.pads.extend(add_footprint_pads(footprint, aux_data))
                 component_data.graphicitems.extend(add_footprint_silkscreen(footprint, aux_data))
                 component_data.models.extend(add_footprint_models(footprint, aux_data))

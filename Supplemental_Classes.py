@@ -58,6 +58,7 @@ class Component:
     pads         = []
     graphicitems = []
     models       = []
+    components: list[str]       = field(default_factory=list)
 
 
 # ==================================================================================================================

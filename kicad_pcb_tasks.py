@@ -5,6 +5,7 @@
 #  #
 #  This is copyright (C) 2022 to Alan Milne
 #  ===================================================================
+from kiutils.symbol import *
 
 # import os
 # import math
@@ -17,6 +18,7 @@ from footprint_generator import *
 # from kiutils.libraries import *
 
 from debug_print import *
+from symbol_generator import *
 from user_display_board import *
 from user_display_libtable import *
 from user_display_footprint import *
@@ -151,7 +153,7 @@ def pcb_task3(filename, board, odir):
 
         if user_selected_components.menu_data is not None:
             # Need to do some housekeeping in terms of possible output directories
-            manage_lib_dir(savedirectory)
+            manage_layout_lib_dir(savedirectory)
 
             # Now figure out the required parameters related to the selected components
             user_selected_components.component_data = add_component_data(board.footprints, user_selected_components.menu_data, outline_data.centroid, flip)
@@ -209,11 +211,18 @@ def pcb_task3(filename, board, odir):
             # print_footprint(footprintname, footprint, True)
 
             # Now save the output file
-            modfilename = savedirectory + "\\" + "MyGen.Pretty" + "\\" + footprintname + ".kicad_mod"
+            modfilename = savedirectory + "MyGen.Pretty" + "\\" + footprintname + ".kicad_mod"
             footprint.to_file(modfilename)
 
-            # and report success.
-            msgbox(msg      = "KiCad Input file " + filename + " has been processed.\n\r \n\rProcessed files are " + modfilename + ".",
+            # Done the layout part so now do the schematic part - first up is to create/manage the sym-lib-table to include the library
+            manage_schematic_lib_dir(savedirectory, footprintname)
+
+            symbol = generate_symbol(footprintname, user_selected_components)
+
+            generate_symbolfile(savedirectory, footprintname, symbol)
+
+            msgbox(msg      = "KiCad Input file " + filename + " has been processed.\n\r \n\rProcessed files are " + modfilename + " and " + savedirectory
+                              + footprintname + ".kicad_sym.",
                    title    = "KiCad Footprint file",
                    ok_button= "Continue")
 
