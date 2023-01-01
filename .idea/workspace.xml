@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can &#10;1. Output a kiCad file &#10;2. Update the libray&#10;3. Add the footprint and models correctly&#10;4. Add the model of the original board&#10;5. Draw silkscreen for connectors&#10;6. Differentiate outline from non-outline shapes&#10;&#10;Can't &#10;1. Generate the symbol&#10;2. Copy required 3D data to new library&#10;3. Optimised grow function - so commented out all code for now&#10;4. Draw silkscreen and courtyard - becasue of 3, - commented out all code for now">
-      <change afterPath="$PROJECT_DIR$/symbol_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can &#10;1. Output a kiCad file &#10;2. Update the libray&#10;3. Add the footprint and models correctly&#10;4. Add the model of the original board&#10;5. Draw silkscreen for connectors&#10;6. Differentiate outline from non-outline shapes&#10;7. Generate the symbol&#10;&#10;Can't &#10;1. Copy required 3D data to new library&#10;2. Optimised grow function - so commented out all code for now&#10;3. Draw silkscreen and courtyard - becasue of 3, - commented out all code for now">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Supplemental_Classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Supplemental_Classes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/footprint_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/footprint_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kicad_pcb_tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/kicad_pcb_tasks.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -283,7 +280,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672404268546</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Can &#10;1. Output a kiCad file &#10;2. Update the libray&#10;3. Add the footprint and models correctly&#10;4. Add the model of the original board&#10;5. Draw silkscreen for connectors&#10;6. Differentiate outline from non-outline shapes&#10;7. Generate the symbol&#10;&#10;Can't &#10;1. Copy required 3D data to new library&#10;2. Optimised grow function - so commented out all code for now&#10;3. Draw silkscreen and courtyard - becasue of 3, - commented out all code for now">
+      <created>1672522885858</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1672522885858</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -313,7 +317,8 @@
     <MESSAGE value="Can &#10;1. output a kiCad file &#10;2. update the libray&#10;3. add the footprint and models correctly&#10;4. add the model of the original board&#10;5. draw silkscreen for connectors&#10;&#10;Can't &#10;1. generate the symbol&#10;2. copy required 3D data to new library&#10;3. optimised center&#10;4. optimised grow function" />
     <MESSAGE value="Can &#10;1. Output a kiCad file &#10;2. Update the libray&#10;3. Add the footprint and models correctly&#10;4. Add the model of the original board&#10;5. Draw silkscreen for connectors&#10;6. Differentiate outline from non-outline shapes&#10;&#10;Can't &#10;1. Generate the symbol&#10;2. Copy required 3D data to new library&#10;3. Optimised grow function&#10;4. Draw silkscreen and courtyard" />
     <MESSAGE value="Can &#10;1. Output a kiCad file &#10;2. Update the libray&#10;3. Add the footprint and models correctly&#10;4. Add the model of the original board&#10;5. Draw silkscreen for connectors&#10;6. Differentiate outline from non-outline shapes&#10;&#10;Can't &#10;1. Generate the symbol&#10;2. Copy required 3D data to new library&#10;3. Optimised grow function - so commented out all code for now&#10;4. Draw silkscreen and courtyard - becasue of 3, - commented out all code for now" />
-    <option name="LAST_COMMIT_MESSAGE" value="Can &#10;1. Output a kiCad file &#10;2. Update the libray&#10;3. Add the footprint and models correctly&#10;4. Add the model of the original board&#10;5. Draw silkscreen for connectors&#10;6. Differentiate outline from non-outline shapes&#10;&#10;Can't &#10;1. Generate the symbol&#10;2. Copy required 3D data to new library&#10;3. Optimised grow function - so commented out all code for now&#10;4. Draw silkscreen and courtyard - becasue of 3, - commented out all code for now" />
+    <MESSAGE value="Can &#10;1. Output a kiCad file &#10;2. Update the libray&#10;3. Add the footprint and models correctly&#10;4. Add the model of the original board&#10;5. Draw silkscreen for connectors&#10;6. Differentiate outline from non-outline shapes&#10;7. Generate the symbol&#10;&#10;Can't &#10;1. Copy required 3D data to new library&#10;2. Optimised grow function - so commented out all code for now&#10;3. Draw silkscreen and courtyard - becasue of 3, - commented out all code for now" />
+    <option name="LAST_COMMIT_MESSAGE" value="Can &#10;1. Output a kiCad file &#10;2. Update the libray&#10;3. Add the footprint and models correctly&#10;4. Add the model of the original board&#10;5. Draw silkscreen for connectors&#10;6. Differentiate outline from non-outline shapes&#10;7. Generate the symbol&#10;&#10;Can't &#10;1. Copy required 3D data to new library&#10;2. Optimised grow function - so commented out all code for now&#10;3. Draw silkscreen and courtyard - becasue of 3, - commented out all code for now" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -350,7 +355,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/footprint_generator.py</url>
-          <line>1303</line>
+          <line>1307</line>
           <option name="timeStamp" value="134" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -375,7 +380,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/footprint_generator.py</url>
-          <line>1379</line>
+          <line>1383</line>
           <option name="timeStamp" value="159" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

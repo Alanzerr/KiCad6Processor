@@ -824,8 +824,12 @@ def create_outline(gr_items, outline_data, flip):
     outline_points:          List() = []
     non_outline_items:       List() = []
 
-    outline = OutlineData(board_edge     = list(),
-                          non_board_edge = list())
+    # outline = OutlineData(board_edge     = list(),
+    #                       non_board_edge = list())
+    outline = OutlineData()
+
+    outline.board_edge     = []
+    outline.non_board_edge = []
 
     poly_circle_outline = False
 

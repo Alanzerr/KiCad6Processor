@@ -6,11 +6,6 @@
 #  This is copyright (C) 2022 to Alan Milne
 #  ===================================================================
 
-# from typing import Optional, List
-# from os import path
-
-# from kiutils.utils.strings import dequote
-# from kiutils.utils import sexpr
 from kiutils.footprint import *
 
 
@@ -48,17 +43,17 @@ class Outline:
 # ==================================================================================================================
 @dataclass
 class OutlineData:
-    board_edge:     list()
-    non_board_edge: list()
+    board_edge:     List        = field(default_factory=list)
+    non_board_edge: List        = field(default_factory=list)
 
 
 # ==================================================================================================================
 @dataclass
 class Component:
-    pads         = []
-    graphicitems = []
-    models       = []
-    components: list[str]       = field(default_factory=list)
+    pads:         List[Pad]   = field(default_factory=list)
+    graphicitems: List        = field(default_factory=list)
+    models:       List[Model] = field(default_factory=list)
+    components:   List[str]   = field(default_factory=list)
 
 
 # ==================================================================================================================
@@ -92,6 +87,6 @@ class AuxData:
 # ==================================================================================================================
 @dataclass
 class Components:
-    component_data: list[Component] = field(default_factory=list)
+    component_data: List[Component] = field(default_factory=list)
 
-    menu_data:      list[str]       = field(default_factory=list)
+    menu_data:      List[str]       = field(default_factory=list)
