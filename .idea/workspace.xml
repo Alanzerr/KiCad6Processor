@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can &#10;1. Output a kiCad file &#10;2. Update the libray&#10;3. Add the footprint and models correctly&#10;4. Add the model of the original board&#10;5. Draw silkscreen for connectors&#10;6. Differentiate outline from non-outline shapes&#10;7. Generate the symbol&#10;&#10;Can't &#10;1. Copy required 3D data to new library&#10;2. Optimised grow function - so commented out all code for now&#10;3. Draw silkscreen and courtyard - becasue of 3, - commented out all code for now">
+    <list default="true" id="b44e13c1-07cb-473c-93ff-32fd21b98c7d" name="Changes" comment="Can &#10;1. Output a kiCad file &#10;2. Update the libray&#10;3. Add the footprint and models correctly&#10;4. Add the model of the original board&#10;5. Draw silkscreen for connectors&#10;6. Differentiate outline from non-outline shapes&#10;7. Generate the symbol&#10;&#10;Can't &#10;1. Copy required 3D data to new library - it is not clear that this is required!&#10;2. Optimised grow function - so commented out all code for now&#10;3. Draw silkscreen and courtyard - because of 3, - commented out all code for now">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Supplemental_Classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Supplemental_Classes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/footprint_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/footprint_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_display_board.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_display_schematic.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_display_schematic.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -287,7 +287,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672522885858</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Can &#10;1. Output a kiCad file &#10;2. Update the libray&#10;3. Add the footprint and models correctly&#10;4. Add the model of the original board&#10;5. Draw silkscreen for connectors&#10;6. Differentiate outline from non-outline shapes&#10;7. Generate the symbol&#10;&#10;Can't &#10;1. Copy required 3D data to new library - it is not clear that this is required!&#10;2. Optimised grow function - so commented out all code for now&#10;3. Draw silkscreen and courtyard - because of 3, - commented out all code for now">
+      <created>1672590337446</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1672590337446</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -318,7 +325,8 @@
     <MESSAGE value="Can &#10;1. Output a kiCad file &#10;2. Update the libray&#10;3. Add the footprint and models correctly&#10;4. Add the model of the original board&#10;5. Draw silkscreen for connectors&#10;6. Differentiate outline from non-outline shapes&#10;&#10;Can't &#10;1. Generate the symbol&#10;2. Copy required 3D data to new library&#10;3. Optimised grow function&#10;4. Draw silkscreen and courtyard" />
     <MESSAGE value="Can &#10;1. Output a kiCad file &#10;2. Update the libray&#10;3. Add the footprint and models correctly&#10;4. Add the model of the original board&#10;5. Draw silkscreen for connectors&#10;6. Differentiate outline from non-outline shapes&#10;&#10;Can't &#10;1. Generate the symbol&#10;2. Copy required 3D data to new library&#10;3. Optimised grow function - so commented out all code for now&#10;4. Draw silkscreen and courtyard - becasue of 3, - commented out all code for now" />
     <MESSAGE value="Can &#10;1. Output a kiCad file &#10;2. Update the libray&#10;3. Add the footprint and models correctly&#10;4. Add the model of the original board&#10;5. Draw silkscreen for connectors&#10;6. Differentiate outline from non-outline shapes&#10;7. Generate the symbol&#10;&#10;Can't &#10;1. Copy required 3D data to new library&#10;2. Optimised grow function - so commented out all code for now&#10;3. Draw silkscreen and courtyard - becasue of 3, - commented out all code for now" />
-    <option name="LAST_COMMIT_MESSAGE" value="Can &#10;1. Output a kiCad file &#10;2. Update the libray&#10;3. Add the footprint and models correctly&#10;4. Add the model of the original board&#10;5. Draw silkscreen for connectors&#10;6. Differentiate outline from non-outline shapes&#10;7. Generate the symbol&#10;&#10;Can't &#10;1. Copy required 3D data to new library&#10;2. Optimised grow function - so commented out all code for now&#10;3. Draw silkscreen and courtyard - becasue of 3, - commented out all code for now" />
+    <MESSAGE value="Can &#10;1. Output a kiCad file &#10;2. Update the libray&#10;3. Add the footprint and models correctly&#10;4. Add the model of the original board&#10;5. Draw silkscreen for connectors&#10;6. Differentiate outline from non-outline shapes&#10;7. Generate the symbol&#10;&#10;Can't &#10;1. Copy required 3D data to new library - it is not clear that this is required!&#10;2. Optimised grow function - so commented out all code for now&#10;3. Draw silkscreen and courtyard - because of 3, - commented out all code for now" />
+    <option name="LAST_COMMIT_MESSAGE" value="Can &#10;1. Output a kiCad file &#10;2. Update the libray&#10;3. Add the footprint and models correctly&#10;4. Add the model of the original board&#10;5. Draw silkscreen for connectors&#10;6. Differentiate outline from non-outline shapes&#10;7. Generate the symbol&#10;&#10;Can't &#10;1. Copy required 3D data to new library - it is not clear that this is required!&#10;2. Optimised grow function - so commented out all code for now&#10;3. Draw silkscreen and courtyard - because of 3, - commented out all code for now" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

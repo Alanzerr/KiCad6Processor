@@ -261,12 +261,10 @@ def print_gr_poly(graphicitem, printout=False):
         output_text.extend(print_data("BItem/poly/co " + format(loop, '3d') + ": ", coord))
         loop += 1
 
-    output_text.extend(print_data("BItem/poly/width : ", graphicitem.width, True))
-
-    output_text.extend(print_stroke("BItem/poly", graphicitem.stroke))
-
-    output_text.extend(print_data("BItem/poly/fill  : ", graphicitem.fill, True))
-    output_text.extend(print_data("BItem/poly/locked: ", graphicitem.locked))
+    output_text.extend(print_data("BItem/poly/width : ", graphicitem.width,  True))
+    output_text.extend(print_data("BItem/poly/fill  : ", graphicitem.fill,   True))
+    output_text.extend(print_data("BItem/poly/fill  : ", graphicitem.fill,   True))
+    output_text.extend(print_data("BItem/poly/locked: ", graphicitem.locked, True))
     output_text.extend(print_data("BItem/poly/tstamp: ", graphicitem.tstamp, True))
 
     if printout:
@@ -286,7 +284,7 @@ def print_gr_curve(graphicitem, printout=False):
     output_text.extend(print_data("BItem/curv/layer : ", graphicitem.layer))
     output_text.extend(print_data("BItem/curv/width : ", graphicitem.width, True))
 
-    output_text.extend(print_stroke("BItem/curv", graphicitem.stroke))
+    output_text.extend(print_data("BItem/curv/fill  : ", graphicitem.fill))
 
     output_text.extend(print_data("BItem/curv/locked: ", graphicitem.locked, True))
     output_text.extend(print_data("BItem/curv/tstamp: ", graphicitem.tstamp, True))

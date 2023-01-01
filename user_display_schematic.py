@@ -413,7 +413,7 @@ def print_schematic(schematicname, schematic, printout=False):
     output_text.extend(print_junctions(schematic.junctions))
     output_text.extend(print_noconnects(schematic.noConnects))
     output_text.extend(print_busentries(schematic.busEntries))
-    output_text.extend(print_connections(schematic.graphicalItems))
+    output_text.extend(print_sgraphicitems(schematic.graphicalItems))
     output_text.extend(print_images(schematic.images))
     output_text.extend(print_texts(schematic.texts))
     output_text.extend(print_locallabels(schematic.labels))
